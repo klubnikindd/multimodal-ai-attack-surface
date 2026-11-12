@@ -1,0 +1,21 @@
+name: Spec Invariants
+
+on:
+  pull_request:
+    paths:
+      - 'docs/spec/**'
+      - 'scripts/check-spec-invariants.py'
+      - '.github/workflows/spec-invariants.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/spec/**'
+
+jobs:
+  invariants:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run spec invariant check
+        run: python scripts/check-spec-invariants.py

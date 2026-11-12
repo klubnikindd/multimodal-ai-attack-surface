@@ -1,0 +1,10 @@
+{
+  "markdown.validate.enabled": true,
+  "markdown.validate.fileLinks.enabled": true,
+  "markdown.validate.fragmentLinks.enabled": true,
+  
+  "editor.codeActionsOnSave": {
+    "source.fixAll.mdsmith": "explicit"
+  },
+  "mdsmith.previewFix": true 
+}

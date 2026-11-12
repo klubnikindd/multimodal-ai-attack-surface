@@ -1,0 +1,41 @@
+name: Link Checker
+
+on:
+  pull_request:
+    paths:
+      - 'docs/**'
+      - '**.md'
+      - '.github/workflows/link-checker.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - '**.md'
+  schedule:
+    - cron: '0 0 * * 0'   # воскресенье, чтобы ловить внешние ссылки
+  workflow_dispatch:
+
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Lychee link checker
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --verbose
+            --no-progress
+            --exclude-path './docs/_build'
+            --exclude-loopback
+            --exclude '^mailto:'
+            --exclude 'localhost'
+            --exclude '127\.0\.0\.1'
+            --accept 200,201,202,203,204,206,301,302,303,307,308,429
+            --max-retries 3
+            --retry-wait-time 5
+            --timeout 30
+            '*.md' '**/*.md'
+          fail: true
+          token: ${{ secrets.GITHUB_TOKEN }}
