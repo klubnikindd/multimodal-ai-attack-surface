@@ -99,3 +99,37 @@ $RECYCLE.BIN/
 *~
 .directory
 .Trash-*
+
+# Временные файлы
+*.tmp
+*.bak
+*.log
+tmp*
+.tmp_*
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Виртуальные окружения
+.venv/
+venv/
+
+# Медиафайлы (важно для вашего проекта)
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.mp4
+*.mov
+*.avi
+*.mkv
