@@ -15,14 +15,14 @@
     - [API](#api)
     - [CLI](#cli)
   - [Архитектура](#архитектура)
-  - [Вкладчики](#вкладчики)
+  - [Автор](#автор)
   - [Лицензия](#лицензия)
   - [Отчёт о состоянии](#отчёт-о-состоянии)
 
 ## Установка
 ```bash
 # Клонирование репозитория
-git clone https://github.com/your-org/multimodal-ai-attack-surface.git
+git clone https://github.com//klubnikindd/multimodal-ai-attack-surface.git
 cd multimodal-ai-attack-surface
 
 # (Опционально) Создание виртуального окружения
@@ -59,8 +59,8 @@ python -m attack_surface.cli путь/к/файлу.jpg
 
 Подробности проектирования: `docs/spec/v3.md` и архитектурные решения – `docs/ADR-*.md`.
 
-## Вкладчики
-- Денис Клубникин – ведущий разработчик
+## Автор
+- Денис Клубникин
 
 
 ## Лицензия
