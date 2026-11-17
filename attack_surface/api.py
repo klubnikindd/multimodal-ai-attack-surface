@@ -52,8 +52,15 @@ async def metadata_endpoint(file: UploadFile = File(...)) -> dict:
     return metadata
 
 
-# Allow the app to be run directly for quick debugging
+# Allow the app to be run directly for quick debugging only.
+# Never use --reload on a public host; this is a loopback research demo.
 if __name__ == "__main__":  # pragma: no cover
+    import os
+
     import uvicorn
 
-    uvicorn.run("attack_surface.api:app", host="0.0.0.0", port=8000, reload=True)
+    host = os.environ.get("ATTACK_SURFACE_HOST", "127.0.0.1")
+    reload = os.environ.get("ATTACK_SURFACE_RELOAD") == "1"
+    if reload and host not in {"127.0.0.1", "localhost", "::1"}:
+        raise SystemExit("reload only allowed on loopback")
+    uvicorn.run("attack_surface.api:app", host=host, port=8000, reload=reload)

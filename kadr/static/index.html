@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kadr — библиотека</title>
+  <link rel="stylesheet" href="/ui/ui.css">
+</head>
+<body>
+  <header>
+    <h1>Kadr</h1>
+    <span id="badge" class="badge">нет соединения</span>
+    <input id="token" type="password" placeholder="Bearer token" autocomplete="off">
+    <button id="connect">Подключиться</button>
+  </header>
+  <main>
+    <section>
+      <h2>Состояние системы</h2>
+      <pre id="status">Введите токен и нажмите «Подключиться».</pre>
+    </section>
+    <section>
+      <h2>Поиск</h2>
+      <form id="search-form">
+        <input id="query" placeholder="camera:Canon date:2025-07..2025-08 kind:photo" size="60">
+        <button>Найти</button>
+      </form>
+      <p id="index-badge" class="badge"></p>
+      <ul id="results"></ul>
+    </section>
+    <section>
+      <h2>Раскладка (dry-run)</h2>
+      <form id="plan-form">
+        <input id="root" placeholder="/path/to/library" size="40">
+        <select id="preset">
+          <option>date</option><option>family</option><option>wedding</option><option>stock</option><option>video</option>
+        </select>
+        <button>Построить план</button>
+      </form>
+      <pre id="plan"></pre>
+    </section>
+  </main>
+  <script src="/ui/ui.js"></script>
+</body>
+</html>

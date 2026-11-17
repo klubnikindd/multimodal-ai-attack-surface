@@ -1,6 +1,4 @@
 # Benchmarks
 
-## Device Benchmarks
-
-| Device | OS | CPU | GPU | VLM (CPU) | VLM (GPU) | Search (50K) | Search (200K) |
-|--------|----|-----|-----|-----------|-----------|--------------|--------------|
+Единственный источник публикуемых цифр — [docs/BENCHMARKS.md](docs/BENCHMARKS.md).
+Запуск: `kadr bench /path/to/library --limit 100 --output bench.json`.

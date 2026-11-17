@@ -1,0 +1,23 @@
+# Автоматически определять текстовые файлы и нормализовать их
+* text=auto
+
+# Принудительно использовать LF для скриптов и конфигов (для Linux/CI)
+*.py      text eol=lf
+*.sh      text eol=lf
+*.yml     text eol=lf
+*.yaml    text eol=lf
+*.md      text eol=lf
+*.json    text eol=lf
+Dockerfile text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+
+# Бинарные файлы (чтобы Git не пытался менять в них строки)
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.ico     binary
+*.pdf     binary
+*.zip     binary
+*.exe     binary

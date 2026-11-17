@@ -1,0 +1,34 @@
+# Единая политика песочницы (ТЗ v3 §13.4, D12).
+# Из этого файла генерируются Linux seccomp/namespaces, macOS Seatbelt,
+# Windows Job Object и research-Docker опции. Security-метрики продукта
+# считаются только по нативным прогонам на 3 ОС; Docker — research-only.
+version: 1
+name: kadr-parser-worker
+network: none
+exec:
+  allow: [exiftool, ffprobe, ffmpeg, tesseract]
+  shell: false
+paths:
+  read: [input]
+  write: [tmp]
+  deny: [home, library_root]
+limits:
+  cpu_seconds: 10
+  memory_mb: 1024
+  file_size_mb: 512
+  processes: 8
+  open_files: 128
+  timeout_seconds: 10
+  video_timeout_seconds: 60
+  max_pixels: 100000000
+  max_duration_seconds: 14400
+  max_frames: 120
+docker:
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: ["no-new-privileges:true"]
+  network_mode: none
+  pids_limit: 64
+  mem_limit: 1g
+  cpus: 1.0
+  tmpfs: ["/tmp:size=512m,noexec,nosuid"]

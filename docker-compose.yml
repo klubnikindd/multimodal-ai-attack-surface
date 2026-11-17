@@ -1,0 +1,25 @@
+# Research-only окружение. Песочница генерируется из security/sandbox/policy.yaml;
+# продуктовые security-метрики по этому прогону не публикуются (§13.4).
+# mem_limit/cpus работают в `docker compose up`; для Swarm используйте deploy.resources.
+services:
+  kadr-research:
+    build: .
+    read_only: true
+    network_mode: none
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 64
+    mem_limit: 1g
+    cpus: 1.0
+    environment:
+      PYTHONPYCACHEPREFIX: /tmp/pycache
+      PYTEST_ADDOPTS: -p no:cacheprovider
+    tmpfs:
+      - /tmp:size=512m,noexec,nosuid
+      - /tmp/work:size=64m,noexec,nosuid
+    volumes:
+      - ./:/app:ro
+      - kadr-data:/data
+volumes:
+  kadr-data:
