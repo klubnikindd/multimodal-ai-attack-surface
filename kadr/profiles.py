@@ -12,6 +12,30 @@ from typing import Any
 from .models import ProfileInfo
 
 
+def _ram_gb_windows() -> float | None:
+    import ctypes
+    from ctypes import wintypes
+
+    class MEMORYSTATUSEX(ctypes.Structure):
+        _fields_ = [
+            ("dwLength", wintypes.DWORD),
+            ("dwMemoryLoad", wintypes.DWORD),
+            ("ullTotalPhys", ctypes.c_ulonglong),
+            ("ullAvailPhys", ctypes.c_ulonglong),
+            ("ullTotalPageFile", ctypes.c_ulonglong),
+            ("ullAvailPageFile", ctypes.c_ulonglong),
+            ("ullTotalVirtual", ctypes.c_ulonglong),
+            ("ullAvailVirtual", ctypes.c_ulonglong),
+            ("ullAvailExtendedVirtual", ctypes.c_ulonglong),
+        ]
+
+    stat = MEMORYSTATUSEX()
+    stat.dwLength = ctypes.sizeof(stat)
+    if ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(stat)):  # type: ignore[attr-defined]
+        return round(stat.ullTotalPhys / 1024**3, 1)
+    return None
+
+
 def ram_gb() -> float:
     try:
         if Path("/proc/meminfo").is_file():
@@ -25,6 +49,10 @@ def ram_gb() -> float:
             )
             if completed.stdout.strip().isdigit():
                 return round(int(completed.stdout.strip()) / 1024**3, 1)
+        if platform.system() == "Windows":
+            windows_ram = _ram_gb_windows()
+            if windows_ram is not None:
+                return windows_ram
     except (OSError, ValueError, subprocess.SubprocessError):
         pass
     try:
