@@ -108,6 +108,20 @@ def test_parser_worker_receives_policy_limits(tmp_path):
     assert payload["metadata"]["width"] == 16
 
 
+def test_parser_worker_enforces_pixel_limit(tmp_path):
+    """SEC-09/T09: превышение max_pixels должно отклонить файл, а не дать частичные метаданные."""
+    from PIL import Image
+
+    from kadr.workers.client import WorkerError
+
+    image = tmp_path / "big.jpg"
+    Image.new("RGB", (400, 400), color=(0, 0, 0)).save(image)  # 160K пикселей
+    with pytest.raises(WorkerError) as exc_info:
+        run_worker("metadata", image, limits={"max_pixels": 1000})
+    message = str(exc_info.value).lower()
+    assert "bomb" in message or "pixel" in message
+
+
 def test_sandbox_parity_exposes_accepted_differences():
     parity = load_policy().parity()
     assert set(parity) >= {"equal", "differences", "accepted", "hash"}

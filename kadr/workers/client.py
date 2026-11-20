@@ -91,10 +91,16 @@ def run_worker(
         stdout = _read_limited(stdout_file, MAX_WORKER_STDOUT_BYTES, "stdout")
         stderr = _read_limited(stderr_file, MAX_WORKER_STDERR_BYTES, "stderr")
     if process.returncode not in {0, None}:
-        raise WorkerError(
-            f"parser worker exited {process.returncode}: "
-            f"{stderr.decode('utf-8', errors='replace')[:300]}"
-        )
+        # Worker вернул ненулевой код: пробуем достать причину из его JSON
+        # (DecompressionBombError и пр.), а не только stderr (часто пустой).
+        detail = stderr.decode("utf-8", errors="replace")[:300]
+        try:
+            parsed = json.loads(stdout.decode("utf-8", errors="replace"))
+            if isinstance(parsed, dict) and parsed.get("error"):
+                detail = str(parsed["error"])[:300]
+        except (ValueError, UnicodeDecodeError):
+            pass
+        raise WorkerError(f"parser worker exited {process.returncode}: {detail}")
     if not stdout:
         raise WorkerError(
             f"parser worker empty output: {stderr.decode('utf-8', errors='replace')[:300]}"

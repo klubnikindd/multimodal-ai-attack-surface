@@ -193,6 +193,10 @@ def _image_metadata(path: Path, result: MediaMetadata) -> None:
                 result.description = exif_values.get("description") or result.description
                 result.title = exif_values.get("title") or result.title
                 result.raw_json["text_fields"] = combined_text
+    except Image.DecompressionBombError:
+        # SEC-09/T09: decompression-бомба обязана отклонить файл целиком,
+        # а не превращаться в «частичные метаданные».
+        raise
     except Exception as exc:  # битые/обрезанные файлы не роняют процесс
         result.parse_errors.append(f"image parse: {type(exc).__name__}: {exc}")
 
@@ -381,6 +385,10 @@ def extract_metadata(path: str | Path, *, with_xmp: bool = True) -> MediaMetadat
             result.raw_json["raw"] = True
         try:
             _image_metadata(file_path, result)
+        except Image.DecompressionBombError:
+            # SEC-09/T09: decompression-бомба обязана отклонить файл, а не дать
+            # «частичные метаданные» и пройти дальше молча.
+            raise
         except Exception as exc:  # pragma: no cover
             result.parse_errors.append(f"image: {type(exc).__name__}: {exc}")
     if ext in VIDEO_EXTENSIONS or ext in AUDIO_EXTENSIONS:

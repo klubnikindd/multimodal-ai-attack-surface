@@ -57,7 +57,8 @@ def test_hybrid_and_auto_backend(catalog):
     _assets(catalog)
     assert auto_backend(10) == "sqlite-vec"
     assert auto_backend(60_000) == "sqlite-vec"  # hybrid не авто до M2 (спайк E)
-    assert auto_backend(150_000) == "ann"
+    assert auto_backend(150_000) == "sqlite-vec"  # 200K держит exact (122 мс)
+    assert auto_backend(300_000) == "ann"
     index = create_vector_index(catalog, backend="hybrid", model_id="test", dim=8)
     assert isinstance(index, HybridVectorIndex)
     index.add(1, _vector(0))
