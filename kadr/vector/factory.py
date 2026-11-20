@@ -10,15 +10,19 @@ from .hybrid import HybridVectorIndex
 from .sqlite_vec import SqliteVecIndex
 
 DEFAULT_MODEL_ID = "concept-hash-v1"
-BRUTE_FORCE_COMFORT_LIMIT = 100_000
-HYBRID_SWITCH_LIMIT = 50_000
+# По спайку E (2026-11-20, docs/BENCHMARKS.md): sqlite-vec держит 100K на
+# p95 141 мс при цели NFR-18 ≤300 мс, а hybrid — пока точный Python-перебор
+# (~450 мс уже на 10K) без FTS5-сужения. Поэтому автоматически выбирается
+# sqlite-vec до 100K и tuned-ANN выше; hybrid включается только после M2
+# (реализация FTS5/метаданные-сужения) и до тех пор не выбирается автоматически.
+SQLITE_VEC_LIMIT = 100_000
+BRUTE_FORCE_COMFORT_LIMIT = SQLITE_VEC_LIMIT
+HYBRID_SWITCH_LIMIT = SQLITE_VEC_LIMIT
 
 
 def auto_backend(vector_count: int) -> str:
-    if vector_count > BRUTE_FORCE_COMFORT_LIMIT:
+    if vector_count > SQLITE_VEC_LIMIT:
         return "ann"
-    if vector_count > HYBRID_SWITCH_LIMIT:
-        return "hybrid"
     return "sqlite-vec"
 
 

@@ -56,8 +56,8 @@ def test_sqlite_vec_fallback_is_visible(catalog):
 def test_hybrid_and_auto_backend(catalog):
     _assets(catalog)
     assert auto_backend(10) == "sqlite-vec"
-    assert auto_backend(60_000) == "hybrid"
-    assert auto_backend(200_000) == "ann"
+    assert auto_backend(60_000) == "sqlite-vec"  # hybrid не авто до M2 (спайк E)
+    assert auto_backend(150_000) == "ann"
     index = create_vector_index(catalog, backend="hybrid", model_id="test", dim=8)
     assert isinstance(index, HybridVectorIndex)
     index.add(1, _vector(0))
@@ -127,7 +127,7 @@ def test_ann_rebuild_deduplicates_asset_ids(catalog, monkeypatch):
     from kadr.vector.base import pack_vector
 
     class FakeIndex:
-        def __init__(self, *, ndim, metric, connectivity):
+        def __init__(self, *, ndim, metric, connectivity, **kwargs):  # noqa: ARG002
             self.keys = []
 
         def add(self, keys, vectors):

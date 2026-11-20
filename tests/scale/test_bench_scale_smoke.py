@@ -7,6 +7,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -37,3 +39,33 @@ def test_scale_bench_smoke(tmp_path):
     assert data["index_status"] == "active"
     assert data["recall_at_10"] >= 0.99
     assert data["p95_ms"] > 0
+
+def test_scale_bench_ann_smoke(tmp_path):
+    """ANN (usearch) должен быть активен и давать полный recall на малом наборе."""
+    pytest.importorskip("usearch", reason="usearch не установлен")
+    out = tmp_path / "ann.json"
+    proc = subprocess.run(  # noqa: S603 - фиксированный argv
+        [
+            sys.executable,
+            str(REPO_ROOT / "tests" / "scale" / "bench_scale.py"),
+            "--vectors",
+            "500",
+            "--dim",
+            "32",
+            "--backend",
+            "ann",
+            "--queries",
+            "3",
+            "--out",
+            str(out),
+        ],
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=300,
+    )
+    assert proc.returncode == 0, proc.stderr
+    data = json.loads(out.read_text(encoding="utf-8"))
+    assert data["index_status"] == "active"
+    assert data["recall_at_10"] >= 0.99

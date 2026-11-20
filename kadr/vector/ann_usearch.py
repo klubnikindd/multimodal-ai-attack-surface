@@ -15,14 +15,24 @@ logger = logging.getLogger(__name__)
 
 _BATCH_SIZE = 1000
 _RECOVERY_COOLDOWN_SECONDS = 30.0
+# Тюнинг HNSW по спайку E (2026-11-20): при дефолтах recall@10 был 0.31–0.61,
+# что не проходит NFR-18 (≥0.90). conn=32 / ef_add=200 / ef_search=256 дают
+# recall@10 = 0.98 при ~2 мс на 20K векторов (см. docs/BENCHMARKS.md).
+_ANN_CONNECTIVITY = 32
+_ANN_EXPANSION_ADD = 200
+_ANN_EXPANSION_SEARCH = 256
 
 
 def _add_in_batches(index, keys: Sequence[int], vectors: Sequence[Sequence[float]]) -> None:
     """Добавляет векторы пачками: большие наборы не должны упираться в лимиты usearch."""
+    import numpy as np
+
     if not keys:
         return
+    keys_array = np.asarray(list(keys), dtype=np.int64)
+    vectors_array = np.asarray(list(vectors), dtype=np.float32)
     for start in range(0, len(keys), _BATCH_SIZE):
-        index.add(keys[start : start + _BATCH_SIZE], vectors[start : start + _BATCH_SIZE])
+        index.add(keys_array[start : start + _BATCH_SIZE], vectors_array[start : start + _BATCH_SIZE])
 
 
 class AnnVectorIndex(VectorIndex):
@@ -77,7 +87,7 @@ class AnnVectorIndex(VectorIndex):
             by_asset[int(row["asset_id"])] = unpack_vector(row["vec"], self.dim)
         if not by_asset:
             return
-        index = self._index_cls(ndim=self.dim, metric="cos", connectivity=16)
+        index = self._index_cls(ndim=self.dim, metric="cos", connectivity=_ANN_CONNECTIVITY, expansion_add=_ANN_EXPANSION_ADD, expansion_search=_ANN_EXPANSION_SEARCH)
         keys = list(by_asset)
         vectors = [by_asset[key] for key in keys]
         _add_in_batches(index, keys, vectors)
@@ -108,7 +118,7 @@ class AnnVectorIndex(VectorIndex):
         if not self.available:
             return False
         if self._index is None:
-            self._index = self._index_cls(ndim=self.dim, metric="cos", connectivity=16)
+            self._index = self._index_cls(ndim=self.dim, metric="cos", connectivity=_ANN_CONNECTIVITY, expansion_add=_ANN_EXPANSION_ADD, expansion_search=_ANN_EXPANSION_SEARCH)
         return True
 
     def _index_size(self) -> int:
@@ -146,8 +156,13 @@ class AnnVectorIndex(VectorIndex):
             return
         if self._ensure():
             try:
-                self._index.add([asset_id], [values])
-                self.record_status(status="active", reason="usearch HNSW")
+                import numpy as np
+
+                # usearch требует ndarray; статус обновляется пачкой в add_many().
+                self._index.add(
+                    np.asarray([asset_id], dtype=np.int64),
+                    np.asarray([values], dtype=np.float32),
+                )
             except Exception as exc:
                 self._mark_failed("add", exc)
         self._fallback._cache = None
@@ -157,6 +172,10 @@ class AnnVectorIndex(VectorIndex):
         for asset_id, vector in rows:
             self.add(asset_id, vector)
             count += 1
+        self.record_status(
+            status="active" if self.available else "degraded",
+            reason=None if self.available else self.reason,
+        )
         return count
 
     def remove(self, asset_id: int) -> None:
@@ -183,8 +202,11 @@ class AnnVectorIndex(VectorIndex):
             self._recover()
         if self.available and self._index is not None:
             try:
+                import numpy as np
+
                 fetch_k = k if candidate_ids is None else max(k * 10, 100)
-                matches = self._index.search(normalize(query_vector), fetch_k)
+                query = np.asarray(normalize(query_vector), dtype=np.float32)
+                matches = self._index.search(query, fetch_k)
                 result = [(int(match.key), 1.0 - float(match.distance)) for match in matches]
                 if candidate_ids is not None:
                     result = [

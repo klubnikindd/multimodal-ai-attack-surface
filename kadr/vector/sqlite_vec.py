@@ -143,8 +143,9 @@ class SqliteVecIndex(VectorIndex):
                 self.reason = f"vec0 insert failed: {exc}"
                 self.record_status(status="degraded", reason=self.reason)
                 return
-        if self.available:
-            self.record_status(status="active")
+        # Статус обновляется пачкой в add_many()/rebuild(): запись на каждую
+        # строку делала сборку O(N²) — record_status() считал COUNT(*) по vec0
+        # (спайк E: 50K строились 306 с, 100K не завершались за 40 минут).
         self._fallback._cache = None
 
     def add_many(self, rows: Iterable[tuple[int, Sequence[float]]]) -> int:
@@ -152,6 +153,10 @@ class SqliteVecIndex(VectorIndex):
         for asset_id, vector in rows:
             self.add(asset_id, vector)
             count += 1
+        self.record_status(
+            status="active" if self.available else "degraded",
+            reason=None if self.available else self.reason,
+        )
         return count
 
     def remove(self, asset_id: int) -> None:

@@ -323,3 +323,9 @@
 | P1-05 (спайк C) | one-dir собирается и работает; найдено и исправлено 4 дефекта сборки: SPECPATH (`packaging` → `.parent`), entry-point (относительный импорт в `kadr/__main__.py` → `packaging/entry.py`), worker в frozen-режиме (`worker-parser` вместо `-m kadr.workers.parser_worker`), `doctor` читал каталог после `close()`; замер: 82,2 МБ, старт 18,5 с (первый, AV) / 430 мс (повторный), 0 orphans | полный pipeline scan→analyze→search в бандле OK; `BENCHMARKS` обновлён |
 | P1-04, P1-07 | **заблокировано: нет Rust-тулчейна** (rustc/cargo отсутствуют) — нужна установка или другой исполнитель | `Get-Command rustc` → отсутствует |
 | Прочее | исправлен `IndexStatus.degradation_visible`: был всегда true → бейдж «деградация» висел бы и на активном индексе; + регресс-тест | smoke: `active → degradation_visible=false` |
+
+| P1-02 доп. | **Квадратичный дефект сборки исправлен**: `record_status()` на каждую вставку (COUNT по vec0) → 50K за 306 с, 100K не завершались; статус перенесён в `add_many()` → 22 с (50K), 44 с (100K) | `bench-results` |
+| P1-02 доп. | **ANN (usearch) затюнен**: дефолты давали recall@10 0.31–0.61 (ниже NFR-18 ≥0.90); conn=32/ef_add=200/ef_search=256 → 0.915–0.99; numpy-фиксы в add/search | `kadr/vector/ann_usearch.py` |
+| P1-02 доп. | **Порог бэкендов по данным**: sqlite-vec до 100K (p95 141 мс), tuned-ANN выше; hybrid не авто до M2 | `factory.auto_backend`, ADR-0004 |
+| P1-06 | **Аудит весов**: Qwen3-VL-2B/4B GGUF — apache-2.0 подтверждён (HF tags+cardData), ревизии и sha256 файлов запинены, `enabled=true`; siglip2 источник apache-2.0 (ONNX-артефакт не запинен); `model-integrity` проверяет sha256 по файлу или HF ETag | `models/manifest.yaml`, гейты зелёные |
+| P1-06 доп. | `check-model-integrity` переписан (HF ETag fallback) + 3 теста | `tests/test_model_integrity.py` |

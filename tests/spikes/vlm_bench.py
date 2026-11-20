@@ -108,6 +108,36 @@ def main(argv: list[str] | None = None) -> int:
     results: list[dict] = []
     for resolution in args.resolutions:
         timings: list[float] = []
+        # Базовый прогон без изображения: вычитаем загрузку модели и старт процесса.
+        base_cmd = [
+            str(binary),
+            "-m",
+            str(gguf),
+            "--mmproj",
+            str(mmproj),
+            "--no-display-prompt",
+            "--no-display-output",
+            "--simple-io",
+            "-c",
+            "1024",
+            "-n",
+            "8",
+            "-p",
+            "ok",
+        ]
+        base_times: list[float] = []
+        for _ in range(2):
+            start = time.perf_counter()
+            try:
+                subprocess.run(  # noqa: S603 - фиксированный argv, без shell
+                    base_cmd, capture_output=True, text=True, timeout=600
+                )
+            except subprocess.TimeoutExpired:
+                base_times.append(600.0)
+                continue
+            base_times.append(time.perf_counter() - start)
+        baseline_seconds = min(base_times)
+
         for image in images:
             argv_cmd = [
                 str(binary),
@@ -122,6 +152,8 @@ def main(argv: list[str] | None = None) -> int:
                 "2048",
                 "-n",
                 str(MAX_OUTPUT_TOKENS),
+                "-p",
+                "Опиши изображение кратко: сцена, объекты, текст. Только JSON.",
                 "--image",
                 str(image),
                 "--image-max-side",
@@ -144,11 +176,12 @@ def main(argv: list[str] | None = None) -> int:
             except subprocess.TimeoutExpired:
                 timings.append(600.0)
                 continue
-            timings.append(time.perf_counter() - start)
+            timings.append(max(0.0, time.perf_counter() - start - baseline_seconds))
         results.append(
             {
                 "resolution_px": resolution,
                 "images": len(images),
+                "baseline_seconds": round(baseline_seconds, 2),
                 "seconds_per_new_image_median": round(statistics.median(timings), 2),
                 "seconds_per_new_image_p95": round(
                     statistics.quantiles(timings, n=20)[18] if len(timings) >= 20 else max(timings), 2

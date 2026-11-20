@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
-"""model-integrity: sha256/revision для enabled-моделей (§12.3).
+"""model-integrity (§12.3): sha256 каждого файла enabled-модели.
 
-В v0.1 enabled-моделей нет (веса disabled до M0-аудита), поэтому job проходит
-с предупреждением. Как только модель включается, отсутствие файла/хэша — FAIL.
+Порядок проверки для каждого файла:
+  1. локальный файл models/<id>/<name> → сравнение sha256 с манифестом;
+  2. файла нет локально → HEAD resolve-URL запиненной ревизии на HF, ETag
+     ответа (LFS oid = sha256) сравнивается с манифестом. Файлы весов в git
+     не хранятся, поэтому CI проверяет по сети; локальный прогон без сети —
+     fail-closed (это соответствует §12.3: «любое расхождение — падение»).
 """
 
 from __future__ import annotations
@@ -10,6 +14,7 @@ from __future__ import annotations
 import hashlib
 import json
 import sys
+import urllib.request
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -27,25 +32,60 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def hf_etag(repo_url: str, revision: str, filename: str, *, timeout: float = 60.0) -> str | None:
+    """LFS oid (sha256) файла на HF: ETag ответа resolve-URL запиненной ревизии."""
+    url = f"{repo_url.rstrip('/')}/resolve/{revision}/{filename}"
+    request = urllib.request.Request(
+        url, method="HEAD", headers={"User-Agent": "kadr-model-integrity/1"}
+    )
+    with urllib.request.urlopen(request, timeout=timeout) as response:  # noqa: S310
+        etag = response.headers.get("ETag") or ""
+    cleaned = etag.strip().strip('"')
+    return cleaned.lower() or None
+
+
 def main() -> int:
     data = load_manifest()
     report = validate_manifest(data)
     issues = list(report.issues)
-    checked = []
+    checked: list[dict[str, str]] = []
     for model in data.get("models", []):
         if not isinstance(model, dict) or not model.get("enabled"):
             continue
-        model_dir = REPO_ROOT / "models" / str(model["id"])
+        model_id = str(model["id"])
+        model_dir = REPO_ROOT / "models" / model_id
+        repo_url = str(model.get("license_source_url") or "")
+        revision = str(model.get("revision") or "")
         for file in model.get("files", []):
-            path = model_dir / str(file.get("name"))
-            if not path.is_file():
-                issues.append(f"{model['id']}: missing file {path}")
+            name = str(file.get("name"))
+            expected = str(file.get("sha256", "")).lower()
+            path = model_dir / name
+            if path.is_file():
+                actual = sha256_file(path)
+                source = "local"
+            elif repo_url and revision:
+                try:
+                    actual = hf_etag(repo_url, revision, name)
+                    source = "hf-etag"
+                except Exception as exc:  # noqa: BLE001 - fail-closed по §12.3
+                    issues.append(f"{model_id}: не удалось проверить {name} (HF недоступен: {exc})")
+                    continue
+            else:
+                issues.append(f"{model_id}: missing file {path} и нет revision/url для проверки")
                 continue
-            actual = sha256_file(path)
-            if actual.lower() != str(file.get("sha256", "")).lower():
-                issues.append(f"{model['id']}: sha256 mismatch for {path.name}")
-            checked.append({"model": model["id"], "file": path.name, "sha256": actual})
-    print(json.dumps({"ok": not issues, "checked": checked, "issues": issues, "warnings": report.warnings}, ensure_ascii=False, indent=2))
+            if actual and actual == expected:
+                checked.append({"model": model_id, "file": name, "sha256": actual, "source": source})
+            else:
+                issues.append(
+                    f"{model_id}: sha256 mismatch for {name} (expected {expected[:12]}…, got {str(actual)[:12]}…)"
+                )
+    print(
+        json.dumps(
+            {"ok": not issues, "checked": checked, "issues": issues, "warnings": report.warnings},
+            ensure_ascii=False,
+            indent=2,
+        )
+    )
     return 0 if not issues else 1
 
 

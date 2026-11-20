@@ -2,14 +2,14 @@
 
 <!-- kadr:generated:start -->
 
-**Сгенерировано:** 2026-11-20T16:24:39+00:00 · **HEAD:** 029cc77 · **спека:** docs/spec/v3.1.md · **итог:** ✅ все проверенные гейты зелёные
+**Сгенерировано:** 2026-11-20T16:46:56+00:00 · **HEAD:** 74dd29e · **спека:** docs/spec/v3.1.md · **итог:** ✅ все проверенные гейты зелёные
 
 | Гейт | Статус | Детали |
 |---|---|---|
-| tests | ✅ | 122 тестов: 0 fail, 2 skip |
+| tests | ✅ | 126 тестов: 0 fail, 2 skip |
 | sqlite-vec-smoke | ✅ exit=0 | available=True, status=active |
 | sidecar-lifecycle | ✅ exit=0 | ok=True, checks=3 |
-| license-weights | ✅ exit=0 | enabled=0 issues=0 |
+| license-weights | ✅ exit=0 | enabled=2 issues=0 |
 | model-integrity | ✅ exit=0 | ok=True, issues=0 |
 | license-code | ✅ exit=0 | OK |
 | sandbox-parity | ✅ exit=0 | policy_hash=bf75be1cf74e8e185dd34524e40b73c630f65e2f, design_parity={'equal': True, 'differences': {}, 'acce, enforcement={'parser_worker': 'rlimits/timeouts/pr |

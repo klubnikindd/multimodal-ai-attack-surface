@@ -142,3 +142,5 @@ sbom.cdx.json
 bench-results/
 dist-test/
 build-test/
+
+.models-test/

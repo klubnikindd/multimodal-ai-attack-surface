@@ -21,11 +21,16 @@ def _enabled_model(**overrides):
     return model
 
 
-def test_default_manifest_is_honest_and_passes_with_disabled_pending_models():
+def test_default_manifest_is_honest_and_passes():
     report = validate_manifest_file()
     assert report.ok
-    assert report.enabled_count == 0
-    assert report.warnings
+    # v0.1: включены только верифицированные VLM (P1-06); embeddings/OCR — disabled
+    # до фиксации ONNX-артефактов. enabled-модели обязаны иметь license_verified_at.
+    assert report.enabled_count == 2
+    enabled = [model for model in report.models if model["enabled"]]
+    assert all(model["role"] == "vlm" for model in enabled)
+    assert all(model.get("license_verified_at") for model in enabled)
+    assert all(model["commercial_use"] for model in enabled)
 
 
 def test_unknown_license_fails_closed_for_enabled_model():
