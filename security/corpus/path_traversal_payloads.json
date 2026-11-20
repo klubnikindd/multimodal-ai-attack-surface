@@ -1,0 +1,15 @@
+{
+  "description": "Path-traversal / FS-escape payloads (SEC-06, T06). Каждый обязан отклоняться normalize_rel_path (0 записей вне root). Резервированные имена Windows (CON/NUL) — отдельно: они санитизируются, а не отклоняются (test_paths_security).",
+  "version": 1,
+  "payloads": [
+    "../etc/passwd",
+    "..\\..\\windows\\system32",
+    "/absolute/path",
+    "C:\\Windows\\System32",
+    "\\\\server\\share\\file",
+    "dir/file:stream",
+    "a/../../b",
+    "bad\u0000name",
+    "dir//../..//x"
+  ]
+}

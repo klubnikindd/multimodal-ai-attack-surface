@@ -1,0 +1,26 @@
+{
+  "description": "PII payloads (SEC-04, T04): каждый обязан детектироваться detect_pii в указанной категории.",
+  "version": 1,
+  "payloads": [
+    {
+      "text": "пишите на user@example.com",
+      "category": "email"
+    },
+    {
+      "text": "карта 4111 1111 1111 1111",
+      "category": "card"
+    },
+    {
+      "text": "тел. +7 912 345 67 89",
+      "category": "phone"
+    },
+    {
+      "text": "паспорт 45 07 123456",
+      "category": "passport"
+    },
+    {
+      "text": "ip 192.168.1.10",
+      "category": "ip"
+    }
+  ]
+}
