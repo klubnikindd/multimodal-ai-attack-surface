@@ -2,11 +2,11 @@
 
 <!-- kadr:generated:start -->
 
-**Сгенерировано:** 2026-11-20T17:42:11+00:00 · **HEAD:** ad565d4 · **спека:** docs/spec/v3.1.md · **итог:** ✅ все проверенные гейты зелёные
+**Сгенерировано:** 2026-11-20T17:47:24+00:00 · **HEAD:** e371506 · **спека:** docs/spec/v3.1.md · **итог:** ✅ все проверенные гейты зелёные
 
 | Гейт | Статус | Детали |
 |---|---|---|
-| tests | ✅ | 140 тестов: 0 fail, 2 skip |
+| tests | ✅ | 141 тестов: 0 fail, 2 skip |
 | sqlite-vec-smoke | ✅ exit=0 | available=True, status=active |
 | sidecar-lifecycle | ✅ exit=0 | ok=True, checks=3 |
 | license-weights | ✅ exit=0 | enabled=2 issues=0 |

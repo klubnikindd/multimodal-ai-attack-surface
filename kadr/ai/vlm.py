@@ -448,6 +448,9 @@ class LlamaCppClient:
             ],
             "max_tokens": VLM_MAX_OUTPUT_TOKENS,
             "temperature": 0,
+            # §8.4: grammar-constrained decoding — рантайм обязан возвращать валидный
+            # JSON (json_object), строгость схемы добивает validate_vlm_output.
+            "response_format": {"type": "json_object"},
         }
         request = urllib.request.Request(
             f"{self.base_url}/v1/chat/completions",
