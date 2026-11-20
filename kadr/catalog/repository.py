@@ -613,6 +613,14 @@ class Catalog:
     ) -> None:
         if self.fts5:
             self.conn.execute("DELETE FROM fts WHERE asset_id=?", (asset_id,))
+            # RU-морфология (FR-5.2): добавляем стемы тегов/подписи, чтобы «кот»
+            # находил «кота/котов». Стеммер без зависимостей, ошибка не роняет индекс.
+            try:
+                from ..ai.rustem import stem_text
+
+                tags = f"{tags} {stem_text(tags + ' ' + caption)}".strip()
+            except Exception:  # pragma: no cover - стеммер опционален
+                pass
             self.conn.execute(
                 "INSERT INTO fts(asset_id, caption, ocr_text, asr_text, tags) VALUES (?,?,?,?,?)",
                 (asset_id, caption, ocr_text, asr_text, tags),

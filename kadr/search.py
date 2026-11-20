@@ -120,8 +120,25 @@ def _iso_bound(value: str, *, end: bool = False) -> str | None:
 
 def _fts_query(text: str) -> str:
     terms = [term for term in re.findall(r"[\w\-]{2,}", text, flags=re.UNICODE)]
-    # Пользовательский ввод не должен ломать FTS-синтаксис: только quoted terms.
-    return " OR ".join(f'"{term.replace(chr(34), "")}"' for term in terms[:16])
+    # RU-морфология (FR-5.2): к русским токенам добавляем стем, чтобы запрос
+    # «коты» находил «кот/кота». Пользовательский ввод не ломает FTS-синтаксис.
+    try:
+        from .ai.rustem import stem_word as _stemmer
+    except Exception:  # pragma: no cover
+        _stemmer = None  # type: ignore[assignment]
+    expanded: list[str] = []
+    seen: set[str] = set()
+    for term in terms[:16]:
+        clean = term.replace(chr(34), "")
+        if clean not in seen:
+            expanded.append(clean)
+            seen.add(clean)
+        if _stemmer is not None and re.fullmatch(r"[а-яё]+", clean, flags=re.IGNORECASE):
+            stem = _stemmer(clean)
+            if stem != clean and len(stem) >= 2 and stem not in seen:
+                expanded.append(stem)
+                seen.add(stem)
+    return " OR ".join(f'"{part}"' for part in expanded)
 
 
 def _structural_rows(catalog: Catalog, filters: list[tuple[str, str, str]]) -> set[int] | None:
