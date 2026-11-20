@@ -365,3 +365,32 @@ def test_catalog_rejects_unsafe_migration_identifier(catalog):
         catalog._ensure_column("plan_items; DROP TABLE plans", "hash", "TEXT")
     with pytest.raises(CatalogError):
         catalog._ensure_column("plan_items", "hash", "TEXT; DROP TABLE plans")
+
+
+def test_case_insensitive_collision_resolution():
+    """FR-2.9: на case-insensitive ФС (Windows/macOS) регистрово-иные имена коллизуют."""
+    from kadr.planner import _planned_key, resolve_collision
+
+    dst = Path("Archive") / "Photo.jpg"
+    planned = {_planned_key(Path("Archive") / "photo.jpg", case_insensitive=True)}
+    resolved, collision, _reason = resolve_collision(
+        dst, mode="suffix", source_hash="blake3:abc", planned=planned, case_insensitive=True
+    )
+    assert collision is True
+    assert resolved.name.lower().startswith("photo (")  # suffix, а не перезапись
+
+
+def test_case_sensitive_fs_does_not_collide_on_case():
+    """На Linux (case-sensitive) Photo.jpg и photo.jpg — разные пути."""
+    from kadr.planner import resolve_collision
+
+    dst = Path("Archive") / "Photo.jpg"
+    resolved, collision, _reason = resolve_collision(
+        dst,
+        mode="suffix",
+        source_hash="blake3:abc",
+        planned={"archive/photo.jpg"},
+        case_insensitive=False,
+    )
+    assert collision is False
+    assert resolved == dst

@@ -84,6 +84,12 @@ def main(argv: list[str] | None = None) -> int:
         default=0,
         help="переопределить число потоков (0 = cores-1); для эмуляции 4/8-ядерных CPU — 3/7",
     )
+    parser.add_argument(
+        "--ngl",
+        type=int,
+        default=0,
+        help="число слоёв на GPU (0 = CPU); 999 = offload всех слоёв (класс «GPU ≥6 ГБ», §8.3.4)",
+    )
     parser.add_argument("--out", default=None)
     args = parser.parse_args(argv)
 
@@ -118,9 +124,10 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     threads = str(args.threads if args.threads > 0 else max(1, (os.cpu_count() or 2) - 1))
+    gpu_args = ["--n-gpu-layers", str(args.ngl)] if args.ngl else []
     base_cmd = [
         str(binary), "-m", str(gguf), "--mmproj", str(mmproj),
-        "-p", "ok", "-n", "8", "--temp", "0", "--threads", threads,
+        "-p", "ok", "-n", "8", "--temp", "0", "--threads", threads, *gpu_args,
     ]
     base_times: list[float] = []
     for _ in range(2):
@@ -141,7 +148,7 @@ def main(argv: list[str] | None = None) -> int:
                 str(binary), "-m", str(gguf), "--mmproj", str(mmproj),
                 "--image", str(image),
                 "-p", PROMPT, "-n", str(MAX_OUTPUT_TOKENS),
-                "--temp", "0", "--threads", threads,
+                "--temp", "0", "--threads", threads, *gpu_args,
             ]
             start = time.perf_counter()
             try:
@@ -166,6 +173,7 @@ def main(argv: list[str] | None = None) -> int:
                 "mmproj": str(mmproj),
                 "binary": str(binary),
                 "threads": int(threads),
+                "n_gpu_layers": args.ngl,
                 "thinking": False,
                 "max_output_tokens": MAX_OUTPUT_TOKENS,
             }
