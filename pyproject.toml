@@ -33,6 +33,7 @@ images = ["Pillow>=10.0"]
 hashing = ["blake3>=0.4"]
 ml = ["onnxruntime>=1.17", "numpy>=1.24"]
 ann = ["usearch>=2.0", "numpy>=1.24"]
+asr = ["faster-whisper>=1.0", "av>=11,<15"]
 build = ["pyinstaller>=6.0"]
 dev = [
   "pytest>=8.0",
@@ -50,6 +51,8 @@ dev = [
   "usearch>=2.0",
   "pyinstaller>=6.0",
   "pip-audit>=2.7",
+  "faster-whisper>=1.0",
+  "av>=11,<15",
 ]
 all = [
   "fastapi>=0.110",

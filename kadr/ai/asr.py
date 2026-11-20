@@ -40,6 +40,27 @@ class ASRResult:
         }
 
 
+def _ensure_av_compat() -> None:
+    """PyAV ≥15 удалил «metadata_errors» из av.open, а faster-whisper 1.2.x
+    его передаёт → decode_audio падает. Шимм убирает лишний kwarg; убирается,
+    как только faster-whisper выпустит совместимую версию (нет wheel av<15 для
+    Python 3.12 Windows)."""
+    try:
+        import av
+    except Exception:  # pragma: no cover - av не установлен
+        return
+    if getattr(av, "_kadr_patched", False):
+        return
+    original_open = av.open
+
+    def open_compat(*args: Any, **kwargs: Any) -> Any:
+        kwargs.pop("metadata_errors", None)
+        return original_open(*args, **kwargs)
+
+    av.open = open_compat
+    av._kadr_patched = True
+
+
 def is_available() -> bool:
     try:
         import faster_whisper  # noqa: F401
@@ -70,6 +91,7 @@ class WhisperASR:
             return self._model
         import faster_whisper
 
+        _ensure_av_compat()
         # download_root=None → используем HF-кэш; веса small/turbo — MIT (faster-whisper)
         # и SYSTEM-карточка Whisper (Apache-2.0/MIT в зависимости от модели).
         self._model = faster_whisper.WhisperModel(
