@@ -25,7 +25,9 @@ kadr doctor
 | Windows 11, 28 ядер | win32 | — | one-dir: scan → analyze → search | 1 файл: pipeline OK, sqlite-vec активен, 0 осиротевших процессов | 2026-11-20 | спайк C (в сборке найдено и исправлено 4 дефекта: SPECPATH, entry, worker-режим, doctor-after-close + hook sqlite_vec) |
 
 | Windows 11, Intel 28c, 4 потока | win32 | lite | VLM 2B Q4_K_M + mmproj F16, 768 px | **33,4 с/кадр** (median, 12 изобр.; baseline загрузки 20 с) | 2026-11-20 | спайк D: > 25 с/кадр → гейт §14 «VLM вне Lite, ночная задача только по выборке» подтверждается; 8 потоков и 1024 px — в прогоне |
-| Windows 11, Intel 28c + RTX 4070 Ti SUPER 16 ГБ | win32 | pro | VLM 4B/2B на GPU (CUDA) | **не измерено** — нужен CUDA-билд llama.cpp + веса 4B | — | спайк D, класс «GPU ≥6 ГБ»: замер открыт, машина есть |
+| Windows 11, RTX 4070 Ti SUPER 16 ГБ (CUDA, ngl=999) | win32 | pro | VLM 2B Q4_K_M + mmproj F16, 768 px | **2,7 с/кадр** (median, 3 изобр.; baseline 5,8 с) | 2026-11-20 | спайк D, класс «GPU ≥6 ГБ»: в ожидании §8.3 (1–4 с) |
+| Windows 11, RTX 4070 Ti SUPER 16 ГБ (CUDA, ngl=999) | win32 | pro | VLM 2B Q4_K_M + mmproj F16, 1024 px | **6,4 с/кадр** (median, 5 изобр.) | 2026-11-20 | спайк D: 1024 px дороже 768 (vision-encode) — бюджетировать по разрешению |
+| Windows 11, RTX 4070 Ti SUPER 16 ГБ | win32 | pro | VLM 4B Q4_K_M на GPU | **не измерено** — нужна докачка весов 4B (2,5 ГБ) | — | спайк D, опционально |
 | 4-ядерный CPU, 8 ГБ | — | lite | VLM 2B Q4, 768/1024 px | **не измерено** (ожидание 15–25 с/кадр) | — | блокирующий спайк D |
 | 8-ядерный CPU, 16 ГБ | — | lite | VLM 2B Q4 | **не измерено** (ожидание 10–18 с/кадр) | — | блокирующий спайк D |
 | Apple Silicon 16 ГБ | macOS | balanced | VLM 2B Q4 Metal | **не измерено** (ожидание 1–4 с/кадр) | — | блокирующий спайк D |
