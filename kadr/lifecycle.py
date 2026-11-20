@@ -73,6 +73,22 @@ def spawn_sidecar(argv: Sequence[str], *, env: dict[str, str] | None = None) -> 
         if preexec is not None:
             kwargs["preexec_fn"] = preexec
     process = subprocess.Popen(list(argv), **kwargs)
+    if os.name == "nt":  # pragma: no cover - Windows
+        # SEC-17/NFR-17: Job Object с kill-on-close — если родитель умрёт
+        # (в т.ч. kill -9), ОС добьёт всё дерево. При невозможности (уже в job,
+        # напр. в CI) остаётся taskkill из terminate_group.
+        try:
+            from .security.jobobject import assign_process_to_job, create_kill_on_close_job
+
+            job = create_kill_on_close_job()
+            if assign_process_to_job(job, process.pid):
+                process.kadr_job = job  # type: ignore[attr-defined]
+            else:
+                from .security.jobobject import close_job
+
+                close_job(job)
+        except Exception:  # pragma: no cover - defensive
+            pass
     lines: list[str] = []
     lock = threading.Lock()
     process.kadr_lines = lines  # type: ignore[attr-defined]
