@@ -15,8 +15,11 @@ Docker). Для продуктовых метрик Docker-прогон не п�
 - **Реализация:** `kadr/metadata/sanitize.py` (детектор, NFKC, zero-width/bidi),
   `kadr/ai/vlm.py` (схема, запрет thinking/tools, PII-фильтр),
   `tests/kadr/test_metadata_and_dates.py`, `tests/kadr/test_vlm_contract.py`.
-- **Метрика:** ASR на синтетическом корпусе инъекций — 0% изменения схемы при
-  включённых слоях 1–4; статус: локальные unit-тесты, нативные прогоны 3 ОС — M3.
+- **Метрика:** ASR детерминированного слоя = **0% на 15 detectable payload'ах**
+  (`security/corpus/injection_payloads.json`, `tests/kadr/test_injection_corpus.py`;
+  Windows native, 2026-11-20). Bidi/zero-width проверяются отдельно как
+  нейтрализация (sanitize их удаляет). Полный ML-сканер (LLM Guard) — модуль
+  Pro Security, не входит в базовый установщик; нативные прогоны 3 ОС — M3.
 - **Остаточный риск:** OCR/ASR-текст может влиять на теги в пределах review-флага;
   это допустимо, но требует человеческого подтверждения.
 
@@ -30,6 +33,10 @@ Docker). Для продуктовых метрик Docker-прогон не п�
   (rlimits/timeout/process-group), `kadr/workers/client.py`,
   `kadr/metadata/extractor.py` (исключения парсеров не роняют процесс),
   `tests/kadr/test_lifecycle_sandbox.py`.
+- **Метрика (T09, 2026-11-20, Windows native):** decompression-бомба
+  (`Image.DecompressionBombError` при превышении `max_pixels`) **отклоняет
+  файл** — `test_parser_worker_enforces_pixel_limit`; ранее ошибка
+  проглатывалась и файл проходил с «частичными метаданными» (исправлено).
 - **Остаточный риск:** полный malformed-корпус и fuzz — M3; нативные прогоны
   Windows/macOS/Linux обязательны.
 
