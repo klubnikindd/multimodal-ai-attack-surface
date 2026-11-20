@@ -163,5 +163,6 @@ def test_sqlite_vec_backend_is_active_when_extension_installed(catalog):
     assert index.available is True, index.reason
     status = index.status()
     assert status.status == "active", status.reason
+    assert status.degradation_visible is False  # active — не деградация (FR-3.13)
     index.add(1, _vector(0))
     assert [asset_id for asset_id, _ in index.search(_vector(0), k=1)] == [1]

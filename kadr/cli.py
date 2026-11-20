@@ -291,6 +291,14 @@ def cmd_bench(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_worker_parser(args: argparse.Namespace) -> int:
+    """Скрытая команда для PyInstaller-бандла: те же обязанности, что у
+    python -m kadr.workers.parser_worker (спайк C). В dev-режиме не используется."""
+    from .workers.parser_worker import main as worker_main
+
+    return worker_main()
+
+
 def cmd_doctor(args: argparse.Namespace) -> int:
     settings = _settings(args)
     catalog = _catalog(settings)
@@ -299,6 +307,10 @@ def cmd_doctor(args: argparse.Namespace) -> int:
     policy = load_policy()
     index = create_vector_index(catalog, backend=args.vector_backend)
     stats = catalog.stats()
+    # Снимок ДО close(): после закрытия соединения чтение падало с
+    # "Cannot operate on a closed database" (найден на one-dir-бандле, спайк C).
+    index_status = index.status()
+    fts5 = catalog.fts5
     payload = {
         "product": __product_name__,
         "version": __version__,
@@ -308,10 +320,10 @@ def cmd_doctor(args: argparse.Namespace) -> int:
         "catalog": str(settings.catalog_path),
         "catalog_stats": stats,
         "profile": profile.to_dict(),
-        "vector_index": index.status().to_dict(),
+        "vector_index": index_status.to_dict(),
         "models": manifest.to_dict(),
         "sandbox": {"hash": policy.policy_hash(), "parity": policy.parity()},
-        "fts5": catalog.fts5,
+        "fts5": fts5,
         "process": {
             "pid": os.getpid(),
             "process_group": os.getpgrp() if hasattr(os, "getpgrp") else None,
@@ -330,12 +342,12 @@ def cmd_doctor(args: argparse.Namespace) -> int:
         print(
             f"Каталог: {settings.catalog_path} (assets={stats['assets']}, files={stats['files']}, embeddings={stats['embeddings']})"
         )
-        print(f"FTS5: {'да' if catalog.fts5 else 'НЕТ — текстовый поиск ограничен'}")
+        print(f"FTS5: {'да' if fts5 else 'НЕТ — текстовый поиск ограничен'}")
         print(
-            f"Векторный индекс: {index.status().backend} / {index.status().status} ({index.status().vector_count} векторов)"
+            f"Векторный индекс: {index_status.backend} / {index_status.status} ({index_status.vector_count} векторов)"
         )
-        if index.status().reason:
-            print(f"  причина: {index.status().reason}")
+        if index_status.reason:
+            print(f"  причина: {index_status.reason}")
         print(
             f"Модели: включено {manifest.enabled_count}; issues {len(manifest.issues)}; warnings {len(manifest.warnings)}"
         )
@@ -497,6 +509,12 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--orphan-check", action="store_true")
     p.set_defaults(func=cmd_doctor)
 
+    p = sub.add_parser(
+        "worker-parser",
+        help=argparse.SUPPRESS,
+        description="Внутренний worker (one-dir-бандл); не вызывать напрямую",
+    )
+    p.set_defaults(func=cmd_worker_parser)
     p = sub.add_parser("status", help="Краткий статус (алиас doctor)")
     p.add_argument("--orphan-check", action="store_true")
     p.set_defaults(func=cmd_doctor)

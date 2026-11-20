@@ -18,7 +18,12 @@ from ..models import MediaMetadata
 from ..security.sandbox import load_policy
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-_WORKER = [sys.executable, "-m", "kadr.workers.parser_worker"]
+if getattr(sys, "frozen", False):
+    # В one-dir-бандле sys.executable — kadr-engine.exe; «-m» он не понимает,
+    # поэтому worker вызывается скрытой CLI-командой (спайк C).
+    _WORKER = [sys.executable, "worker-parser"]
+else:
+    _WORKER = [sys.executable, "-m", "kadr.workers.parser_worker"]
 MAX_WORKER_STDOUT_BYTES = 16 * 1024 * 1024
 MAX_WORKER_STDERR_BYTES = 1 * 1024 * 1024
 

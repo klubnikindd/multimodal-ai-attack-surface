@@ -57,3 +57,18 @@ def test_cli_init_and_rules_list(tmp_path):
     rules = _run(tmp_path, "rules", "list")
     assert rules.returncode == 0, rules.stderr
     assert "date" in json.loads(rules.stdout)
+
+
+def test_cli_doctor_text_output_without_closed_database(tmp_path):
+    """Регресс спайка C: doctor печатал статус после catalog.close()."""
+    init = _run(tmp_path, "init")
+    assert init.returncode == 0, init.stderr
+    cmd = [sys.executable, "-m", "kadr", "--home", str(tmp_path / ".kadr"), "doctor"]
+    # encoding=utf-8: CLI печатает UTF-8, а локаль Windows — cp1251.
+    completed = subprocess.run(  # noqa: S603
+        cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=120
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert "FTS5:" in completed.stdout
+    assert "Векторный индекс:" in completed.stdout
+    assert "Cannot operate on a closed database" not in completed.stdout

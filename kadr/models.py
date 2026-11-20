@@ -195,7 +195,12 @@ class IndexStatus:
     index_generation: int = 1
     reason: str | None = None
     measured_p95_ms: float | None = None
-    degradation_visible: bool = True
+    degradation_visible: bool | None = None  # вычисляется по статусу (см. __post_init__)
+
+    def __post_init__(self) -> None:
+        if self.degradation_visible is None:
+            # «Видна» только реальная деградация; active/building — не повод для бейджа.
+            self.degradation_visible = self.status in {"degraded", "unavailable"}
 
     def to_dict(self) -> dict[str, Any]:
         return {

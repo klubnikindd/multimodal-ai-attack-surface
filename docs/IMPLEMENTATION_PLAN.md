@@ -312,3 +312,14 @@
 **Остаток по Ф0 (не блокирует Ф1):** оригинал ревью `Pravki.md` не приложен (нет данных); `SBOM-diff` между PR не реализован (нужен baseline-артефакт); легаси-пакет `attack_surface/` пока живёт — 5 его тестов входят в набор, вынос в задачу `P0-09` при переходе к M1.
 
 **Следующая фаза:** Ф1 (M0-спайки D → E → A → B → C), первая задача — поднять стенд VLM-замеров (P1-01) и генератор синтетических векторов (P1-02).
+
+### Ф1 — в работе (2026-11-20)
+
+| Задача | Прогресс | Доказательство |
+|---|---|---|
+| P1-01 (спайк D) | харнесс `tests/spikes/vlm_bench.py` готов: llama.cpp, thinking off, разрешения 768/1024, 384 токена, честный `not_measured` без устройств; smoke-тест | прогон без бинаря/весов → `status=not_measured` |
+| P1-02 (спайк E) | `tests/scale/bench_scale.py`: ground truth (numpy), p95, recall@10, сборка, размер БД; smoke-тест; прогон 10K/50K/100K запущен | 10K: p95 6,1 мс, recall 1.00, сборка 15,6 с; 50K: p95 31,4 мс, recall 1.00, сборка 306 с (Python-loop add_many — кандидат на оптимизацию); внесено в BENCHMARKS |
+| P1-03 (спайк A в пакетах) | PyInstaller-hook `packaging/hook-sqlite_vec.py` кладёт vec0.dll в бандл | `doctor` в one-dir: `sqlite-vec / active` (до hook — «Не найден указанный модуль») |
+| P1-05 (спайк C) | one-dir собирается и работает; найдено и исправлено 4 дефекта сборки: SPECPATH (`packaging` → `.parent`), entry-point (относительный импорт в `kadr/__main__.py` → `packaging/entry.py`), worker в frozen-режиме (`worker-parser` вместо `-m kadr.workers.parser_worker`), `doctor` читал каталог после `close()`; замер: 82,2 МБ, старт 18,5 с (первый, AV) / 430 мс (повторный), 0 orphans | полный pipeline scan→analyze→search в бандле OK; `BENCHMARKS` обновлён |
+| P1-04, P1-07 | **заблокировано: нет Rust-тулчейна** (rustc/cargo отсутствуют) — нужна установка или другой исполнитель | `Get-Command rustc` → отсутствует |
+| Прочее | исправлен `IndexStatus.degradation_visible`: был всегда true → бейдж «деградация» висел бы и на активном индексе; + регресс-тест | smoke: `active → degradation_visible=false` |

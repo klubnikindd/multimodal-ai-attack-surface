@@ -1,8 +1,7 @@
 # Allowlist лицензий кода (ТЗ v3.1 §12.4, гейт license-code).
 #
 # Здесь — единственное место, где допускаются исключения для зависимостей,
-# лицензия которых не проходит denylist (§12.1 v3.1). Пустой список — норма:
-# правилу «запись = точная версия + срок + тикет» следуем без исключений.
+# лицензия которых не проходит denylist (§12.1 v3.1).
 #
 # Правила (проверяются scripts/check-code-licenses.py):
 #   * component — ровно "name==version", не диапазон;
@@ -16,4 +15,16 @@
 schema_version: 1
 reviewed_at: "2026-11-20"
 reviewed_by: "владелец продукта"
-entries: []
+entries:
+  - component: "pyinstaller==6.22.3"
+    license: "GPL-2.0-or-later (bootloader exception)"
+    reason: "только этап сборки (scope=build), в продукт не входит; bootloader-exception допускает распространение собранных one-dir артефактов (ADR-0005)"
+    scope: "build"
+    expires_at: "2027-06-01"
+    issue: "https://github.com/klubnikindd/multimodal-ai-attack-surface/issues"
+  - component: "pyinstaller-hooks-contrib==2026.10"
+    license: "Apache-2.0 / GPL-2.0-or-later"
+    reason: "только этап сборки (scope=build), в продукт не входит; поставляется вместе с PyInstaller"
+    scope: "build"
+    expires_at: "2027-06-01"
+    issue: "https://github.com/klubnikindd/multimodal-ai-attack-surface/issues"

@@ -137,3 +137,8 @@ venv/
 .pytest-junit.xml
 pytest-*.xml
 sbom.cdx.json
+
+# --- Замеры и сборки (спайки C/E) ---
+bench-results/
+dist-test/
+build-test/
