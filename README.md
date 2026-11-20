@@ -35,7 +35,8 @@
   (`sqlite-vec` / `hybrid` / `ann` / exact fallback) с **видимым** статусом
   деградации.
 - Поиск: структурный синтаксис (`camera:Canon date:2025-07..2025-08 kind:video
-  rating>=4`), FTS5, семантика.
+  rating>=4`), FTS5 с **русской морфологией**, семантика.
+- Группы дублей: точные (один content_hash — несколько файлов) и почти-дубли в review.
 - XMP-sidecar merge-запись, пресеты приватности `stock/social/archive`,
   запрет записи внутрь RAW.
 - Локальный API на `127.0.0.1` с bearer-токеном, Origin/Host и CSRF-проверкой.

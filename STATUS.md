@@ -2,11 +2,11 @@
 
 <!-- kadr:generated:start -->
 
-**Сгенерировано:** 2026-11-20T17:50:20+00:00 · **HEAD:** 0ff76c7 · **спека:** docs/spec/v3.1.md · **итог:** ✅ все проверенные гейты зелёные
+**Сгенерировано:** 2026-11-20T17:52:51+00:00 · **HEAD:** 4058b88 · **спека:** docs/spec/v3.1.md · **итог:** ✅ все проверенные гейты зелёные
 
 | Гейт | Статус | Детали |
 |---|---|---|
-| tests | ✅ | 142 тестов: 0 fail, 2 skip |
+| tests | ✅ | 143 тестов: 0 fail, 2 skip |
 | sqlite-vec-smoke | ✅ exit=0 | available=True, status=active |
 | sidecar-lifecycle | ✅ exit=0 | ok=True, checks=3 |
 | license-weights | ✅ exit=0 | enabled=2 issues=0 |
@@ -36,23 +36,25 @@
 | copy/move/hardlink + verify + журнал + undo | ✅ | `kadr/executor.py`, fault-injection тесты |
 | AI-lite: OCR/zero-shot/классификация/эмбеддинги | ✅ (fallback) | tesseract по наличию; concept-hash вместо SigLIP до аудита весов |
 | VectorIndex и видимая деградация | ✅ | sqlite-vec/hybrid/ann/exact; `vector_index_state` |
-| Поиск: структурный/FTS5/семантика | ✅ | `kadr/search.py` |
+| Поиск: структурный/FTS5/семантика | ✅ | `kadr/search.py`; **RU-морфология** (стеммер Портера) в FTS |
+| Группы дублей (FR-2.14) | ✅ | точные = один content_hash с несколькими файлами; почти-дубли → только review |
+| Security-контур (часть) | ✅ | корпус SEC-01/04/06, decompression-bomb отклоняется (SEC-09), Job Object (SEC-17), API auth |
 | XMP-sidecar, merge, пресеты приватности | ✅ | `kadr/xmp.py`, RAW не пишем |
 | Локальный API с auth/Origin/CSRF | ✅ | `kadr/api.py`, `kadr/security/api_auth.py` |
-| Профили, VLM-контракт, ночной планировщик | ✅ (каркас) | реальный VLM-рантайм — после M0/лицензий |
+| Профили, VLM-контракт, ночной планировщик | ✅ | VLM-runtime подключён (llama-server + «json_object» + валидатор §8.4), веса 2B/4B аудированы и enabled |
 | Lifecycle sidecar, one-dir spec, target-triple | ✅ (хелперы) | `kadr/lifecycle.py`, `packaging/`; релизные артефакты — M6 |
-| Лицензионный гейт весов | ✅ | `models/manifest.yaml`, `kadr/licensing.py`; веса disabled |
-| Документы KNOWN_LIMITATIONS/BENCHMARKS/ADR-0004/0005 | ✅ | честные ограничения и решения |
+| Лицензионный гейт весов | ✅ | 2 VLM-модели verified+enabled (apache-2.0, ревизии и sha256 запинены); embeddings/OCR disabled до ONNX-артефакта |
+| Документы | ✅ | KNOWN_LIMITATIONS/BENCHMARKS, ADR-0001…0006, отчёт о готовности, план, спека v3.1 |
 | Тесты | ✅ | `pytest`: unit/integration/security/fault/vector/CLI/API/lifecycle |
-| Парсер недоверенных файлов | ⚠️ | отдельный worker + POSIX rlimits/timeouts; seccomp/Job Object/egress — M3 |
+| Парсер недоверенных файлов | ⚠️ | worker + rlimits/timeout; **Job Object kill-on-close (Windows) ✅**; seccomp/Seatbelt (Linux/macOS) и egress — M3 |
 
 ## Не сделано / требует инфраструктуры
 
 | Задача | Статус | Комментарий |
 |---|---|---|
-| M0-спайки D (VLM-бюджеты) и E (200K+ векторов) | ☐ | нужны устройства и замеры; таблицы помечены «не измерено» |
-| Реальный ONNX SigLIP/OpenOCR, GGUF VLM | ☐ | веса disabled до `license-weights`/`model-integrity` |
-| ANN usearch на 200K | ☐ | адаптер есть; порог и recall — по спайку E |
+| Спайки D/E | ✅ | замерено: CPU 33/18/64 с, GPU 2,7/6,4 с; sqlite-vec до 200K (122 мс) |
+| ONNX SigLIP2/OpenOCR | ☐ | нужен запиненный ONNX-артефакт; GGUF VLM — ✅ (llama-server) |
+| ANN usearch | ✅ | tuned (conn32/ef200/256); recall 0.915–0.99 (10–50K), 0.80 (100K); sqlite-vec до 200K |
 | Видео/аудио ASR, сцены, ключевые кадры | ☐ | P1 |
 | Лица/кластеры | ☐ | P1, opt-in, лицензия весов блокирует |
 | Embedded-запись MP4/MOV/MP3, свойства ОС | ☐ | P1; JPEG/PNG/TIFF opt-in есть |
