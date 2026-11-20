@@ -63,7 +63,7 @@ def run_worker(
             "env": env,
         }
         if os.name == "nt":  # pragma: no cover - Windows
-            popen_kwargs["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP
+            popen_kwargs["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP  # type: ignore[attr-defined]
         else:
             popen_kwargs["start_new_session"] = True
         process = subprocess.Popen(_WORKER, **popen_kwargs)  # noqa: S603 - argv без shell

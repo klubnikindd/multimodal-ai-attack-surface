@@ -24,6 +24,13 @@ def utcnow() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="milliseconds")
 
 
+def _inserted_id(cursor: sqlite3.Cursor) -> int:
+    """«BT»lastrowid«BT» типизирован как «BT»int | None«BT»; после INSERT он всегда есть."""
+    if cursor.lastrowid is None:  # pragma: no cover - не должно случаться
+        raise RuntimeError("INSERT не вернул lastrowid")
+    return int(cursor.lastrowid)
+
+
 class Catalog:
     """Тонкая обёртка над SQLite с WAL, миграциями и репозиторными методами."""
 
@@ -138,7 +145,7 @@ class Catalog:
             "INSERT INTO volumes(uuid, label, root_path, last_seen) VALUES (?, ?, ?, ?)",
             (None, label or Path(root).name, root, utcnow()),
         )
-        return int(cur.lastrowid)
+        return _inserted_id(cur)
 
     # ------------------------------------------------------------------ assets
     def get_asset_by_hash(self, content_hash: str) -> sqlite3.Row | None:
@@ -242,7 +249,7 @@ class Catalog:
                 now,
             ),
         )
-        return int(cur.lastrowid), True
+        return _inserted_id(cur), True
 
     def update_asset_ai(
         self, asset_id: int, *, media_class: str | None = None, scene_type: str | None = None
@@ -458,7 +465,7 @@ class Catalog:
         if row:
             return int(row["id"])
         cur = self.conn.execute("INSERT INTO tags(name) VALUES (?)", (name,))
-        return int(cur.lastrowid)
+        return _inserted_id(cur)
 
     def add_asset_tag(
         self, asset_id: int, name: str, *, source: str = "model", confidence: float | None = None
@@ -654,7 +661,7 @@ class Catalog:
                 utcnow(),
             ),
         )
-        return int(cur.lastrowid)
+        return _inserted_id(cur)
 
     def list_review(self, state: str = "open", limit: int = 100) -> list[sqlite3.Row]:
         return list(
@@ -683,7 +690,7 @@ class Catalog:
             "VALUES (?,?,0,?,?,?,?,?)",
             (kind, state, total, eta_seconds, throttle_reason, now, now),
         )
-        return int(cur.lastrowid)
+        return _inserted_id(cur)
 
     def update_job(
         self,
@@ -744,7 +751,7 @@ class Catalog:
                     now,
                 ),
             )
-            plan_id = int(cur.lastrowid)
+            plan_id = _inserted_id(cur)
             conn.executemany(
                 "INSERT INTO plan_items(plan_id, seq, asset_id, src, dst, action, size_bytes, state, error, "
                 "collision, review_reason, rule_id, hash, tags_json) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
@@ -841,7 +848,7 @@ class Catalog:
             "INSERT INTO journal(plan_id, seq, action, src, dst, hash) VALUES (?,?,?,?,?,?)",
             (plan_id, seq, action, src, dst, hash_),
         )
-        return int(cur.lastrowid)
+        return _inserted_id(cur)
 
     def mark_journal_done(self, journal_id: int, *, error: str | None = None) -> None:
         self.conn.execute(

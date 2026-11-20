@@ -66,7 +66,7 @@ def spawn_sidecar(argv: Sequence[str], *, env: dict[str, str] | None = None) -> 
         },
     }
     if os.name == "nt":  # pragma: no cover - Windows
-        kwargs["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP
+        kwargs["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP  # type: ignore[attr-defined]
     else:
         kwargs["start_new_session"] = True
         preexec = _pdeathsig_preexec(os.getpid())
@@ -114,8 +114,55 @@ def read_handshake(process: subprocess.Popen[Any], *, timeout: float = 10.0) -> 
     raise TimeoutError("sidecar handshake timeout")
 
 
+def pid_alive(pid: int) -> bool:
+    """Жив ли процесс — без побочных эффектов (BLK-02, NFR-17).
+
+    На Windows `os.kill(pid, 0)` НЕ является проверкой существования: для
+    не-сигнальных значений CPython вызывает `TerminateProcess`, а
+    `OpenProcess` по PID завершённого, но ещё не освобождённого процесса
+    может успешно открыться. Поэтому используется Win32
+    `OpenProcess` + `GetExitCodeProcess`.
+    """
+    if pid <= 0:
+        return False
+    if os.name == "nt":  # pragma: no cover - Windows
+        return _pid_alive_windows(pid)
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    return True
+
+
+def _pid_alive_windows(pid: int) -> bool:  # pragma: no cover - Windows
+    import ctypes
+    from ctypes import wintypes
+
+    PROCESS_QUERY_LIMITED_INFORMATION = 0x1000
+    STILL_ACTIVE = 259
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)  # type: ignore[attr-defined]
+    kernel32.OpenProcess.restype = wintypes.HANDLE
+    kernel32.OpenProcess.argtypes = (wintypes.DWORD, wintypes.BOOL, wintypes.DWORD)
+    kernel32.GetExitCodeProcess.argtypes = (wintypes.HANDLE, ctypes.POINTER(wintypes.DWORD))
+    kernel32.GetExitCodeProcess.restype = wintypes.BOOL
+    kernel32.CloseHandle.argtypes = (wintypes.HANDLE,)
+    kernel32.CloseHandle.restype = wintypes.BOOL
+    handle = kernel32.OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, False, pid)
+    if not handle:
+        return False
+    try:
+        code = wintypes.DWORD(0)
+        if not kernel32.GetExitCodeProcess(handle, ctypes.byref(code)):
+            return False
+        return code.value == STILL_ACTIVE
+    finally:
+        kernel32.CloseHandle(handle)
+
+
 def terminate_group(process: subprocess.Popen[Any], *, grace: float = SHUTDOWN_GRACE_SECONDS) -> None:
-    """SIGTERM группе, затем SIGKILL; на Windows — taskkill /T."""
+    """SIGTERM группе, затем SIGKILL; на Windows — taskkill /T с ожиданием."""
     if process.poll() is not None:
         return
     if os.name == "nt":  # pragma: no cover - Windows
@@ -125,6 +172,16 @@ def terminate_group(process: subprocess.Popen[Any], *, grace: float = SHUTDOWN_G
             check=False,
             timeout=grace + SHUTDOWN_KILL_SECONDS,
         )
+        # taskkill асинхронен по отношению к Popen: дожидаемся реального выхода,
+        # иначе следующая же проверка живости увидит ещё живой процесс.
+        try:
+            process.wait(timeout=grace + SHUTDOWN_KILL_SECONDS)
+        except subprocess.TimeoutExpired:
+            process.kill()
+            try:
+                process.wait(timeout=SHUTDOWN_KILL_SECONDS)
+            except subprocess.TimeoutExpired:  # pragma: no cover - defensive
+                pass
         return
     try:
         os.killpg(os.getpgid(process.pid), signal.SIGTERM)
@@ -194,7 +251,7 @@ def single_instance_lock(path: str | Path) -> Iterator[bool]:
 
             handle = open(lock_path, "a+")
             try:
-                msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
+                msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)  # type: ignore[attr-defined]
                 acquired = True
             except OSError:
                 acquired = False
@@ -216,7 +273,7 @@ def single_instance_lock(path: str | Path) -> Iterator[bool]:
                         import msvcrt
 
                         handle.seek(0)
-                        msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
+                        msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)  # type: ignore[attr-defined]
                     else:
                         import fcntl
 
@@ -235,7 +292,9 @@ class Watchdog:
     stdin: Any = None
     interval: float = WATCHDOG_STALE_SECONDS
     pgid: int = 0
-    _stop: threading.Event = field(default=None, init=False, repr=False, compare=False)
+    _stop: threading.Event = field(
+        default_factory=threading.Event, init=False, repr=False, compare=False
+    )
     _thread: threading.Thread | None = field(default=None, init=False, repr=False, compare=False)
 
     def __post_init__(self) -> None:
@@ -330,14 +389,7 @@ def wait_for_no_orphans(pids: Sequence[int], *, timeout: float = SHUTDOWN_KILL_S
     deadline = time.monotonic() + timeout
     alive = list(pids)
     while time.monotonic() < deadline and alive:
-        remaining = []
-        for pid in alive:
-            try:
-                os.kill(pid, 0)
-                remaining.append(pid)
-            except (ProcessLookupError, PermissionError):
-                pass
-        alive = remaining
+        alive = [pid for pid in alive if pid_alive(pid)]
         if alive:
             time.sleep(0.05)
     return alive
@@ -348,6 +400,7 @@ __all__ = [
     "engine_shutdown",
     "handshake_payload",
     "parse_handshake",
+    "pid_alive",
     "sidecar_binary_name",
     "single_instance_lock",
     "read_handshake",

@@ -1,9 +1,10 @@
 import json
+import os
 import subprocess
 import sys
-import os
 import tempfile
 from pathlib import Path
+
 from PIL import Image
 
 

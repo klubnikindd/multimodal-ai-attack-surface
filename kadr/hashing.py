@@ -3,14 +3,17 @@
 from __future__ import annotations
 
 import hashlib
+import importlib
 import math
 import os
 from pathlib import Path
+from typing import Any
 
 from .constants import HASH_CHUNK, MAX_FILE_HASH_BYTES
 
+_blake3: Any = None
 try:  # pragma: no cover - зависит от окружения
-    import blake3 as _blake3
+    _blake3 = importlib.import_module("blake3")
 except Exception:  # pragma: no cover
     _blake3 = None
 

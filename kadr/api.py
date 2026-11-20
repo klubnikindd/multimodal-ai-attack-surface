@@ -85,7 +85,7 @@ def create_app(
 ) -> FastAPI:
     settings = settings or Settings.from_env()
     settings.ensure_dirs()
-    catalog = catalog or Catalog(settings.catalog_path)
+    catalog = catalog or Catalog(settings.db_path)
     if settings.vector_backend_override:
         catalog.set_setting("vector_backend_override", settings.vector_backend_override)
     profile = detect_profile(settings.profile_override)
@@ -107,7 +107,7 @@ def create_app(
     app.state.db_lock = asyncio.Lock()
 
     @app.middleware("http")
-    async def auth_middleware(request: Request, call_next):  # type: ignore[no-untyped-def]
+    async def auth_middleware(request: Request, call_next):
         if request.url.path in {"/health", "/", "/ui", "/ui/ui.js", "/ui/ui.css", "/favicon.ico"}:
             return await call_next(request)
         if request.method.upper() == "OPTIONS":

@@ -14,7 +14,7 @@ from .errors import LicenseError
 try:
     import yaml
 except Exception:  # pragma: no cover
-    yaml = None  # type: ignore[assignment]
+    yaml = None
 
 _SHA256 = re.compile(r"^[a-fA-F0-9]{64}$")
 _REVISION = re.compile(r"^[a-fA-F0-9]{7,64}$")

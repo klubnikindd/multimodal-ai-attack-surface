@@ -5,6 +5,7 @@ from __future__ import annotations
 import os
 import re
 import unicodedata
+from collections.abc import Sequence
 from pathlib import Path
 
 from ..constants import MAX_PATH_LENGTH, MAX_PATH_SEGMENT
@@ -145,8 +146,8 @@ _SYSTEM_ROOTS = (
 def validate_scan_root(
     root: str | Path,
     *,
-    allowed_roots: list[str | Path] | None = None,
-    forbidden_roots: list[str | Path] | None = None,
+    allowed_roots: Sequence[str | Path] | None = None,
+    forbidden_roots: Sequence[str | Path] | None = None,
 ) -> Path:
     """Ограничивает API/CLI-скан утверждёнными корнями (SEC-10)."""
     resolved = Path(root).expanduser().resolve()
@@ -157,16 +158,16 @@ def validate_scan_root(
         if not any(resolved == item or item in resolved.parents for item in allowed):
             raise PathSafetyError("Сканирование вне разрешённых KADR_SCAN_ROOTS запрещено")
     deny = [Path(item).resolve() for item in (forbidden_roots or [])]
-    for item in _SYSTEM_ROOTS:
-        candidate = Path(item)
+    for system_root in _SYSTEM_ROOTS:
+        candidate = Path(system_root)
         if candidate.exists() or os.name == "nt":
             deny.append(candidate.resolve())
     home = Path.home().resolve()
     if resolved == home:
         raise PathSafetyError("Сканирование всего домашнего каталога запрещено; выберите подпапку")
-    for item in deny:
-        if resolved == item or item in resolved.parents:
-            raise PathSafetyError(f"Системный каталог запрещён для скана: {item}")
+    for denied in deny:
+        if resolved == denied or denied in resolved.parents:
+            raise PathSafetyError(f"Системный каталог запрещён для скана: {denied}")
     return resolved
 
 

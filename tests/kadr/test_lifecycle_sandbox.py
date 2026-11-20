@@ -9,6 +9,7 @@ import pytest
 from kadr.lifecycle import (
     handshake_payload,
     parse_handshake,
+    pid_alive,
     read_handshake,
     sidecar_binary_name,
     single_instance_lock,
@@ -20,7 +21,6 @@ from kadr.security.sandbox import load_policy
 from kadr.workers.client import run_worker
 
 
-@pytest.mark.skipif(os.name == "nt", reason="process group semantics differ on Windows")
 def test_process_group_is_terminated_and_no_orphans():
     process = spawn_sidecar([sys.executable, "-c", "import time; time.sleep(60)"])
     pid = process.pid
@@ -32,6 +32,20 @@ def test_process_group_is_terminated_and_no_orphans():
     finally:
         if process.poll() is None:
             process.kill()
+
+
+def test_pid_alive_reflects_real_process_state():
+    """BLK-02: живость проверяется без побочных эффектов и на Windows."""
+    process = spawn_sidecar([sys.executable, "-c", "import time; time.sleep(60)"])
+    try:
+        assert pid_alive(process.pid) is True
+        terminate_group(process, grace=0.5)
+        assert pid_alive(process.pid) is False
+    finally:
+        if process.poll() is None:
+            process.kill()
+        process.wait(timeout=5)
+    assert pid_alive(-1) is False
 
 
 def test_single_instance_lock(tmp_path):

@@ -1,13 +1,10 @@
 import io
-from pathlib import Path
-import tempfile
 
 import pytest
 from fastapi.testclient import TestClient
+from PIL import Image
 
 from attack_surface.api import app
-from attack_surface.metadata import extract_metadata
-from PIL import Image
 
 client = TestClient(app)
 

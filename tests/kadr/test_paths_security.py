@@ -52,7 +52,11 @@ def test_symlink_component_is_rejected(tmp_path):
     root.mkdir()
     outside = tmp_path / "outside"
     outside.mkdir()
-    (root / "link").symlink_to(outside, target_is_directory=True)
+    try:
+        (root / "link").symlink_to(outside, target_is_directory=True)
+    except (OSError, NotImplementedError):
+        # Windows без SeCreateSymbolicLinkPrivilege/Developer Mode.
+        pytest.skip("symlink creation is not permitted on this platform")
     with pytest.raises(PathSafetyError):
         safe_join(root, "link/photo.jpg")
 

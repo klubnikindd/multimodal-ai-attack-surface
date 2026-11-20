@@ -1,5 +1,5 @@
-import os
 import tempfile
+
 from PIL import Image
 
 from attack_surface.metadata import extract_metadata

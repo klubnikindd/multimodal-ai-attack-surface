@@ -1,11 +1,6 @@
 import json
-import os
 import subprocess
-import tempfile
 import sys
-import pytest
-
-from attack_surface.metadata import extract_metadata
 
 
 def run_cli(file_path, args=None):

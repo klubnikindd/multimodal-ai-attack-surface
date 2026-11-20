@@ -14,7 +14,7 @@ from .templates import validate_template
 try:
     import yaml
 except Exception:  # pragma: no cover
-    yaml = None  # type: ignore[assignment]
+    yaml = None
 
 DEFAULT_FALLBACK = {"path": "_Unsorted/{file.mtime:%Y-%m}", "review": True}
 

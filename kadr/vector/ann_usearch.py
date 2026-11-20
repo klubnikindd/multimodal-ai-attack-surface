@@ -5,6 +5,7 @@ from __future__ import annotations
 import logging
 import time
 from collections.abc import Iterable, Sequence
+from typing import Any
 
 from ..models import IndexStatus
 from .base import VectorIndex, normalize, unpack_vector
@@ -35,14 +36,14 @@ class AnnVectorIndex(VectorIndex):
             index_generation=self.index_generation,
             dim=self.dim,
         )
-        self._index = None
-        self._index_cls = None
+        self._index: Any = None
+        self._index_cls: Any = None
         self.available = False
         self._failed = False
         self._last_recovery_attempt = 0.0
         self.reason: str | None = "usearch is not installed; using exact brute-force fallback"
         try:
-            from usearch.index import Index  # type: ignore
+            from usearch.index import Index
         except Exception as exc:
             self.reason = f"usearch unavailable: {exc}"
             self.record_status(status="degraded", reason=self.reason)

@@ -160,9 +160,8 @@ def _set_bag(description: ET.Element, qualified: str, values: list[str]) -> None
         existing = ET.SubElement(description, qualified)
         bag = ET.SubElement(existing, f"{RDF}Bag")
     else:
-        bag = existing.find(f"{RDF}Bag")
-        if bag is None:
-            bag = ET.SubElement(existing, f"{RDF}Bag")
+        found = existing.find(f"{RDF}Bag")
+        bag = found if found is not None else ET.SubElement(existing, f"{RDF}Bag")
     current = _text_list(bag)
     for value in values:
         if value and value not in current:
@@ -411,7 +410,10 @@ def write_embedded_metadata(
                 raise ValueError("embedded write would drop EXIF")
             if icc_profile and not saved.info.get("icc_profile"):
                 raise ValueError("embedded write would drop ICC profile")
-        with open(tmp_name, "rb") as fh:
+        # fsync требует дескриптор с правом записи (Windows: _commit на
+        # read-only handle падает с EBADF). Данные при этом не меняются.
+        with open(tmp_name, "rb+") as fh:
+            fh.flush()
             os.fsync(fh.fileno())
         try:
             os.replace(tmp_name, source)

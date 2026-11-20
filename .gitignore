@@ -133,3 +133,7 @@ venv/
 *.mov
 *.avi
 *.mkv
+# --- Артефакты CI ---
+.pytest-junit.xml
+pytest-*.xml
+sbom.cdx.json

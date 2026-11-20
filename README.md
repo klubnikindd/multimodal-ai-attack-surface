@@ -10,7 +10,9 @@
 модель угроз, security-корпус и защитный контур. Требования безопасности —
 обязательная часть продукта, а не надстройка.
 
-- Исходное ТЗ: [`docs/spec/v3.md`](docs/spec/v3.md)
+- Исходное ТЗ: [`docs/spec/v3.1.md`](docs/spec/v3.1.md) (current; `v3.md`, `v2.md`, `v1.md` — архив)
+- Отчёт о готовности: [`docs/READINESS_REPORT_v3.md`](docs/READINESS_REPORT_v3.md)
+- План реализации: [`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md)
 - Архитектурные решения: [`docs/adr/`](docs/adr/)
 - Известные ограничения: [`KNOWN_LIMITATIONS.md`](KNOWN_LIMITATIONS.md)
 - Бенчмарки: [`docs/BENCHMARKS.md`](docs/BENCHMARKS.md)

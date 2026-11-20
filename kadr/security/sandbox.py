@@ -16,7 +16,7 @@ from typing import Any
 try:
     import yaml
 except Exception:  # pragma: no cover
-    yaml = None  # type: ignore[assignment]
+    yaml = None
 
 DEFAULT_POLICY: dict[str, Any] = {
     "version": 1,

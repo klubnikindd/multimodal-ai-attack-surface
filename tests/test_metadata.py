@@ -1,5 +1,3 @@
-import os
-import tempfile
 import pytest
 
 from attack_surface.metadata import extract_metadata

@@ -45,7 +45,7 @@ def _settings(args: argparse.Namespace) -> Settings:
 
 
 def _catalog(settings: Settings) -> Catalog:
-    return Catalog(settings.catalog_path)
+    return Catalog(settings.db_path)
 
 
 def _print(payload: Any, as_json: bool) -> None:
@@ -254,10 +254,9 @@ def cmd_bench(args: argparse.Namespace) -> int:
             if analyze_seconds and analyzed["processed"]
             else None,
         }
+        db_path = settings.db_path
         payload["storage"] = {
-            "catalog_bytes": settings.catalog_path.stat().st_size
-            if settings.catalog_path.exists()
-            else 0,
+            "catalog_bytes": db_path.stat().st_size if db_path.exists() else 0,
         }
         catalog.close()
     else:
@@ -530,7 +529,20 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def _configure_stdio() -> None:
+    """UTF-8-вывод CLI: русский текст и «→» роняли cp1251-консоль Windows (NFR-14)."""
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is None:
+            continue
+        try:
+            reconfigure(encoding="utf-8", errors="replace")
+        except (OSError, ValueError):  # pragma: no cover - exotic consoles
+            pass
+
+
 def main(argv: list[str] | None = None) -> int:
+    _configure_stdio()
     parser = build_parser()
     args = parser.parse_args(argv)
     try:

@@ -88,7 +88,7 @@ class OnnxEmbeddingBackend(EmbeddingBackend):
         self.reason = "ONNX weights are not verified/installed; use concept-hash fallback until M0 license gate"
         if self.model_path and self.model_path.is_file():
             try:
-                import onnxruntime  # type: ignore  # noqa: F401
+                import onnxruntime  # noqa: F401
 
                 self.available = False
                 self.reason = "onnxruntime is present, but preprocessing/model revision is not pinned in this build"

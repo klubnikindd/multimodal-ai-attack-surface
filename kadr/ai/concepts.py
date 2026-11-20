@@ -116,7 +116,7 @@ def image_stats(path: str | None) -> ImageStats | None:
         maximum, minimum = max(r, g, b), min(r, g, b)
         saturations.append(0.0 if maximum == 0 else (maximum - minimum) / maximum)
     count = max(1, len(pixels))
-    rgb = tuple(int(value / count) for value in total)
+    rgb = (int(total[0] / count), int(total[1] / count), int(total[2] / count))
     brightness = (0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]) / 255.0
     saturation = sum(saturations) / count
     warmth = (rgb[0] - rgb[2]) / 255.0

@@ -71,7 +71,7 @@ class BruteForceVectorIndex(VectorIndex):
             return []
         query = normalize(query_vector)
         cache = self._load()
-        items = cache.items()
+        items: Iterable[tuple[int, list[float]]] = cache.items()
         if candidate_ids is not None:
             items = ((asset_id, vec) for asset_id, vec in cache.items() if asset_id in candidate_ids)
         scored = []

@@ -17,26 +17,35 @@ PINNED_VERSION_PREFIX = "0.1."
 def _load_extension(conn) -> tuple[bool, str | None, str | None]:
     """Загружает sqlite-vec. Возвращает (ok, version, reason)."""
     try:
-        import sqlite_vec  # type: ignore
+        import sqlite_vec
     except Exception:
         sqlite_vec = None
     if sqlite_vec is not None:
-        try:
-            version = getattr(sqlite_vec, "__version__", "unknown")
-            if not str(version).startswith(PINNED_VERSION_PREFIX) and version != "unknown":
-                return (
-                    False,
-                    str(version),
-                    f"sqlite-vec version {version} is not pinned {PINNED_VERSION_PREFIX}x",
-                )
-            sqlite_vec.load(conn)
-            return True, str(version), None
-        except Exception as exc:
+        version = str(getattr(sqlite_vec, "__version__", "unknown"))
+        if not version.startswith(PINNED_VERSION_PREFIX) and version != "unknown":
             return (
                 False,
-                getattr(sqlite_vec, "__version__", "unknown"),
-                f"sqlite_vec.load failed: {exc}",
+                version,
+                f"sqlite-vec version {version} is not pinned {PINNED_VERSION_PREFIX}x",
             )
+        enabled_here = False
+        try:
+            # Python's sqlite3 forbids load_extension() unless it is enabled on the
+            # connection; sqlite_vec.load() runs "SELECT load_extension(...)" and
+            # fails with "not authorized" without this call (BLK-01, v3.1 §12.3).
+            if hasattr(conn, "enable_load_extension"):
+                conn.enable_load_extension(True)
+                enabled_here = True
+            sqlite_vec.load(conn)
+            return True, version, None
+        except Exception as exc:
+            return False, version, f"sqlite_vec.load failed: {exc}"
+        finally:
+            if enabled_here:
+                try:
+                    conn.enable_load_extension(False)
+                except Exception:  # pragma: no cover - defensive
+                    pass
     extension_path = os.environ.get("KADR_SQLITE_VEC_PATH")
     if extension_path:
         try:
@@ -65,6 +74,9 @@ class SqliteVecIndex(VectorIndex):
         )
         if self.available:
             self._ensure_table()
+            # Сбрасываем возможный устаревший degraded-статус прошлого запуска:
+            # статус в БД — единственный источник правды для UI-бейджа (§7).
+            self.record_status(status="active")
         else:
             self.record_status(status="degraded", reason=self.reason)
 
@@ -106,7 +118,7 @@ class SqliteVecIndex(VectorIndex):
     @staticmethod
     def _serialize(vector: Sequence[float]) -> bytes:
         try:
-            import sqlite_vec  # type: ignore
+            import sqlite_vec
 
             return sqlite_vec.serialize_float32(list(vector))
         except Exception:

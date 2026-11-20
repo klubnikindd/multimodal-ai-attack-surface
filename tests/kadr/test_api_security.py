@@ -30,18 +30,31 @@ def _headers(client, csrf: bool = False):
     return headers
 
 
-def test_auth_required_and_csrf_for_mutations(client):
+def test_auth_required_and_csrf_for_mutations(client, tmp_path):
     assert client.get("/health").status_code == 200
     assert client.get("/v1/system/status").status_code == 401
     assert client.get("/v1/assets", headers=_headers(client)).status_code == 200
-    assert client.post("/v1/scan", json={"root": "/tmp"}, headers=_headers(client)).status_code == 403
+    assert (
+        client.post("/v1/scan", json={"root": str(tmp_path)}, headers=_headers(client)).status_code
+        == 403
+    )
     token = client.app.state.settings.api_token
     assert client.post(
-        "/v1/scan", json={"root": "/tmp"}, headers={**_headers(client), "X-Kadr-CSRF": token}
+        "/v1/scan", json={"root": str(tmp_path)}, headers={**_headers(client), "X-Kadr-CSRF": token}
     ).status_code == 403
     assert client.app.state.security.csrf_token != token
-    assert client.post("/v1/scan", json={"root": "/tmp"}, headers=_headers(client, csrf=True)).status_code in {200, 400}
-    assert client.post("/v1/scan", json={"root": "/etc"}, headers=_headers(client, csrf=True)).status_code == 403
+    # Корректный CSRF + разрешённый корень из KADR_SCAN_ROOTS: запрос проходит
+    # проверку безопасности (allowlist корней — отдельный слой, см. test_scan_root_allowlist).
+    assert (
+        client.post(
+            "/v1/scan", json={"root": str(tmp_path)}, headers=_headers(client, csrf=True)
+        ).status_code
+        in {200, 400}
+    )
+    assert (
+        client.post("/v1/scan", json={"root": "/etc"}, headers=_headers(client, csrf=True)).status_code
+        == 403
+    )
 
 
 def test_metadata_upload_returns_l0_without_path_access(client, tmp_path):

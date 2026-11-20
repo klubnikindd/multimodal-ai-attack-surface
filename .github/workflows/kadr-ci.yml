@@ -12,6 +12,9 @@ on:
   push:
     branches: [main]
 
+env:
+  PYTHONIOENCODING: utf-8
+
 jobs:
   preflight:
     name: preflight (required scripts)
@@ -22,10 +25,30 @@ jobs:
         shell: bash
         run: |
           for f in scripts/check-model-license.py scripts/check-model-integrity.py \
-                   scripts/sqlite_vec_smoke.py scripts/check-sidecar-lifecycle.py \
-                   scripts/check-no-onefile.py scripts/check-sandbox-parity.py; do
+                   scripts/check-code-licenses.py scripts/sqlite_vec_smoke.py \
+                   scripts/check-sidecar-lifecycle.py scripts/check-no-onefile.py \
+                   scripts/check-sandbox-parity.py scripts/check-spec-invariants.py \
+                   scripts/render-status.py licenses/allowlist.yaml; do
             test -f "$f" || { echo "missing $f"; exit 1; }
           done
+
+  lint:
+    needs: preflight
+    name: lint (ruff + mypy)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+      - name: ruff
+        run: ruff check kadr tests scripts
+      - name: mypy (platform=linux из pyproject)
+        run: mypy kadr
 
   tests:
     needs: preflight
@@ -41,12 +64,46 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
+      - name: Install ffmpeg (Linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - name: Install
         run: |
           python -m pip install --upgrade pip
           pip install -e ".[dev,api]"
       - name: Test
-        run: pytest -q
+        run: pytest -q --junitxml=pytest-${{ matrix.os }}.xml
+      - name: Upload junit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-junit-${{ matrix.os }}
+          path: pytest-${{ matrix.os }}.xml
+          if-no-files-found: ignore
+
+  license-code:
+    needs: preflight
+    name: license-code (SBOM + allowlist + pip-audit)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev,api]" pip-audit
+      - name: License gate + CycloneDX SBOM
+        run: python scripts/check-code-licenses.py --sbom sbom.cdx.json
+      - name: pip-audit
+        run: python -m pip_audit --progress-spinner off --desc off
+      - name: Upload SBOM
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: sbom.cdx.json
+          if-no-files-found: error
 
   license-weights:
     needs: preflight
@@ -88,7 +145,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install pyyaml sqlite-vec
-      - name: KNN smoke
+      - name: KNN smoke (должен падать без расширения — §12.3)
         run: python scripts/sqlite_vec_smoke.py
 
   sidecar-lifecycle:
@@ -105,8 +162,25 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install pyyaml
-      - name: No orphans on shutdown
+      - name: M0-минимум §11.2.4 (3 сценария, 0 orphans)
         run: python scripts/check-sidecar-lifecycle.py
+
+  sandbox-parity:
+    needs: preflight
+    name: sandbox-parity (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pyyaml
+      - name: Policy parity + фактический setrlimit
+        run: python scripts/check-sandbox-parity.py
 
   packaging:
     needs: preflight
@@ -118,3 +192,35 @@ jobs:
         with:
           python-version: '3.12'
       - run: python scripts/check-no-onefile.py
+
+  spec-invariants:
+    needs: preflight
+    name: spec-invariants
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Проверить версионирование спеки и §-ссылки
+        run: python scripts/check-spec-invariants.py
+
+  status:
+    needs: [tests, lint, license-code, license-weights, sqlite-vec-smoke, sidecar-lifecycle]
+    name: status.md из артефактов
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -e ".[dev]"
+      - name: Download junit (linux)
+        uses: actions/download-artifact@v4
+        with:
+          name: pytest-junit-ubuntu-latest
+          path: artifacts
+      - name: Render STATUS.md
+        run: python scripts/render-status.py --junit artifacts/pytest-ubuntu-latest.xml
+      - name: Upload STATUS.md
+        uses: actions/upload-artifact@v4
+        with:
+          name: STATUS.md
+          path: STATUS.md

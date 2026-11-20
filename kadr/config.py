@@ -76,6 +76,13 @@ class Settings:
                 self.case_insensitive_fs = False
 
     @property
+    def db_path(self) -> Path:
+        """Путь к каталогу; после «B»__post_init__«B» он всегда определён."""
+        if self.catalog_path is None:  # pragma: no cover - защита от ручной правки
+            raise ConfigError("catalog_path не инициализирован")
+        return self.catalog_path
+
+    @property
     def models_dir(self) -> Path:
         return self.home / "models"
 
@@ -119,7 +126,7 @@ class Settings:
                 values[key] = raw
         if "api_port" in values:
             try:
-                values["api_port"] = int(values["api_port"])  # type: ignore[arg-type]
+                values["api_port"] = int(str(values["api_port"]))
             except (TypeError, ValueError) as exc:
                 raise ConfigError(f"Некорректный KADR_API_PORT: {values['api_port']!r}") from exc
         if "dev_mode" not in overrides and os.environ.get("KADR_DEV_MODE") in {"1", "true", "yes"}:

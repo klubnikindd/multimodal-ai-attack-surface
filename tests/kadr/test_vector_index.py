@@ -146,3 +146,22 @@ def test_ann_rebuild_deduplicates_asset_ids(catalog, monkeypatch):
     )
     index._rebuild_from_db()
     assert sorted(index._index.keys) == [1, 2]
+
+
+def test_sqlite_vec_backend_is_active_when_extension_installed(catalog):
+    """BLK-01 / FR-3.13: если расширение установлено, бэкенд ОБЯЗАН быть активен.
+
+    Регресс: раньше `sqlite_vec.load()` вызывался без `enable_load_extension(True)`,
+    расширение молча не грузилось ("not authorized"), и симантический поиск
+    деградировал даже на машинах, где sqlite-vec установлен.
+    """
+    import pytest
+
+    pytest.importorskip("sqlite_vec", reason="sqlite-vec не установлен")
+    _assets(catalog)
+    index = SqliteVecIndex(catalog, model_id="test-active", dim=8)
+    assert index.available is True, index.reason
+    status = index.status()
+    assert status.status == "active", status.reason
+    index.add(1, _vector(0))
+    assert [asset_id for asset_id, _ in index.search(_vector(0), k=1)] == [1]

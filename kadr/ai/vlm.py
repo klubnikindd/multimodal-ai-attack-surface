@@ -11,6 +11,7 @@ import re
 import time
 import urllib.request
 from collections import deque
+from collections.abc import Collection
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Protocol
@@ -469,10 +470,11 @@ def _describe(
     client: VLMClient, path: str | Path, prompt: str, *, max_side: int
 ) -> str | dict[str, Any]:
     """Передаёт max_side только если сигнатура клиента его поддерживает."""
+    parameters: Collection[str]
     try:
         parameters = inspect.signature(client.describe).parameters
     except (TypeError, ValueError):
-        parameters = {}
+        parameters = set()
     if "max_side" in parameters:
         return client.describe(path, prompt, max_side=max_side)
     return client.describe(path, prompt)
