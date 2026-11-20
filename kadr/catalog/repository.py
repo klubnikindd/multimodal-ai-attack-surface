@@ -63,6 +63,10 @@ class Catalog:
             self._ensure_fts()
             self._ensure_column("plan_items", "hash", "TEXT")
             self._ensure_column("plan_items", "tags_json", "TEXT")
+            # FR-2.14: группы дублей (exact по content_hash; near — только review)
+            self._ensure_column("assets", "dup_group", "TEXT")
+            self._ensure_column("assets", "dup_is_original", "INTEGER")
+            self._ensure_column("assets", "dup_copies", "INTEGER")
             row = self.conn.execute(
                 "SELECT version FROM schema_meta ORDER BY version DESC LIMIT 1"
             ).fetchone()
@@ -348,7 +352,21 @@ class Catalog:
             for key, value in output.items():
                 ctx[f"ai.{key}"] = value
             ctx["ai.confidence"] = ai["confidence"]
+        # FR-2.14 / §5.2.3: dup.group → origin-<hash8> | dup-<hash8> | single
+        dup_group = asset["dup_group"] if "dup_group" in asset.keys() else None
+        ctx["dup.group"] = str(dup_group) if dup_group else "single"
+        ctx["dup.is_original"] = bool(asset["dup_is_original"])
+        ctx["dup.copies"] = int(asset["dup_copies"] or 0)
         return ctx
+
+    def set_dup_group(
+        self, asset_id: int, group_id: str, *, is_original: bool = False, copies: int = 0
+    ) -> None:
+        """FR-2.14: фиксирует принадлежность ассета к группе дублей."""
+        self.conn.execute(
+            "UPDATE assets SET dup_group=?, dup_is_original=?, dup_copies=? WHERE id=?",
+            (group_id, int(is_original), int(copies), asset_id),
+        )
 
     # ------------------------------------------------------------------ files
     def add_file(

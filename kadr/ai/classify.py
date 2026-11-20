@@ -19,6 +19,7 @@ from ..metadata.sanitize import detect_injection, detect_pii, sanitize_text
 from ..security.paths import safe_join
 from ..workers.client import run_ocr_sandboxed
 from .concepts import zero_shot_tags
+from .duplicates import compute_dup_groups
 from .embeddings import ConceptHashingEmbedding, embed_asset, get_embedding_backend
 
 logger = logging.getLogger(__name__)
@@ -266,12 +267,14 @@ def analyze_catalog(
         except (OSError, ValueError, sqlite3.Error) as exc:
             logger.exception("analyze failed for asset %s", asset_id)
             errors.append(f"asset {asset_id}: {type(exc).__name__}: {exc}")
+    duplicates = compute_dup_groups(catalog)
     return {
         "processed": processed,
         "errors": errors,
         "embeddings": catalog.stats()["embeddings"],
         "fts5": catalog.fts5,
         "embedding_model": ConceptHashingEmbedding.model_id,
+        "duplicates": duplicates,
     }
 
 
