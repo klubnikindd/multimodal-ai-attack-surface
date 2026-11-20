@@ -153,7 +153,13 @@ def scan_root(catalog: Catalog, root: str | Path, settings: Settings | None = No
     groups = group_paths(paths, root_path)
     report.groups = len(groups)
 
+    # FR-1.7: прогресс скана в таблице jobs (для CLI/API/экрана Jobs); идемпотентность
+    # по content_hash уже даёт «продолжение без переобработки» после kill -9.
+    job_id = catalog.create_job("scan", state="running", total=len(groups))
+    processed = 0
     for group in groups:
+        catalog.update_job(job_id, progress=(processed / len(groups)) if groups else 1.0)
+        processed += 1
         primary = _pick_primary(group)
         rels: dict[Path, str] = {}
         for path in group:
@@ -270,6 +276,7 @@ def scan_root(catalog: Catalog, root: str | Path, settings: Settings | None = No
             if not unchanged.get(member, False):
                 report.added_files += 1
             report.scanned += 1
+    catalog.update_job(job_id, state="done", progress=1.0, finished=True)
     return report
 
 
