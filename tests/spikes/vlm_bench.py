@@ -78,6 +78,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--images", default=None, help="каталог с тестовыми изображениями")
     parser.add_argument("--resolutions", nargs="+", type=int, default=[768])
     parser.add_argument("--count", type=int, default=DEFAULT_IMAGES)
+    parser.add_argument(
+        "--threads",
+        type=int,
+        default=0,
+        help="переопределить число потоков (0 = cores-1); для эмуляции 4/8-ядерных CPU — 3/7",
+    )
     parser.add_argument("--out", default=None)
     args = parser.parse_args(argv)
 
@@ -111,7 +117,7 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(payload, ensure_ascii=False, indent=2))
         return 0
 
-    threads = str(max(1, (os.cpu_count() or 2) - 1))
+    threads = str(args.threads if args.threads > 0 else max(1, (os.cpu_count() or 2) - 1))
     base_cmd = [
         str(binary), "-m", str(gguf), "--mmproj", str(mmproj),
         "-p", "ok", "-n", "8", "--temp", "0", "--threads", threads,
@@ -159,6 +165,7 @@ def main(argv: list[str] | None = None) -> int:
                 "model": str(gguf),
                 "mmproj": str(mmproj),
                 "binary": str(binary),
+                "threads": int(threads),
                 "thinking": False,
                 "max_output_tokens": MAX_OUTPUT_TOKENS,
             }

@@ -329,3 +329,5 @@
 | P1-02 доп. | **Порог бэкендов по данным**: sqlite-vec до 100K (p95 141 мс), tuned-ANN выше; hybrid не авто до M2 | `factory.auto_backend`, ADR-0004 |
 | P1-06 | **Аудит весов**: Qwen3-VL-2B/4B GGUF — apache-2.0 подтверждён (HF tags+cardData), ревизии и sha256 файлов запинены, `enabled=true`; siglip2 источник apache-2.0 (ONNX-артефакт не запинен); `model-integrity` проверяет sha256 по файлу или HF ETag | `models/manifest.yaml`, гейты зелёные |
 | P1-06 доп. | `check-model-integrity` переписан (HF ETag fallback) + 3 теста | `tests/test_model_integrity.py` |
+| P1-01 | **Спайк D: первый реальный замер.** Qwen3-VL-2B Q4_K_M + mmproj F16, 768 px, 3 потока (≈4 ядра): **≈46 с/кадр** (baseline загрузки модели 20 с). Это > 25 с/кадр → гейт §14 «VLM вне Lite, ночная задача только по выборке» подтверждается. Полный замер 4/8 потоков × 768/1024 px — в фоновом прогоне | `bench-results/vlm-768-threads3.json`, BENCHMARKS |
+| P1-06 корр. | ETag CDN ≠ LFS oid: oid весов взяты из tree API и сверены с фактически скачанным файлом; `check-model-integrity` переведён на tree API + размер | `models/manifest.yaml`, `scripts/check-model-integrity.py` |
