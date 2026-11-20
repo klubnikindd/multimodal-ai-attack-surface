@@ -32,16 +32,31 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def hf_etag(repo_url: str, revision: str, filename: str, *, timeout: float = 60.0) -> str | None:
-    """LFS oid (sha256) файла на HF: ETag ответа resolve-URL запиненной ревизии."""
-    url = f"{repo_url.rstrip('/')}/resolve/{revision}/{filename}"
-    request = urllib.request.Request(
-        url, method="HEAD", headers={"User-Agent": "kadr-model-integrity/1"}
+def hf_lfs_oid(
+    repo_url: str, revision: str, filename: str, *, timeout: float = 60.0
+) -> tuple[str | None, int | None]:
+    """LFS oid (sha256) и размер файла — через tree API с expand=true.
+
+    ETag CDN без ?download=true НЕ равен LFS oid (проверено на Qwen3-VL-2B:
+    ETag давал неверный хэш), поэтому берём «lfs.oid» из tree API запиненной
+    ревизии — это детерминированный sha256, совпадающий с файлом.
+    """
+    repo_id = repo_url.rstrip("/")
+    for prefix in ("https://huggingface.co/", "http://huggingface.co/"):
+        repo_id = repo_id.removeprefix(prefix)
+    url = (
+        f"https://huggingface.co/api/models/{repo_id}/tree/{revision}"
+        "?recursive=true&expand=true"
     )
+    request = urllib.request.Request(url, headers={"User-Agent": "kadr-model-integrity/1"})
     with urllib.request.urlopen(request, timeout=timeout) as response:  # noqa: S310
-        etag = response.headers.get("ETag") or ""
-    cleaned = etag.strip().strip('"')
-    return cleaned.lower() or None
+        entries = json.loads(response.read().decode("utf-8"))
+    for entry in entries:
+        if entry.get("path") == filename and isinstance(entry.get("lfs"), dict):
+            oid = str(entry["lfs"].get("oid") or "").lower() or None
+            size = entry["lfs"].get("size")
+            return oid, int(size) if size is not None else None
+    return None, None
 
 
 def main() -> int:
@@ -62,19 +77,26 @@ def main() -> int:
             path = model_dir / name
             if path.is_file():
                 actual = sha256_file(path)
+                actual_size = path.stat().st_size
                 source = "local"
             elif repo_url and revision:
                 try:
-                    actual = hf_etag(repo_url, revision, name)
-                    source = "hf-etag"
+                    actual, remote_size = hf_lfs_oid(repo_url, revision, name)
+                    actual_size = remote_size
+                    source = "hf-lfs-oid"
                 except Exception as exc:  # noqa: BLE001 - fail-closed по §12.3
                     issues.append(f"{model_id}: не удалось проверить {name} (HF недоступен: {exc})")
                     continue
             else:
                 issues.append(f"{model_id}: missing file {path} и нет revision/url для проверки")
                 continue
-            if actual and actual == expected:
+            size_ok = actual_size is None or actual_size == int(file.get("bytes") or 0)
+            if actual and actual == expected and size_ok:
                 checked.append({"model": model_id, "file": name, "sha256": actual, "source": source})
+            elif actual and actual == expected and not size_ok:
+                issues.append(
+                    f"{model_id}: size mismatch for {name} (expected {file.get('bytes')}, got {actual_size})"
+                )
             else:
                 issues.append(
                     f"{model_id}: sha256 mismatch for {name} (expected {expected[:12]}…, got {str(actual)[:12]}…)"

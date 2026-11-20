@@ -1,23 +1,23 @@
 #!/usr/bin/env python3
 """Спайк D (ТЗ v3.1 §8.3.4, §13.1): бюджеты VLM — замер t_encode/t_decode.
 
-Цифры §8.3 спеки — ожидания до этого замера; UI обязан брать факты из
-docs/BENCHMARKS.md и таблицы device_bench. Харнесс НЕ выдаёт результат за
-продуктовый, пока не выполнен на 4 классах устройств (§8.3.4).
+Цифры §8.3 — ожидания до этого замера; UI обязан брать факты из
+docs/BENCHMARKS.md и device_bench. Харнесс не выдаёт результат за продуктовый,
+пока не выполнен на 4 классах устройств (§8.3.4).
 
-Требования к стенду (нормативно, §8.3.2):
-  * только *-Instruct GGUF + mmproj, ревизии запинены;
-  * thinking выключен флагами рантайма;
-  * max_output_tokens = 384 (JSON-контракт §8.4);
-  * изображения ≤ 1024 px (Lite-ночь ≤ 768 px);
-  * параллелизм ≤ cores-1, питание от сети.
+Стенд (нормативно, §8.3.2): только *-Instruct GGUF + mmproj (ревизии запинены),
+thinking off, max_output_tokens=384, изображения ≤1024 px (Lite-ночь ≤768),
+параллелизм ≤ cores-1, питание от сети.
+
+Замер «секунд на новый кадр» = wall-время однокартиночного прогона минус
+baseline (загрузка модели + старт процесса, без изображения). Разрешение
+задаётся заранее подготовленными изображениями (images-768 / images-1024).
 
 Использование:
-  KADR_LLAMA_BIN=./llama-server.exe KADR_GGUF=model.gguf KADR_MMPROJ=mmproj.gguf \
-    python tests/spikes/vlm_bench.py --images /path/to/20-photos --resolutions 768 1024
+  KADR_LLAMA_BIN=./llama-mtmd-cli.exe KADR_GGUF=model.gguf KADR_MMPROJ=mmproj.gguf \\
+    python tests/spikes/vlm_bench.py --images .models-test/images-768 --resolutions 768
 
-Без бинаря/весов печатает status="not_measured" и причину — это честный ответ
-спайка, а не провал: замер требует устройств, которых в репозитории нет.
+Без бинаря/весов печатает status="not_measured" и причину.
 """
 
 from __future__ import annotations
@@ -35,14 +35,20 @@ from pathlib import Path
 
 MAX_OUTPUT_TOKENS = 384
 DEFAULT_IMAGES = 20
-DEFAULT_RESOLUTIONS = (768, 1024)
+PROMPT = "Опиши изображение кратко: сцена, объекты, текст. Только JSON."
 
 
 def _find_binary() -> Path | None:
     env = os.environ.get("KADR_LLAMA_BIN")
     if env and Path(env).exists():
         return Path(env)
-    for name in ("llama-server", "llama-server.exe", "llama-cli", "llama-cli.exe"):
+    # Qwen3-VL — multimodal: нужен mtmd-клиент, а не текстовый llama-cli.
+    for name in (
+        "llama-mtmd-cli",
+        "llama-mtmd-cli.exe",
+        "llama-qwen2vl-cli",
+        "llama-qwen2vl-cli.exe",
+    ):
         found = shutil.which(name)
         if found:
             return Path(found)
@@ -70,7 +76,7 @@ def not_measured(reason: str) -> dict:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Спайк D: замер бюджетов VLM")
     parser.add_argument("--images", default=None, help="каталог с тестовыми изображениями")
-    parser.add_argument("--resolutions", nargs="+", type=int, default=list(DEFAULT_RESOLUTIONS))
+    parser.add_argument("--resolutions", nargs="+", type=int, default=[768])
     parser.add_argument("--count", type=int, default=DEFAULT_IMAGES)
     parser.add_argument("--out", default=None)
     args = parser.parse_args(argv)
@@ -81,7 +87,7 @@ def main(argv: list[str] | None = None) -> int:
 
     missing = []
     if binary is None:
-        missing.append("llama.cpp бинарь не найден (KADR_LLAMA_BIN или PATH)")
+        missing.append("llama.cpp mtmd-бинарь не найден (KADR_LLAMA_BIN или PATH)")
     if gguf is None:
         missing.append("GGUF не указан (KADR_GGUF)")
     if mmproj is None:
@@ -92,87 +98,48 @@ def main(argv: list[str] | None = None) -> int:
         payload = not_measured("; ".join(missing))
         print(json.dumps(payload, ensure_ascii=False, indent=2))
         if args.out:
-            Path(args.out).write_text(
-                json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8"
-            )
-        return 0  # не измерено — не падение: замер требует устройств
+            Path(args.out).write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+        return 0
 
     images = sorted(
-        path for path in Path(args.images).iterdir() if path.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"}
+        path
+        for path in Path(args.images).iterdir()
+        if path.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp"}
     )[: args.count]
     if not images:
         payload = not_measured(f"в {args.images} нет изображений")
         print(json.dumps(payload, ensure_ascii=False, indent=2))
         return 0
 
+    threads = str(max(1, (os.cpu_count() or 2) - 1))
+    base_cmd = [
+        str(binary), "-m", str(gguf), "--mmproj", str(mmproj),
+        "-p", "ok", "-n", "8", "--temp", "0", "--threads", threads,
+    ]
+    base_times: list[float] = []
+    for _ in range(2):
+        start = time.perf_counter()
+        try:
+            subprocess.run(base_cmd, capture_output=True, text=True, timeout=600)  # noqa: S603
+        except subprocess.TimeoutExpired:
+            base_times.append(600.0)
+            continue
+        base_times.append(time.perf_counter() - start)
+    baseline_seconds = min(base_times)
+
     results: list[dict] = []
     for resolution in args.resolutions:
         timings: list[float] = []
-        # Базовый прогон без изображения: вычитаем загрузку модели и старт процесса.
-        base_cmd = [
-            str(binary),
-            "-m",
-            str(gguf),
-            "--mmproj",
-            str(mmproj),
-            "--no-display-prompt",
-            "--no-display-output",
-            "--simple-io",
-            "-c",
-            "1024",
-            "-n",
-            "8",
-            "-p",
-            "ok",
-        ]
-        base_times: list[float] = []
-        for _ in range(2):
-            start = time.perf_counter()
-            try:
-                subprocess.run(  # noqa: S603 - фиксированный argv, без shell
-                    base_cmd, capture_output=True, text=True, timeout=600
-                )
-            except subprocess.TimeoutExpired:
-                base_times.append(600.0)
-                continue
-            base_times.append(time.perf_counter() - start)
-        baseline_seconds = min(base_times)
-
         for image in images:
             argv_cmd = [
-                str(binary),
-                "-m",
-                str(gguf),
-                "--mmproj",
-                str(mmproj),
-                "--no-display-prompt",
-                "--no-display-output",
-                "--simple-io",
-                "-c",
-                "2048",
-                "-n",
-                str(MAX_OUTPUT_TOKENS),
-                "-p",
-                "Опиши изображение кратко: сцена, объекты, текст. Только JSON.",
-                "--image",
-                str(image),
-                "--image-max-side",
-                str(resolution),
-                # Thinking принудительно выключен (§8.3.2, D13): кэш/режим
-                # зависят от версии llama.cpp — флаги без изменения бюджета.
-                "--cache-reuse",
-                "256",
+                str(binary), "-m", str(gguf), "--mmproj", str(mmproj),
+                "--image", str(image),
+                "-p", PROMPT, "-n", str(MAX_OUTPUT_TOKENS),
+                "--temp", "0", "--threads", threads,
             ]
             start = time.perf_counter()
             try:
-                _ = subprocess.run(  # noqa: S603 - фиксированный argv, без shell
-                    argv_cmd,
-                    capture_output=True,
-                    text=True,
-                    encoding="utf-8",
-                    errors="replace",
-                    timeout=600,
-                )
+                subprocess.run(argv_cmd, capture_output=True, text=True, timeout=600)  # noqa: S603
             except subprocess.TimeoutExpired:
                 timings.append(600.0)
                 continue
@@ -184,7 +151,10 @@ def main(argv: list[str] | None = None) -> int:
                 "baseline_seconds": round(baseline_seconds, 2),
                 "seconds_per_new_image_median": round(statistics.median(timings), 2),
                 "seconds_per_new_image_p95": round(
-                    statistics.quantiles(timings, n=20)[18] if len(timings) >= 20 else max(timings), 2
+                    statistics.quantiles(timings, n=20)[18]
+                    if len(timings) >= 20
+                    else max(timings),
+                    2,
                 ),
                 "model": str(gguf),
                 "mmproj": str(mmproj),

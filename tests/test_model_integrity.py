@@ -31,25 +31,28 @@ def test_sha256_file(module, tmp_path):
     assert module.sha256_file(path) == hashlib.sha256(b"kadr").hexdigest()
 
 
-def test_hf_etag_strips_quotes(module, monkeypatch):
+def test_hf_lfs_oid_uses_tree_api(module, monkeypatch):
     class FakeResponse:
-        headers = {"ETag": '"06fb8948e506b2e751a0f81f6e365382a3b9ea5f304ade3c77a814adc9543109"'}
-
         def __enter__(self):
             return self
 
         def __exit__(self, *args):
             return None
 
+        def read(self):
+            return b'[{"path":"f.gguf","lfs":{"oid":"089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae","size":1107409952}}]'
+
+    captured = {}
+
     def fake_urlopen(request, timeout):  # noqa: ARG001
-        assert request.get_method() == "HEAD"
+        captured["url"] = request.get_full_url()
+        assert "tree/" in request.get_full_url()
         return FakeResponse()
 
     monkeypatch.setattr(module.urllib.request, "urlopen", fake_urlopen)
-    assert (
-        module.hf_etag("https://huggingface.co/X/Y", "rev", "f.gguf")
-        == "06fb8948e506b2e751a0f81f6e365382a3b9ea5f304ade3c77a814adc9543109"
-    )
+    oid, size = module.hf_lfs_oid("https://huggingface.co/X/Y", "rev", "f.gguf")
+    assert oid == "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae"
+    assert size == 1107409952
 
 
 def test_main_verifies_local_file_and_fails_on_mismatch(module, monkeypatch, tmp_path):
@@ -63,7 +66,7 @@ def test_main_verifies_local_file_and_fails_on_mismatch(module, monkeypatch, tmp
                 "enabled": True,
                 "revision": "r",
                 "license_source_url": "https://huggingface.co/X/Y",
-                "files": [{"name": "w.bin", "sha256": good}],
+                "files": [{"name": "w.bin", "sha256": good, "bytes": 4}],
             }
         ]
     }

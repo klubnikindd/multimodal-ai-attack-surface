@@ -49,12 +49,12 @@ models:
     enabled: true
     verification_status: verified
     files:
-      - {name: Qwen3VL-2B-Instruct-Q4_K_M.gguf, sha256: "06fb8948e506b2e751a0f81f6e365382a3b9ea5f304ade3c77a814adc9543109", bytes: 1107409952}
-      - {name: mmproj-Qwen3VL-2B-Instruct-F16.gguf, sha256: "33b9d852c78ca7e5c50e9245cf4bcc6ac335572606eede697d29767b72a45016", bytes: 819394848}
+      - {name: Qwen3VL-2B-Instruct-Q4_K_M.gguf, sha256: "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae", bytes: 1107409952}
+      - {name: mmproj-Qwen3VL-2B-Instruct-F16.gguf, sha256: "c3d5afbef5287953acd57b4043d2269456e5761a4eaccb3b71b062996970aea5", bytes: 819394848}
     license: Apache-2.0
     license_source_url: "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct-GGUF"
     license_verified_at: "2026-11-20"
-    license_verified_by: "владелец продукта: HF API tags license:apache-2.0 + cardData.license, ревизия и LFS-sha256 файлов зафиксированы"
+    license_verified_by: "владелец продукта: HF tags/cardData license:apache-2.0; oid файлов — HF tree API (lfs.oid), сверено с фактически скачанным файлом"
     commercial_use: true
     allowed_profiles: [balanced, pro]   # Lite без VLM (D8)
     thinking: false
@@ -70,8 +70,8 @@ models:
     enabled: true
     verification_status: verified
     files:
-      - {name: Qwen3VL-4B-Instruct-Q4_K_M.gguf, sha256: "d4ccbe2aafe6a38e45695e8414f071078f894e3aa59426454d3242e5944397c5", bytes: 2497281664}
-      - {name: mmproj-Qwen3VL-4B-Instruct-F16.gguf, sha256: "ec0bcc242a5949de10f955acdb16c21e44fa4cf80bee0c6ef18ff3ce5ed6be20", bytes: 836180256}
+      - {name: Qwen3VL-4B-Instruct-Q4_K_M.gguf, sha256: "66358cb18bb6b3b1b6675aa412c7a88ef01d228f481184d13668e5201c730a0a", bytes: 2497281664}
+      - {name: mmproj-Qwen3VL-4B-Instruct-F16.gguf, sha256: "256f3a43bd4205ffef48d6b92715e1e70b5b0e9aef06522584967513a9985331", bytes: 836180256}
     license: Apache-2.0
     license_source_url: "https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct-GGUF"
     license_verified_at: "2026-11-20"
