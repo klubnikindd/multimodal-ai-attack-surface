@@ -54,7 +54,7 @@ def main() -> int:
         rows = catalog.list_assets(limit=100000)
         catalog.close()
 
-    print(f"scan: {report.added} добавлено, {report.updated} обновлено, {report.errors} ошибок")
+    print(f"scan: {report.scanned} просканировано, {report.added_assets} активов, {len(report.errors)} ошибок")
     date_ok = date_total = time_ok = src_ok = src_total = 0
     mismatches: list[str] = []
     for row in rows:
