@@ -362,3 +362,13 @@ A (форматы пакетов) и B (Tauri-связка) — к M6; оба з
 | P1-01 (спайк D, GPU) | **GPU-класс измерен**: 2B Q4_K_M + mmproj F16 на RTX 4070 Ti SUPER (CUDA, ngl=999) — **2,7 с/кадр** (768 px), **6,4 с/кадр** (1024 px); 768 в ожидании §8.3 (1–4 с), 1024 дороже | `bench-results/vlm-768-gpu.json` |
 | P1-01 | **Спайк D: первый реальный замер.** Qwen3-VL-2B Q4_K_M + mmproj F16, 768 px, 3 потока (≈4 ядра): **≈46 с/кадр** (baseline загрузки модели 20 с). Это > 25 с/кадр → гейт §14 «VLM вне Lite, ночная задача только по выборке» подтверждается. Полный замер 4/8 потоков × 768/1024 px — в фоновом прогоне | `bench-results/vlm-768-threads3.json`, BENCHMARKS |
 | P1-06 корр. | ETag CDN ≠ LFS oid: oid весов взяты из tree API и сверены с фактически скачанным файлом; `check-model-integrity` переведён на tree API + размер | `models/manifest.yaml`, `scripts/check-model-integrity.py` |
+
+### P0-09 / P3-03 (датасет) + P1-07 (каркас Tauri) — в работе (2026-11-21)
+
+| Задача | Прогресс | Доказательство |
+|---|---|---|
+| P3-03 (датасет) | golden-протокол заполнен: manifest (357 файлов, blake3+sha256), labels (авто + scene/event/quality), expected (папка «по дате»), владелец Denis Klubnikin; даты 19 файлов извлечены через PyAV (MOV/MP4) + byte-scan (RAF) | tests/golden/{manifest,labels,expected}.json, data/golden/v1/manifest.json |
+| P3-03 (VLM-разметка) | Qwen3-VL-2B (GPU, CUDA, 768px) размечает 330 фото (scene/event/quality) | data/golden/v1/vlm_labels.json (чекпойнт) |
+| P1-07 (каркас Tauri) | src-tauri/ (Rust: sidecar handshake + app_shutdown + single-instance) + ui/ (React+TS+Vite); ADR-0007 (фреймворк React) | src-tauri/src/lib.rs, ui/, docs/adr/ADR-0007-ui-framework.md |
+| P3-03 (VLM-промпт) | закрытые словари §8.4 добавлены в build_vlm_prompt (раньше валидировались, но модели не сообщались); VLM_PROMPT_REV v3→v4; регресс-тест | kadr/ai/vlm.py (_vocab_text), kadr/constants.py, tests/kadr/test_vlm_contract.py; valid 199→244, scene/event теперь осмысленные |
+| P1-04 (Job Object в Rust) | TODO: Windows Job Object kill-on-close в Rust-хосте (Python-сторона уже есть — SEC-17) | следующий шаг после сборки P1-07 |

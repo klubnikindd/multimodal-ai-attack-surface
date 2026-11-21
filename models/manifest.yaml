@@ -1,10 +1,10 @@
 # Манифест весов Kadr (ТЗ v3 §12.2). fail-closed: enabled-модель без проверенной
 # лицензии/revision/sha256 не проходит CI-гейт license-weights.
 #
-# В v0.1 веса не поставляются: M0-аудит конкретных чекпойнтов ещё не выполнен.
-# Поэтому все записи disabled; продукт использует concept-hash fallback для
-# эмбеддингов и текстовый/структурный поиск. Это честно отражено в
-# KNOWN_LIMITATIONS.md и в UI-статусе.
+# VLM-веса Qwen3-VL-2B/4B-Instruct-GGUF аудированы (apache-2.0, ревизии и sha256
+# запинены) и enabled. Эмбеддинги (SigLIP2) и OCR (RapidOCR) остаются disabled —
+# ONNX-артефакт для инференса не запинен, поэтому эмбеддинги используют
+# concept-hash fallback. Это честно отражено в KNOWN_LIMITATIONS.md.
 schema_version: 1
 checked_at: "2026-11-20"        # дата последней ручной проверки манифеста (не дата M0-аудита)
 models:
