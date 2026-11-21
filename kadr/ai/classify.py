@@ -151,6 +151,7 @@ def classify_asset(
     *,
     run_ocr_enabled: bool = True,
     ocr_language: str = DEFAULT_OCR_LANGUAGE,
+    run_tta: bool = False,
 ) -> dict[str, Any]:
     asset = catalog.get_asset(asset_id)
     if asset is None:
@@ -247,6 +248,31 @@ def classify_asset(
         confidence=l1_conf,
         device="cpu",
     )
+
+    # FR-3.11: TTA — горизонтальный флип (нестабильность L1 → ревью, SEC-03)
+    if run_tta and path is not None:
+        try:
+            import tempfile
+
+            from PIL import Image as _PILImage
+
+            img = _PILImage.open(str(path)).convert("RGB")
+            flipped = img.transpose(_PILImage.FLIP_LEFT_RIGHT)
+            with tempfile.TemporaryDirectory() as td:
+                fp = Path(td) / "flip.jpg"
+                flipped.save(fp, "JPEG")
+                flip_vec = backend.embed_image(path=fp, media_class="photo", scene_type=None)
+            flip_scene, flip_conf, _ = classify_scene(flip_vec, backend)
+            catalog.set_ai_output(
+                asset_id,
+                "scene_tta",
+                backend.model_id,
+                {"scene": l1_scene, "flip_scene": flip_scene, "agreement": l1_scene == flip_scene},
+                confidence=flip_conf,
+                device="cpu",
+            )
+        except Exception:
+            pass
 
     catalog.update_asset_ai(asset_id, media_class=media_class, scene_type=scene_type)
 

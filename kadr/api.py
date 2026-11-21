@@ -17,6 +17,7 @@ from pydantic import BaseModel, Field
 
 from . import __product_name__, __version__
 from .ai.classify import analyze_catalog
+from .ai.personalize import rerank_by_rating
 from .ai.vlm import NightlyVLMPlanner
 from .catalog.repository import Catalog
 from .config import Settings
@@ -77,6 +78,20 @@ class NightlyRequest(BaseModel):
 
 def _headers(request: Request) -> dict[str, str]:
     return {key.lower(): value for key, value in request.headers.items()}
+
+
+def _rerank_hits(hits: list[dict[str, Any]], catalog: Catalog) -> list[dict[str, Any]]:
+    """FR-3.12: реранкинг результатов по рейтингам пользователя (assets.rating)."""
+    ratings: dict[int, float] = {}
+    for h in hits:
+        row = catalog.conn.execute("SELECT rating FROM assets WHERE id=?", (h["asset_id"],)).fetchone()
+        if row and row["rating"] is not None:
+            ratings[int(h["asset_id"])] = float(row["rating"])
+    if not ratings:
+        return hits
+    reranked = rerank_by_rating([(int(h["asset_id"]), float(h["score"])) for h in hits], ratings)
+    by_id = {h["asset_id"]: h for h in hits}
+    return [by_id[aid] for aid, _ in reranked]
 
 
 def create_app(
@@ -359,7 +374,9 @@ def create_app(
             k=payload.k,
             backend=payload.backend,
         )
-        return result.to_dict()
+        d = result.to_dict()
+        d["hits"] = _rerank_hits(d["hits"], state(request).catalog)
+        return d
 
     @app.get("/v1/search/status")
     def search_status(request: Request, backend: str | None = None) -> dict[str, Any]:
