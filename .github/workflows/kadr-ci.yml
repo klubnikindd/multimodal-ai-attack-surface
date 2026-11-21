@@ -182,7 +182,7 @@ jobs:
       - name: Policy parity + фактический setrlimit
         run: python scripts/check-sandbox-parity.py
 
-rust-build:
+  rust-build:
     needs: preflight
     name: rust-build (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
@@ -214,9 +214,60 @@ rust-build:
           else
             touch "src-tauri/binaries/kadr-engine-${TRIPLE}"
           fi
-      - name: cargo check (Rust host: Windows Job Object / Unix process group)
+      - name: "cargo check (Rust host: Windows Job Object / Unix process group)"
         run: cargo check --manifest-path src-tauri/Cargo.toml
 
+  cargo-deny:
+    needs: preflight
+    name: cargo-deny (лицензии + advisories Rust)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install cargo-deny
+        run: cargo install cargo-deny --locked
+      - name: deny check
+        run: cargo deny --config deny.toml check --manifest-path src-tauri/Cargo.toml
+
+  trivy:
+    needs: preflight
+    name: "trivy (fs scan: уязвимые зависимости)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trivy filesystem scan
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          severity: 'HIGH,CRITICAL'
+          exit-code: '1'
+          format: 'table'
+
+  sbom-diff:
+    needs: preflight
+    if: github.event_name == 'pull_request'
+    name: sbom-diff (новые/изменённые зависимости)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install (PR)
+        run: pip install -e ".[dev,api]"
+      - name: PR SBOM
+        run: python scripts/check-code-licenses.py --sbom sbom-pr.cdx.json || true
+      - name: Base SBOM + diff
+        run: |
+          git fetch origin ${{ github.base_ref }} --depth=1
+          git worktree add /tmp/kadr-base ${{ github.base_ref }}
+          cd /tmp/kadr-base
+          pip install -e ".[dev,api]" >/dev/null 2>&1 || true
+          python scripts/check-code-licenses.py --sbom sbom-base.cdx.json || true
+          cd "$GITHUB_WORKSPACE"
+          python scripts/check-sbom-diff.py --base /tmp/kadr-base/sbom-base.cdx.json --pr sbom-pr.cdx.json
   packaging:
     needs: preflight
     name: packaging (no one-file)

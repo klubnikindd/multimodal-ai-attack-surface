@@ -1,0 +1,27 @@
+# cargo-deny config (§12.3: license-code для Rust-зависимостей Tauri).
+# fail-closed: AGPL/GPL/LGPL (copyleft) и неизвестные лицензии — ошибка.
+
+[advisories]
+vulnerability = "deny"
+unmaintained = "warn"
+yanked = "warn"
+
+[licenses]
+# Разрешено (§12.1): MIT/Apache-2.0/BSD/ISC/Zlib/MPL + общественное достояние.
+allow = [
+  "MIT",
+  "Apache-2.0",
+  "BSD-2-Clause",
+  "BSD-3-Clause",
+  "ISC",
+  "Zlib",
+  "MPL-2.0",
+  "Unicode-DFS-2016",
+  "0BSD",
+  "CC0-1.0",
+  "OpenSSL",
+]
+# Copyleft (GPL/LGPL/AGPL) — запрещено (GPL-статическая линковка §12).
+copyleft = "deny"
+# fail-closed: лицензия вне allow-списка — ошибка (§12.3).
+default = "deny"
