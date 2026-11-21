@@ -266,3 +266,31 @@ select {
 .card:hover .reveal {
   opacity: 1;
 }
+
+.dot {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  z-index: 2;
+}
+.card {
+  position: relative;
+}
+.map {
+  z-index: 0;
+  border-radius: 8px;
+}
+.tl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.tl-grid .card img,
+.tl-grid .card .ph {
+  height: 100px;
+}

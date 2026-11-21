@@ -1,13 +1,26 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { open } from "@tauri-apps/plugin-dialog";
 import { openPath, revealItemInDir } from "@tauri-apps/plugin-opener";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 import "./App.css";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function req(method: string, path: string, body?: object): Promise<any> {
-  const text = await invoke<string>("engine_request", { method, path, body: body ? JSON.stringify(body) : null });
-  return JSON.parse(text);
+  for (let attempt = 0; attempt < 40; attempt++) {
+    try {
+      const text = await invoke<string>("engine_request", { method, path, body: body ? JSON.stringify(body) : null });
+      return JSON.parse(text);
+    } catch (e) {
+      if (String(e).includes("engine not ready") && attempt < 39) {
+        await new Promise((r) => setTimeout(r, 500));
+        continue;
+      }
+      throw e;
+    }
+  }
+  throw new Error("engine not ready (timeout)");
 }
 
 function filename(p: string | null): string {
@@ -28,11 +41,51 @@ interface Card {
   path: string | null;
   taken_at: string | null;
   tags: string[];
+  gps_lat: number | null;
+  gps_lon: number | null;
   score?: number;
 }
 
-type Tab = "gallery" | "rules" | "status" | "review" | "jobs";
+type Tab = "gallery" | "rules" | "map" | "timeline" | "status" | "review" | "jobs";
 const PRESETS = ["date", "family", "wedding", "stock", "video"];
+const COLORS = ["red", "gold", "green", "dodgerblue", "purple"];
+
+function MapView({ assets, colors }: { assets: Card[]; colors: Record<number, number> }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const mapRef = useRef<L.Map | null>(null);
+
+  useEffect(() => {
+    if (!ref.current || mapRef.current) return;
+    const map = L.map(ref.current).setView([55, 37], 4);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "© OpenStreetMap",
+    }).addTo(map);
+    mapRef.current = map;
+    return () => {
+      map.remove();
+      mapRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    map.eachLayer((layer) => {
+      if (layer instanceof L.CircleMarker) map.removeLayer(layer);
+    });
+    for (const a of assets) {
+      if (a.gps_lat == null || a.gps_lon == null) continue;
+      L.circleMarker([a.gps_lat, a.gps_lon], {
+        radius: 5,
+        color: colors[a.id] ? COLORS[colors[a.id] - 1] : "#4a8",
+      })
+        .addTo(map)
+        .bindPopup(filename(a.path) || `#${a.id}`);
+    }
+  }, [assets, colors]);
+
+  return <div ref={ref} className="map" style={{ height: 500, width: "100%" }} />;
+}
 
 export default function App() {
   const [tab, setTab] = useState<Tab>("gallery");
@@ -48,6 +101,7 @@ export default function App() {
   const [selected, setSelected] = useState<number | null>(null);
   const [ratings, setRatings] = useState<Record<number, number>>(() => loadLS("ratings", {}));
   const [marks, setMarks] = useState<Record<number, boolean>>(() => loadLS("marks", {}));
+  const [colors, setColors] = useState<Record<number, number>>(() => loadLS("colors", {}));
 
   const [preset, setPreset] = useState("date");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -65,14 +119,14 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
 
   const loadGallery = useCallback(async () => {
-    setError(null);
-    setStatus("Загрузка…");
+    setError(null); setStatus("Загрузка…");
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const res = await req("GET", "/v1/assets?limit=1000");
+      const res = await req("GET", "/v1/assets?limit=5000");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       setCards((res.items || []).map((a: any) => ({
-        id: a.id, kind: a.kind || "?", path: a.path || null, taken_at: a.taken_at || null, tags: a.tags || [],
+        id: a.id, kind: a.kind || "?", path: a.path || null, taken_at: a.taken_at || null,
+        tags: a.tags || [], gps_lat: a.gps_lat ?? null, gps_lon: a.gps_lon ?? null,
       })));
       setStatus(null);
     } catch (e) { setError(String(e)); setStatus(null); }
@@ -88,7 +142,7 @@ export default function App() {
       const hits = (res.hits || []) as any[];
       setCards(hits.map((h) => {
         const f = h.fields || {};
-        return { id: h.asset_id, kind: f.kind || "?", path: f.path || null, taken_at: f.taken_at || null, tags: f.tags || [], score: h.score };
+        return { id: h.asset_id, kind: f.kind || "?", path: f.path || null, taken_at: f.taken_at || null, tags: f.tags || [], gps_lat: null, gps_lon: null, score: h.score };
       }));
       setStatus(null);
     } catch (e) { setError(String(e)); setStatus(null); }
@@ -104,28 +158,19 @@ export default function App() {
   const doScan = async () => {
     if (!sourceDir) return;
     setStatus("Сканирование… (может занять время для большой папки)");
-    try {
-      await req("POST", "/v1/scan", { root: sourceDir });
-      await loadGallery();
-      setStatus(null);
-    } catch (e) { setError(String(e)); setStatus(null); }
+    try { await req("POST", "/v1/scan", { root: sourceDir }); await loadGallery(); setStatus(null); }
+    catch (e) { setError(String(e)); setStatus(null); }
   };
   const revealDest = async () => { if (destDir) await openPath(destDir); else if (sourceDir) await openPath(sourceDir); };
-
   const revealAsset = async (id: number) => {
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const res = await req("GET", `/v1/assets/${id}/absolute-path`);
-      await revealItemInDir(res.path);
-    } catch (e) { setError(String(e)); }
+    try { /* eslint-disable-next-line @typescript-eslint/no-explicit-any */ const res = await req("GET", `/v1/assets/${id}/absolute-path`); await revealItemInDir(res.path); }
+    catch (e) { setError(String(e)); }
   };
 
   const buildPlan = async () => {
     setStatus("Построение плана…");
-    try {
-      const res = await req("POST", "/v1/plans", { preset, library_root: destDir || undefined });
-      setPlan(res); await loadPlans(); setStatus(null);
-    } catch (e) { setError(String(e)); setStatus(null); }
+    try { const res = await req("POST", "/v1/plans", { preset, library_root: destDir || undefined }); setPlan(res); await loadPlans(); setStatus(null); }
+    catch (e) { setError(String(e)); setStatus(null); }
   };
   const applyPlan = async (id: number) => { setStatus("Применение…"); try { await req("POST", `/v1/plans/${id}/apply`, { force: false }); setStatus(null); } catch (e) { setError(String(e)); setStatus(null); } };
   const undoPlan = async (id: number) => { setStatus("Откат…"); try { await req("POST", `/v1/plans/${id}/undo`); setStatus(null); } catch (e) { setError(String(e)); setStatus(null); } };
@@ -136,8 +181,7 @@ export default function App() {
       const res = await req("GET", "/v1/export/catalog?limit=5000");
       const blob = new Blob([JSON.stringify(res, null, 2)], { type: "application/json" });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url; a.download = "kadr-catalog.json"; a.click();
+      const a = document.createElement("a"); a.href = url; a.download = "kadr-catalog.json"; a.click();
       URL.revokeObjectURL(url);
     } catch (e) { setError(String(e)); }
   };
@@ -146,9 +190,7 @@ export default function App() {
   useEffect(() => {
     for (const c of cards) {
       if (c.kind === "photo" && !thumbs[c.id]) {
-        invoke<string>("engine_thumbnail", { assetId: c.id })
-          .then((b64) => setThumbs((t) => ({ ...t, [c.id]: b64 })))
-          .catch(() => {});
+        invoke<string>("engine_thumbnail", { assetId: c.id }).then((b64) => setThumbs((t) => ({ ...t, [c.id]: b64 }))).catch(() => {});
       }
     }
   }, [cards, thumbs]);
@@ -166,17 +208,30 @@ export default function App() {
     return s;
   }, [cards, kindFilter, sortBy]);
 
-  // hotkeys: ←/→ навигация, Esc сброс, 1-5 рейтинг, X метка
+  const gpsAssets = useMemo(() => cards.filter((c) => c.gps_lat != null && c.gps_lon != null), [cards]);
+  const timeline = useMemo(() => {
+    const g: Record<string, Card[]> = {};
+    for (const c of cards) {
+      const key = (c.taken_at || "—").slice(0, 7);
+      (g[key] = g[key] || []).push(c);
+    }
+    return Object.entries(g).sort((a, b) => b[0].localeCompare(a[0]));
+  }, [cards]);
+
+  // hotkeys: ←/→ навигация, Esc сброс, 1-5 рейтинг, X метка, Ctrl+1..5 цвет
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (tab !== "gallery" || filtered.length === 0) return;
       const idx = filtered.findIndex((c) => c.id === selected);
-      if (e.key === "ArrowRight") { setSelected(filtered[idx < filtered.length - 1 ? idx + 1 : 0].id); }
-      else if (e.key === "ArrowLeft") { setSelected(filtered[idx > 0 ? idx - 1 : filtered.length - 1].id); }
-      else if (e.key === "Escape") { setSelected(null); }
-      else if (selected != null && e.key >= "1" && e.key <= "5") {
+      if (e.key === "ArrowRight") setSelected(filtered[idx < filtered.length - 1 ? idx + 1 : 0].id);
+      else if (e.key === "ArrowLeft") setSelected(filtered[idx > 0 ? idx - 1 : filtered.length - 1].id);
+      else if (e.key === "Escape") setSelected(null);
+      else if (selected != null && !e.ctrlKey && e.key >= "1" && e.key <= "5") {
         const r = parseInt(e.key, 10);
         setRatings((rr) => { const n = { ...rr, [selected]: r }; saveLS("ratings", n); return n; });
+      } else if (selected != null && e.ctrlKey && e.key >= "1" && e.key <= "5") {
+        const c = parseInt(e.key, 10);
+        setColors((cc) => { const n = { ...cc, [selected]: c }; saveLS("colors", n); return n; });
       } else if (selected != null && (e.key === "x" || e.key === "X")) {
         setMarks((mm) => { const n = { ...mm, [selected]: !mm[selected] }; saveLS("marks", n); return n; });
       }
@@ -185,15 +240,15 @@ export default function App() {
     return () => window.removeEventListener("keydown", onKey);
   }, [tab, filtered, selected]);
 
+  const tabLabel = (t: Tab) => t === "gallery" ? "Галерея" : t === "rules" ? "Правила" : t === "map" ? "Карта" : t === "timeline" ? "Таймлайн" : t === "status" ? "Состояние" : t === "review" ? "Review" : "Jobs";
+
   return (
     <main className="app">
       <header className="topbar">
         <h1>Kadr</h1>
         <nav className="tabs">
-          {(["gallery", "rules", "status", "review", "jobs"] as Tab[]).map((t) => (
-            <button key={t} className={tab === t ? "tab active" : "tab"} onClick={() => setTab(t)}>
-              {t === "gallery" ? "Галерея" : t === "rules" ? "Правила" : t === "status" ? "Состояние" : t === "review" ? "Review" : "Jobs"}
-            </button>
+          {(["gallery", "rules", "map", "timeline", "status", "review", "jobs"] as Tab[]).map((t) => (
+            <button key={t} className={tab === t ? "tab active" : "tab"} onClick={() => setTab(t)}>{tabLabel(t)}</button>
           ))}
         </nav>
       </header>
@@ -230,6 +285,7 @@ export default function App() {
           <section className="gallery">
             {filtered.map((c) => (
               <figure key={c.id} className={c.id === selected ? "card selected" : "card"} onClick={() => setSelected(c.id)}>
+                {colors[c.id] && <span className="dot" style={{ background: COLORS[colors[c.id] - 1] }} />}
                 {thumbs[c.id] ? (
                   <img src={`data:image/jpeg;base64,${thumbs[c.id]}`} alt={filename(c.path)} loading="lazy" />
                 ) : (
@@ -241,15 +297,8 @@ export default function App() {
                     {c.kind} · {c.taken_at?.slice(0, 10) ?? "—"}
                     {ratings[c.id] ? ` · ★${ratings[c.id]}` : ""}
                     {marks[c.id] ? " · ✗" : ""}
-                    {c.score != null ? ` · ${c.score.toFixed(2)}` : ""}
                   </div>
-                  <button
-                    className="reveal"
-                    title="Показать в папке"
-                    onClick={(e) => { e.stopPropagation(); revealAsset(c.id); }}
-                  >
-                    📂
-                  </button>
+                  <button className="reveal" title="Показать в папке" onClick={(e) => { e.stopPropagation(); revealAsset(c.id); }}>📂</button>
                 </figcaption>
               </figure>
             ))}
@@ -258,14 +307,43 @@ export default function App() {
         </>
       )}
 
+      {tab === "map" && (
+        <section className="panel">
+          <h2>Карта (GPS)</h2>
+          {gpsAssets.length === 0 ? (
+            <p className="empty">Нет фото с GPS-координатами.</p>
+          ) : (
+            <MapView assets={gpsAssets} colors={colors} />
+          )}
+        </section>
+      )}
+
+      {tab === "timeline" && (
+        <section className="panel">
+          <h2>Таймлайн</h2>
+          {timeline.length === 0 && <p className="empty">Нет файлов.</p>}
+          {timeline.map(([date, items]) => (
+            <div key={date}>
+              <h3>{date}</h3>
+              <div className="tl-grid">
+                {items.map((c) => (
+                  <figure key={c.id} className="card" onClick={() => setSelected(c.id)}>
+                    {thumbs[c.id] ? <img src={`data:image/jpeg;base64,${thumbs[c.id]}`} alt="" loading="lazy" /> : <div className="ph">{c.kind}</div>}
+                    <figcaption><div className="nm">{filename(c.path)}</div></figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
+
       {tab === "rules" && (
         <section className="panel">
           <h2>Правила и планы</h2>
           <div className="toolbar">
             <button onClick={pickDest}>Куда (библиотека)… {destDir && <small>{destDir}</small>}</button>
-            <select value={preset} onChange={(e) => setPreset(e.target.value)}>
-              {PRESETS.map((p) => <option key={p} value={p}>{p}</option>)}
-            </select>
+            <select value={preset} onChange={(e) => setPreset(e.target.value)}>{PRESETS.map((p) => <option key={p} value={p}>{p}</option>)}</select>
             <button onClick={buildPlan}>Построить план</button>
           </div>
           {plan?.tree_text && <pre className="tree">{plan.tree_text}</pre>}
