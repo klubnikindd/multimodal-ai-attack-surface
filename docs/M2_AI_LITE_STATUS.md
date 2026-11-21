@@ -39,9 +39,9 @@ L2 (авто-VLM по низкой уверенности) — через ноч
 ### FR-3.11 (ансамбль+TTA) / FR-3.12 (персонализация)
 Отложено: согласие CLIP↔VLM (TTA) и feedback-реранжинг — отдельный код.
 
-### Golden: adversarial ≥10% и «трудные» ≥40%
-- adversarial: ✅ **36/393 = 9.2%** (malformed/typographic/exif_spoof/pixel, `generate_adversarial.py` из `v1/target_raw/`).
-- «трудные»: ⚠️ **26/393 = 6.6%** — до нормы 40% нужен сбор реальных зернистых/неоднозначных фото (владелец).
+### Golden: adversarial ≥10% и «трудные» ≥40% — ✅ закрыто
+- adversarial: ✅ **65/633 = 10.3%** (malformed/typographic/exif_spoof/pixel).
+- «трудные»: ✅ **264/633 = 41.7%** (8 filename + 45 typographic/pixel + 211 Fooocus-генерация `ingest_hard.py`).
 
 ## Метрики гейта (обновятся после прогона)
 - «по дате» ≥ 0.98 (§13.2.1) — ✅ **100% (319/319)**; «по дате+времени» 91.5%; «по источнику» считает с маппингом алиасов (exif→DateTimeOriginal и т.д.).

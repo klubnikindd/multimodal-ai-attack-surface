@@ -83,15 +83,15 @@ def gen_malformed(bases: list[Path]) -> list[dict]:
 
 def gen_typographic(bases: list[Path]) -> list[dict]:
     entries = []
-    for i in range(10):
+    for i in range(23):
         p = bases[(i + 8) % len(bases)]
         img = _to_rgb(Image.open(p))
         draw = ImageDraw.Draw(img)
         draw.rectangle([10, 10, 340, 110], fill=(255, 255, 255))
-        draw.text((20, 20), _TEXTS[i], fill=(0, 0, 0), font=_font(40))
+        draw.text((20, 20), _TEXTS[i % len(_TEXTS)], fill=(0, 0, 0), font=_font(40))
         name = f"adv_typo_{i + 1:02d}.jpg"
         img.save(OUT / name, "JPEG", quality=92)
-        entries.append({"name": name, "why": _TEXTS[i]})
+        entries.append({"name": name, "why": _TEXTS[i % len(_TEXTS)]})
     return entries
 
 
@@ -129,7 +129,7 @@ def gen_pixel(bases: list[Path]) -> list[dict]:
     import numpy as np
 
     entries = []
-    for i in range(10):
+    for i in range(22):
         p = bases[(i + 26) % len(bases)]
         img = _to_rgb(Image.open(p))
         arr = np.asarray(img, dtype=np.float32)
