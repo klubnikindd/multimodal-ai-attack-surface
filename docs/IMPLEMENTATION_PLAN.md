@@ -363,6 +363,12 @@ A (форматы пакетов) и B (Tauri-связка) — к M6; оба з
 | P1-01 | **Спайк D: первый реальный замер.** Qwen3-VL-2B Q4_K_M + mmproj F16, 768 px, 3 потока (≈4 ядра): **≈46 с/кадр** (baseline загрузки модели 20 с). Это > 25 с/кадр → гейт §14 «VLM вне Lite, ночная задача только по выборке» подтверждается. Полный замер 4/8 потоков × 768/1024 px — в фоновом прогоне | `bench-results/vlm-768-threads3.json`, BENCHMARKS |
 | P1-06 корр. | ETag CDN ≠ LFS oid: oid весов взяты из tree API и сверены с фактически скачанным файлом; `check-model-integrity` переведён на tree API + размер | `models/manifest.yaml`, `scripts/check-model-integrity.py` |
 
+### M4 — каталогизатор (первый шаг, 2026-11-21)
+
+| Задача | Прогресс | Доказательство |
+|---|---|---|
+| P5-01 (галерея) | frontend→engine через Rust-прокси (engine_request/engine_thumbnail, CORS закрыт SEC-10); эндпоинт /v1/assets/{id}/thumbnail (Pillow JPEG); галерея React с миниатюрами + поиском | kadr/api.py, src-tauri/src/lib.rs, ui/src/App.tsx, test_asset_thumbnail_returns_jpeg |
+
 ### P0-09 / P3-03 (датасет) + P1-07 (каркас Tauri) — в работе (2026-11-21)
 
 | Задача | Прогресс | Доказательство |

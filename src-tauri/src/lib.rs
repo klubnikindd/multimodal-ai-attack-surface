@@ -10,6 +10,7 @@ use std::process::{Child, Command, Stdio};
 use std::sync::Mutex;
 
 use serde::{Deserialize, Serialize};
+use base64::{engine::general_purpose::STANDARD, Engine as _};
 use tauri::{Manager, RunEvent, State};
 
 #[cfg(windows)]
@@ -179,6 +180,68 @@ fn engine_status(state: State<EngineState>) -> EngineStatus {
     EngineStatus { running, base_url }
 }
 
+/// Проксирует HTTP-запрос frontend → engine (CORS закрыт, SEC-10; bearer + CSRF).
+#[tauri::command]
+fn engine_request(
+    state: State<EngineState>,
+    method: String,
+    path: String,
+    body: Option<String>,
+) -> Result<String, String> {
+    let base_url = state.base_url.lock().unwrap().clone().ok_or("engine not ready")?;
+    let token = state.token.lock().unwrap().clone().ok_or("no token")?;
+    let csrf = state
+        .csrf_token
+        .lock()
+        .unwrap()
+        .clone()
+        .unwrap_or_else(|| token.clone());
+    let url = format!("{base_url}{path}");
+    let auth = format!("Bearer {token}");
+
+    let result = match method.to_uppercase().as_str() {
+        "GET" => ureq::get(&url)
+            .set("Authorization", &auth)
+            .set("X-Kadr-CSRF", &csrf)
+            .call(),
+        "POST" => ureq::post(&url)
+            .set("Authorization", &auth)
+            .set("X-Kadr-CSRF", &csrf)
+            .set("Content-Type", "application/json")
+            .send_string(body.as_deref().unwrap_or("{}")),
+        other => return Err(format!("unsupported method: {other}")),
+    };
+
+    match result {
+        Ok(resp) => resp.into_string().map_err(|e| format!("read response: {e}")),
+        Err(ureq::Error::Status(code, resp)) => {
+            let detail = resp.into_string().unwrap_or_default();
+            Err(format!("HTTP {code}: {detail}"))
+        }
+        Err(e) => Err(format!("engine request failed: {e}")),
+    }
+}
+
+/// Возвращает миниатюру (JPEG) в base64 для галереи.
+#[tauri::command]
+fn engine_thumbnail(state: State<EngineState>, asset_id: i64) -> Result<String, String> {
+    use std::io::Read;
+
+    let base_url = state.base_url.lock().unwrap().clone().ok_or("engine not ready")?;
+    let token = state.token.lock().unwrap().clone().ok_or("no token")?;
+    let url = format!("{base_url}/v1/assets/{asset_id}/thumbnail");
+    let resp = ureq::get(&url)
+        .set("Authorization", &format!("Bearer {token}"))
+        .call()
+        .map_err(|e| format!("thumbnail failed: {e}"))?;
+    let mut reader = resp.into_reader();
+    let mut bytes = Vec::new();
+    reader
+        .read_to_end(&mut bytes)
+        .map_err(|e| format!("read thumbnail: {e}"))?;
+    Ok(STANDARD.encode(&bytes))
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -189,7 +252,7 @@ pub fn run() {
         }))
         .plugin(tauri_plugin_shell::init())
         .manage(EngineState::default())
-        .invoke_handler(tauri::generate_handler![engine_status])
+        .invoke_handler(tauri::generate_handler![engine_status, engine_request, engine_thumbnail])
         .setup(|app| {
             let handle = app.handle().clone();
             tauri::async_runtime::spawn(async move {

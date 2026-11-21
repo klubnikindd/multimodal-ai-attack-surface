@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from fastapi import FastAPI, File, HTTPException, Request, UploadFile
-from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 from pydantic import BaseModel, Field
 
 from . import __product_name__, __version__
@@ -301,6 +301,38 @@ def create_app(
         if not path.is_file():
             raise HTTPException(status_code=404, detail="file missing")
         return FileResponse(path, filename=path.name)
+
+    @app.get("/v1/assets/{asset_id}/thumbnail")
+    def asset_thumbnail(asset_id: int, request: Request, size: int = 256) -> Response:
+        """Миниатюра (JPEG) для галереи; для не-рендерящихся файлов — 415."""
+        catalog_ = state(request).catalog
+        primary = catalog_.primary_file(asset_id)
+        if primary is None:
+            raise HTTPException(status_code=404, detail="asset has no primary file")
+        root = catalog_.volume_root(int(primary["volume_id"]))
+        if not root:
+            raise HTTPException(status_code=404, detail="volume not found")
+        path = (Path(root) / primary["rel_path"]).resolve()
+        try:
+            path.relative_to(Path(root).resolve())
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail="path outside volume") from exc
+        if not path.is_file():
+            raise HTTPException(status_code=404, detail="file missing")
+        try:
+            from PIL import Image
+        except Exception as exc:
+            raise HTTPException(status_code=503, detail="Pillow unavailable") from exc
+        import io
+
+        try:
+            with Image.open(path) as img:
+                img.thumbnail((size, size))
+                buffer = io.BytesIO()
+                img.convert("RGB").save(buffer, format="JPEG", quality=80)
+                return Response(content=buffer.getvalue(), media_type="image/jpeg")
+        except Exception as exc:
+            raise HTTPException(status_code=415, detail="not a renderable image") from exc
 
     @app.post("/v1/search")
     def search(payload: SearchRequest, request: Request) -> dict[str, Any]:

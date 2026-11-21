@@ -110,3 +110,19 @@ def test_analyze_endpoint_passes_run_ocr_flag(client, monkeypatch):
     assert response.status_code == 200
     assert seen["run_ocr_enabled"] is False
     assert seen["ocr_language"] == client.app.state.settings.ocr_language
+
+
+def test_asset_thumbnail_returns_jpeg(client, source_dir):
+    """FR-5.1: миниатюра JPEG для галереи (сканирование → /v1/assets/{id}/thumbnail)."""
+    headers = _headers(client, csrf=True)
+    resp = client.post("/v1/scan", json={"root": str(source_dir)}, headers=headers)
+    assert resp.status_code in {200, 400}
+    resp = client.get("/v1/assets", headers=_headers(client))
+    assert resp.status_code == 200
+    items = resp.json()["items"]
+    photo = next((a for a in items if a["kind"] == "photo"), None)
+    assert photo is not None
+    resp = client.get(f"/v1/assets/{photo['id']}/thumbnail", headers=_headers(client))
+    assert resp.status_code == 200
+    assert resp.headers["content-type"] == "image/jpeg"
+    assert len(resp.content) > 0
