@@ -13,15 +13,13 @@
 
 ## Осталось / заблокировано
 
-### SigLIP2 ONNX — запинен, но не вшит (2026-11-21)
-✅ Скачаны int8 ONNX (`onnx-community/siglip2-base-patch16-224-ONNX`) в
-`.models-test/siglip2/`: `text_model.onnx` (270 МБ) + `vision_model.onnx` (90 МБ)
-+ tokenizer/config. sha256 запинены в `models/manifest.yaml` (revision
-`ba1f3b08…`, оба файла, `verification_status: verified`). ONNX загружаются
-onnxruntime (768-dim, pooler_output).
-Осталось: реализовать инференс `OnnxEmbeddingBackend.embed_text/embed_image`
-(токенизация + preprocessing 224×224 + нормализация) и переключить
-`index_generation` — тогда `enabled=true` вместо concept-hash fallback.
+### SigLIP2 ONNX — запинен и вшит (2026-11-21)
+✅ Скачаны int8 ONNX в `.models-test/siglip2/`, sha256 в `models/manifest.yaml`
+(revision `ba1f3b08…`, `enabled=true`). `OnnxEmbeddingBackend` реализован:
+tokenizers (EOS+pad 64) → `input_ids`; изображение resize 224×224 (bicubic) +
+rescale 1/255 + normalize (x−0.5)/0.5 → `pixel_values`; `pooler_output` →
+L2-нормализация (768-dim). Тест `test_onnx_embeddings.py` (3/3), полный сьют 152.
+Включается через catalog-setting `embedding_backend=onnx` (иначе concept-hash).
 
 ### RapidOCR ONNX — НЕ запинен
 OCR по-прежнему tesseract fallback; ONNX-веса RapidOCR не скачаны.

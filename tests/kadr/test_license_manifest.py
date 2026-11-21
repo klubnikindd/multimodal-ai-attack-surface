@@ -24,11 +24,11 @@ def _enabled_model(**overrides):
 def test_default_manifest_is_honest_and_passes():
     report = validate_manifest_file()
     assert report.ok
-    # v0.1: включены только верифицированные VLM (P1-06); embeddings/OCR — disabled
-    # до фиксации ONNX-артефактов. enabled-модели обязаны иметь license_verified_at.
-    assert report.enabled_count == 2
+    # v0.1: включены верифицированные VLM + SigLIP2 embeddings (P3-01);
+    # OCR (RapidOCR) остаётся disabled до фиксации ONNX-артефакта.
+    assert report.enabled_count == 3
     enabled = [model for model in report.models if model["enabled"]]
-    assert all(model["role"] == "vlm" for model in enabled)
+    assert {model["role"] for model in enabled} == {"vlm", "embeddings"}
     assert all(model.get("license_verified_at") for model in enabled)
     assert all(model["commercial_use"] for model in enabled)
 
