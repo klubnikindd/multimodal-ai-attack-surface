@@ -22,7 +22,7 @@
 | M3 — security-контур | **75%** | нативная Windows security-регрессия: 54 passed / 0 failed (docs/SECURITY_REGRESSION.md); Корпус SEC-01 (ASR 0%), PII/path-корпус, decompression-bomb + resource-bomb (decompression/pixel/zip), Job Object (SEC-17), zero-egress (SEC-12); SEC-02/03 L1-измерено (typographic ASR 0%, калибровка ok); seccomp/Seatbelt — остаётся (нет Linux/macOS) |
 | M4 — каталогизатор/UI | **95%** | галерея/поиск/фасеты, вкладки, редактор правил (path+safety+условия when), Jobs-поллинг+cancel, Review-resolve, хоткеи ★/✗/Ctrl-цвет/T/пробел, батч-операции (shift-click), именованные поиски, экспорт JSON+CSV, «что знаем»-отчёт, lightbox, офлайн-карта (SVG); остаток: UI на macOS/Linux |
 | M5 — видео/аудио/VLM | **45%** | VLM-runtime подключён end-to-end, ASR-модуль добавлен; scene-cut/ключевые кадры/обложка — нет |
-| M6 — дистрибуция | **15%** | one-dir собирается (82,2 МБ, 430 мс повторный старт, 0 orphan); Tauri/установщики/подпись/updater — нет |
+| M6 — дистрибуция | **40%** | Windows-установщики (MSI 14.6 MiB + NSIS 13.2 MiB) собраны; апдейтер-плагин подключён (без подписи); macOS/Linux + подпись/нотаризация — пропущены (нет нативных прогонов) |
 | **DoD M0 (§14)** | **ПРОЙДЕН (с решениями по гейтам)** | все 5 спайков пройдены или принято решение; deferrals A/B — к M6 |
 
 ---

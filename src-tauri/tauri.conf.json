@@ -32,5 +32,13 @@
     "icon": [
       "icons/icon.ico"
     ]
+  },
+  "plugins": {
+    "updater": {
+      "endpoints": [
+        "https://updates.kadr.app/v1/updates.json"
+      ],
+      "pubkey": ""
+    }
   }
 }
