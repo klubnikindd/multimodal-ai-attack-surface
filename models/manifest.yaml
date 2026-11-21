@@ -32,7 +32,7 @@ models:
     family: RapidOCR
     variant: onnx
     revision: "1cfba2e90fc938db55889873735088de210cc173"
-    enabled: false
+    enabled: true
     verification_status: verified
     files:
       - {name: ch_PP-OCRv4_det_infer.onnx, sha256: "d2a7720d45a54257208b1e13e36a8479894cb74155a5efe29462512d42f49da9", bytes: 4745517}
@@ -46,7 +46,7 @@ models:
     license_verified_by: "владелец продукта"
     commercial_use: true
     allowed_profiles: [lite, balanced, pro]
-    notes: "ONNX-веса (PP-OCRv4 det/rec + cls) в .models-test/rapidocr/, sha256 запинены. enabled=false: OCR-инференс не вшит, tesseract остаётся fallback."
+    notes: "ONNX-веса (PP-OCRv4 det/rec + cls) в .models-test/rapidocr/, sha256 запинены. run_ocr_rapidocr вшит (det→cls→rec), run_ocr пробует RapidOCR первым, tesseract — fallback."
 
   - id: qwen3-vl-2b-instruct-q4_k_m
     role: vlm

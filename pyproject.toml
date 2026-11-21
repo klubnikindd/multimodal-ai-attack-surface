@@ -35,6 +35,7 @@ ml = ["onnxruntime>=1.17", "numpy>=1.24"]
 ann = ["usearch>=2.0", "numpy>=1.24"]
 asr = ["faster-whisper>=1.0", "av>=11,<15"]
 video = ["scenedetect>=0.7", "opencv-python>=4.8", "av>=11,<15", "Pillow>=10.0"]
+ocr = ["rapidocr_onnxruntime>=1.4"]
 build = ["pyinstaller>=6.0"]
 dev = [
   "pytest>=8.0",

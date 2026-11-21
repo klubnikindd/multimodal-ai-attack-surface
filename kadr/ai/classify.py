@@ -44,6 +44,67 @@ def _ocr_language(lang: str | None) -> str:
     return value
 
 
+_RAPIDOCR_ENGINE: Any = None
+_RAPIDOCR_FAILED = False
+_RAPIDOCR_LOGGER = logging.getLogger(__name__)
+
+
+def _rapidocr_dir() -> Path | None:
+    import os
+
+    env = os.environ.get("KADR_RAPIDOCR_DIR")
+    candidates: list[Path] = []
+    if env:
+        candidates.append(Path(env))
+    candidates.append(Path(__file__).resolve().parents[2] / ".models-test" / "rapidocr")
+    for candidate in candidates:
+        if (candidate / "ch_PP-OCRv4_det_infer.onnx").is_file() and (
+            candidate / "ch_PP-OCRv4_rec_infer.onnx"
+        ).is_file():
+            return candidate
+    return None
+
+
+def _rapidocr_engine() -> Any:
+    global _RAPIDOCR_ENGINE, _RAPIDOCR_FAILED
+    if _RAPIDOCR_ENGINE is not None:
+        return _RAPIDOCR_ENGINE
+    if _RAPIDOCR_FAILED:
+        return None
+    model_dir = _rapidocr_dir()
+    if model_dir is None:
+        _RAPIDOCR_FAILED = True
+        return None
+    try:
+        from rapidocr_onnxruntime import RapidOCR
+
+        _RAPIDOCR_ENGINE = RapidOCR(
+            det_model_path=str(model_dir / "ch_PP-OCRv4_det_infer.onnx"),
+            cls_model_path=str(model_dir / "ch_ppocr_mobile_v2.0_cls_infer.onnx"),
+            rec_model_path=str(model_dir / "ch_PP-OCRv4_rec_infer.onnx"),
+            rec_keys_path=str(model_dir / "ppocr_keys_v1.txt"),
+        )
+        return _RAPIDOCR_ENGINE
+    except Exception as exc:
+        _RAPIDOCR_FAILED = True
+        _RAPIDOCR_LOGGER.warning("rapidocr init failed: %s", exc)
+        return None
+
+
+def run_ocr_rapidocr(path: str | Path) -> OcrResult:
+    """OCR через RapidOCR (PP-OCRv4 ONNX, det→cls→rec). Текст недоверенный (T02)."""
+    engine = _rapidocr_engine()
+    if engine is None:
+        return OcrResult(available=False, engine="none", error="rapidocr unavailable")
+    try:
+        result, _elapse = engine(str(path))
+        texts = [str(item[1]) for item in result] if result else []
+        text = "\n".join(t for t in texts if t)
+        return OcrResult(text=text, engine="rapidocr", available=True)
+    except Exception as exc:
+        return OcrResult(available=False, engine="rapidocr", error=str(exc))
+
+
 def run_ocr(
     path: str | Path,
     *,
@@ -51,12 +112,11 @@ def run_ocr(
     sandbox: bool = False,
     lang: str = DEFAULT_OCR_LANGUAGE,
 ) -> OcrResult:
-    """OCR через локальный tesseract; текст — недоверенный (T02).
-
-    ``lang`` — значение для ``tesseract -l`` (по умолчанию из
-    ``Settings.ocr_language`` / ``KADR_OCR_LANG``); требует установленного
-    traineddata соответствующего языка.
-    """
+    """OCR: RapidOCR (PP-OCRv4 ONNX) с fallback на tesseract; текст недоверенный (T02)."""
+    if not sandbox:
+        rapid = run_ocr_rapidocr(path)
+        if rapid.available:
+            return rapid
     language = _ocr_language(lang)
     if sandbox:
         result = run_ocr_sandboxed(path, lang=language)
