@@ -94,13 +94,32 @@ class VLMValidation:
         }
 
 
+def _vocab_text() -> str:
+    """Закрытые словари §8.4 — обязательный блок промпта (иначе модель гадает)."""
+    def _fmt(values: Collection[str]) -> str:
+        return ", ".join(sorted(values))
+
+    return (
+        "\n\nЗакрытые словари. Используй ТОЛЬКО эти значения (точное совпадение, нижний регистр); "
+        "если значение не определено — fallback в скобках:\n"
+        f"- scene_type ({_fmt(VLM_SCENE_TYPES)}); fallback: unknown\n"
+        f"- setting ({_fmt(VLM_SETTINGS)}); fallback: unknown\n"
+        f"- event_type ({_fmt(VLM_EVENT_TYPES)}); fallback: none\n"
+        f"- time_of_day ({_fmt(VLM_TIME_OF_DAY)}); fallback: unknown\n"
+        f"- weather ({_fmt(VLM_WEATHER)}); fallback: unknown\n"
+        f"- lighting ({_fmt(VLM_LIGHTING)}); fallback: unknown\n"
+        "subjects, actions, quality_issues, keywords_en — всегда JSON-массив строк (можно пустой []). "
+        "text_present — boolean. confidence — число от 0 до 1."
+    )
+
+
 def build_vlm_prompt(
     *,
     allow_metadata: bool = False,
     untrusted_text: str | None = None,
 ) -> str:
     """По умолчанию VLM видит только пиксели; текст — отдельный канал (SEC-01/02)."""
-    prompt = VLM_PROMPT
+    prompt = VLM_PROMPT + _vocab_text()
     if allow_metadata and untrusted_text:
         safe = sanitize_text(untrusted_text, limit=512).replace("<<<", "").replace(">>>", "")
         prompt += (

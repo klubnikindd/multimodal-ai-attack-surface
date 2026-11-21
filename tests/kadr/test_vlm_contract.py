@@ -190,3 +190,16 @@ def test_nightly_job_does_not_read_outside_volume(catalog, settings, source_dir)
     assert calls == []
     assert any("unsafe path" in error for error in result["errors"])
     assert result["state"] == "paused"
+
+
+def test_build_vlm_prompt_includes_closed_vocab():
+    """Регресс: промпт обязан перечислять закрытые словари §8.4, иначе модель гадает."""
+    prompt = build_vlm_prompt()
+    assert "scene_type" in prompt and "landscape" in prompt and "portrait" in prompt
+    assert "event_type" in prompt and "wedding" in prompt and "travel" in prompt
+    assert "setting" in prompt and "outdoor_nature" in prompt
+    assert "time_of_day" in prompt and "golden_hour" in prompt
+    assert "weather" in prompt and "cloudy" in prompt
+    assert "lighting" in prompt and "natural_backlight" in prompt
+    assert "JSON-массив" in prompt
+    assert "boolean" in prompt
