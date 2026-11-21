@@ -12,12 +12,17 @@ use std::sync::Mutex;
 use serde::{Deserialize, Serialize};
 use tauri::{Manager, RunEvent, State};
 
+#[cfg(windows)]
+mod job_object;
+
 /// Управляемое состояние: процесс sidecar + креды handshake.
 #[derive(Default)]
 pub struct EngineState {
     child: Mutex<Option<Child>>,
     base_url: Mutex<Option<String>>,
     token: Mutex<Option<String>>,
+    #[cfg(windows)]
+    job: Mutex<Option<job_object::JobObject>>,
 }
 
 #[derive(Deserialize)]
@@ -63,6 +68,13 @@ fn spawn_engine(app: &tauri::AppHandle, state: &State<EngineState>) -> Result<()
         .stderr(Stdio::null())
         .spawn()
         .map_err(|e| format!("spawn {}: {}", exe.display(), e))?;
+
+    #[cfg(windows)]
+    {
+        let job = job_object::JobObject::new_kill_on_close()?;
+        job.assign(child.id())?;
+        *state.job.lock().unwrap() = Some(job);
+    }
 
     let stdout = child.stdout.take().ok_or("sidecar stdout unavailable")?;
     let reader = BufReader::new(stdout);
