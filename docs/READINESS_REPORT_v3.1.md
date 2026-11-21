@@ -19,7 +19,7 @@
 | M0 — каркас, гейты, замеры | **95%** | Все 8 PR-гейтов зелёные; 5 спайков D→E→A→B→C пройдены или закрыты решением по гейту §14; остаток — полный lifecycle-набор и форматы пакетов (M6) |
 | M1 — движок сортировки | **90%** | +FR-2.14 (дубли), FR-1.7 (прогресс скана), case-insensitive коллизии; дыры: FR-2.8 (системная корзина), FR-2.9 (per-OS), FR-2.12 (редактор) |
 | M2 — AI-lite | **100%** | SigLIP2 + RapidOCR вшиты, ANN 0.95@100K, каскад L0→L1, видео-сцены, лица (SCRFD+SigLIP2); golden: adversarial 10.3% + hard 41.7%, eval_quality «по дате» 100%; остаток: FR-3.11/3.12 (ансамбль/персонализация) |
-| M3 — security-контур | **70%** | Корпус SEC-01 (ASR 0%), PII/path-корпус, decompression-bomb + resource-bomb (decompression/pixel/zip), Job Object (SEC-17), zero-egress (SEC-12); SEC-02/03 L1-измерено (typographic ASR 0%, калибровка ok); seccomp/Seatbelt — остаётся (нет Linux/macOS) |
+| M3 — security-контур | **75%** | нативная Windows security-регрессия: 54 passed / 0 failed (docs/SECURITY_REGRESSION.md); Корпус SEC-01 (ASR 0%), PII/path-корпус, decompression-bomb + resource-bomb (decompression/pixel/zip), Job Object (SEC-17), zero-egress (SEC-12); SEC-02/03 L1-измерено (typographic ASR 0%, калибровка ok); seccomp/Seatbelt — остаётся (нет Linux/macOS) |
 | M4 — каталогизатор/UI | **5%** | API/CLI полные, UI — демо-страница; Tauri не начат |
 | M5 — видео/аудио/VLM | **45%** | VLM-runtime подключён end-to-end, ASR-модуль добавлен; scene-cut/ключевые кадры/обложка — нет |
 | M6 — дистрибуция | **15%** | one-dir собирается (82,2 МБ, 430 мс повторный старт, 0 orphan); Tauri/установщики/подпись/updater — нет |
