@@ -182,6 +182,41 @@ jobs:
       - name: Policy parity + фактический setrlimit
         run: python scripts/check-sandbox-parity.py
 
+rust-build:
+    needs: preflight
+    name: rust-build (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Frontend deps + build
+        run: |
+          cd ui
+          pnpm install
+          pnpm build
+      - name: Rust toolchain
+        run: rustc --version && cargo --version
+      - name: Placeholder sidecar (gitignored; externalBin check §11.2.1)
+        shell: bash
+        run: |
+          TRIPLE=$(rustc --print host-tuple)
+          mkdir -p src-tauri/binaries
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            touch "src-tauri/binaries/kadr-engine-${TRIPLE}.exe"
+          else
+            touch "src-tauri/binaries/kadr-engine-${TRIPLE}"
+          fi
+      - name: cargo check (Rust host: Windows Job Object / Unix process group)
+        run: cargo check --manifest-path src-tauri/Cargo.toml
+
   packaging:
     needs: preflight
     name: packaging (no one-file)

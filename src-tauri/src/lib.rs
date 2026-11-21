@@ -15,6 +15,9 @@ use tauri::{Manager, RunEvent, State};
 #[cfg(windows)]
 mod job_object;
 
+#[cfg(unix)]
+mod process_group;
+
 /// Управляемое состояние: процесс sidecar + креды handshake.
 #[derive(Default)]
 pub struct EngineState {
@@ -83,11 +86,14 @@ fn sidecar_path(app: &tauri::AppHandle) -> Result<PathBuf, String> {
 /// Спавнит engine и блокируется до JSON-handshake в stdout.
 fn spawn_engine(app: &tauri::AppHandle, state: &State<EngineState>) -> Result<(), String> {
     let exe = sidecar_path(app)?;
-    let mut child = Command::new(&exe)
-        .args(["serve", "--sidecar"])
+    let mut cmd = Command::new(&exe);
+    cmd.args(["serve", "--sidecar"])
         .stdin(Stdio::piped())
         .stdout(Stdio::piped())
-        .stderr(Stdio::null())
+        .stderr(Stdio::null());
+    #[cfg(unix)]
+    process_group::configure(&mut cmd);
+    let mut child = cmd
         .spawn()
         .map_err(|e| format!("spawn {}: {}", exe.display(), e))?;
 
@@ -139,14 +145,30 @@ fn app_shutdown(state: &State<EngineState>) {
         eprintln!("[kadr] shutdown: no url/token");
     }
     if let Some(mut child) = state.child.lock().unwrap().take() {
+        // graceful wait ≤ 2 c (POST уже мягко остановил сервер)
         for _ in 0..20 {
             if child.try_wait().ok().flatten().is_some() {
-                break;
+                return;
             }
             std::thread::sleep(std::time::Duration::from_millis(100));
         }
-        let _ = child.kill();
-        let _ = child.wait();
+        #[cfg(unix)]
+        {
+            process_group::terminate_group(child.id());
+            for _ in 0..30 {
+                if child.try_wait().ok().flatten().is_some() {
+                    return;
+                }
+                std::thread::sleep(std::time::Duration::from_millis(100));
+            }
+            process_group::kill_group(child.id());
+            let _ = child.wait();
+        }
+        #[cfg(not(unix))]
+        {
+            let _ = child.kill();
+            let _ = child.wait();
+        }
     }
 }
 
