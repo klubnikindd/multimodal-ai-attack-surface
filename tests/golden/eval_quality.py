@@ -26,6 +26,22 @@ from kadr.catalog.repository import Catalog  # noqa: E402
 from kadr.scanner import scan_root  # noqa: E402
 
 
+_SOURCE_ALIASES = {
+    "exif": {"DateTimeOriginal", "CreateDate", "XMP DateCreated"},
+    "quicktime": {"QuickTime CreationDate"},
+    "filename": {"filename"},
+    "mtime": {"mtime"},
+}
+
+
+def _source_matches(engine: str | None, golden: str | None) -> bool:
+    if not engine or not golden:
+        return False
+    if engine == golden:
+        return True
+    return engine in _SOURCE_ALIASES.get(golden, set())
+
+
 def _folder(dt: str | None) -> str | None:
     if not dt:
         return None
@@ -80,7 +96,7 @@ def main() -> int:
 
         if g.get("taken_at_source") is not None:
             src_total += 1
-            if row.get("taken_at_source") == g.get("taken_at_source"):
+            if _source_matches(row.get("taken_at_source"), g.get("taken_at_source")):
                 src_ok += 1
 
     print("\n=== Метрики ===")
