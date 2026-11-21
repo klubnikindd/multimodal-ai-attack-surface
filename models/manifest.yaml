@@ -58,7 +58,7 @@ models:
     commercial_use: true
     allowed_profiles: [balanced, pro]   # Lite без VLM (D8)
     thinking: false
-    max_output_tokens: 384
+    max_output_tokens: 768
     image_max_side: 1024
     notes: "Официальный GGUF-репозиторий Qwen; Thinking запрещён (D13). Модель и mmproj проверены по LFS blobId (sha256)."
 
@@ -79,7 +79,7 @@ models:
     commercial_use: true
     allowed_profiles: [pro]
     thinking: false
-    max_output_tokens: 384
+    max_output_tokens: 768
     image_max_side: 1024
     notes: "Только Pro; CPU-сценарий для 4B не поддерживается. Официальный GGUF-репозиторий Qwen."
 

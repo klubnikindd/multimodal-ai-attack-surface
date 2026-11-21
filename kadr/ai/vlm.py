@@ -130,6 +130,49 @@ def build_vlm_prompt(
     return prompt
 
 
+
+def build_vlm_schema() -> dict[str, Any]:
+    """JSON-схема §8.4 для grammar-constrained decoding (llama.cpp json_schema).
+
+    В отличие от response_format=json_object, схема жёстко ограничивает лексику:
+    enum-поля не могут выйти из закрытых словарей, а структура не может быть
+    невалидным JSON (лечит invalid_json у 2B-модели).
+    """
+    def _enum(values: Collection[str]) -> dict[str, Any]:
+        return {"type": "string", "enum": sorted(values)}
+
+    _str_array: dict[str, Any] = {"type": "array", "items": {"type": "string"}}
+    return {
+        "type": "object",
+        "properties": {
+            "scene_type": _enum(VLM_SCENE_TYPES),
+            "setting": _enum(VLM_SETTINGS),
+            "subjects": _str_array,
+            "actions": _str_array,
+            "event_type": _enum(VLM_EVENT_TYPES),
+            "time_of_day": _enum(VLM_TIME_OF_DAY),
+            "weather": _enum(VLM_WEATHER),
+            "lighting": _enum(VLM_LIGHTING),
+            "text_present": {"type": "boolean"},
+            "quality_issues": _str_array,
+            "keywords_en": _str_array,
+            "caption_ru": {"type": "string"},
+            "caption_en": {"type": "string"},
+            "alt_text": {"type": "string"},
+            "confidence": {"type": "number"},
+        },
+        "required": [
+            "scene_type",
+            "setting",
+            "event_type",
+            "time_of_day",
+            "weather",
+            "lighting",
+            "text_present",
+            "confidence",
+        ],
+    }
+
 def _parse_json(raw: str | dict[str, Any]) -> tuple[dict[str, Any] | None, list[str]]:
     anomalies: list[str] = []
     if isinstance(raw, dict):
@@ -467,9 +510,16 @@ class LlamaCppClient:
             ],
             "max_tokens": VLM_MAX_OUTPUT_TOKENS,
             "temperature": 0,
-            # §8.4: grammar-constrained decoding — рантайм обязан возвращать валидный
-            # JSON (json_object), строгость схемы добивает validate_vlm_output.
-            "response_format": {"type": "json_object"},
+            # Ломает дегенеративные повторы 2B-модели (иначе модель зацикливается
+            # на одном токене и не закрывает JSON).
+            "repeat_penalty": 1.1,
+            "repeat_last_n": 64,
+            # §8.4: grammar-constrained decoding — JSON-schema жёстко ограничивает
+            # лексику/структуру; validate_vlm_output добивает оставшиеся проверки.
+            "response_format": {
+                "type": "json_schema",
+                "json_schema": {"name": "kadr_vlm", "schema": build_vlm_schema()},
+            },
         }
         request = urllib.request.Request(
             f"{self.base_url}/v1/chat/completions",

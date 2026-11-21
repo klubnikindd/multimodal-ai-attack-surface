@@ -6,6 +6,7 @@ from kadr.ai.vlm import (
     LlamaCppClient,
     NightlyVLMPlanner,
     build_vlm_prompt,
+    build_vlm_schema,
     nightly_plan,
     validate_vlm_output,
 )
@@ -203,3 +204,15 @@ def test_build_vlm_prompt_includes_closed_vocab():
     assert "lighting" in prompt and "natural_backlight" in prompt
     assert "JSON-массив" in prompt
     assert "boolean" in prompt
+
+
+def test_build_vlm_schema_constrains_closed_vocab():
+    """Регресс: JSON-schema для grammar-constrained decoding обязана иметь enum-поля §8.4."""
+    schema = build_vlm_schema()
+    props = schema["properties"]
+    assert props["scene_type"]["enum"] and "landscape" in props["scene_type"]["enum"]
+    assert props["event_type"]["enum"] and "wedding" in props["event_type"]["enum"]
+    assert props["lighting"]["enum"] and "natural_backlight" in props["lighting"]["enum"]
+    assert props["text_present"]["type"] == "boolean"
+    assert props["quality_issues"]["type"] == "array"
+    assert "confidence" in schema["required"] and "scene_type" in schema["required"]

@@ -126,10 +126,10 @@ VLM_ALLOWED_FIELDS = frozenset(
 VLM_FORBIDDEN_FIELDS = frozenset(
     {"thinking", "reasoning", "chain_of_thought", "analysis", "tool_calls", "tools", "system"}
 )
-VLM_MAX_OUTPUT_TOKENS = 384
+VLM_MAX_OUTPUT_TOKENS = 768
 VLM_IMAGE_MAX_SIDE = 1024
 VLM_NIGHT_IMAGE_MAX_SIDE = 768
-VLM_PROMPT_REV = "vlm-json-v4-2026-11-21"
+VLM_PROMPT_REV = "vlm-json-v5-2026-11-21"
 VLM_MAX_CAPTION_CHARS = 512
 VLM_MAX_KEYWORDS = 50
 
