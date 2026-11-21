@@ -44,6 +44,14 @@ def _apply_limits(limits: dict[str, Any]) -> None:
 def _ocr(path: str, limits: dict[str, Any], lang: str = DEFAULT_OCR_LANGUAGE) -> dict[str, Any]:
     import shutil
 
+    try:
+        from ..ai.rapidocr import run as _rapidocr_run
+
+        rapid = _rapidocr_run(path)
+        if rapid.get("available"):
+            return rapid
+    except Exception:
+        pass
     language = str(lang or DEFAULT_OCR_LANGUAGE).strip()
     if not OCR_LANGUAGE_PATTERN.fullmatch(language):
         return {"available": False, "text": "", "error": f"invalid ocr language: {lang!r}"}

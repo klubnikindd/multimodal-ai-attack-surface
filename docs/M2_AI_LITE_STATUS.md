@@ -21,11 +21,11 @@ rescale 1/255 + normalize (x−0.5)/0.5 → `pixel_values`; `pooler_output` →
 L2-нормализация (768-dim). Тест `test_onnx_embeddings.py` (3/3), полный сьют 152.
 Включается через catalog-setting `embedding_backend=onnx` (иначе concept-hash).
 
-### RapidOCR ONNX — запинен и вшит (2026-11-21)
+### RapidOCR ONNX — запинен и вшит (in-process + sandbox) (2026-11-21)
 ✅ PP-OCRv4 det/rec + cls в `.models-test/rapidocr/`, sha256 в `models/manifest.yaml`
-(`enabled=true`). `run_ocr_rapidocr` вшит (RapidOCR det→cls→rec), `run_ocr`
-пробует RapidOCR первым, tesseract — fallback. Тест `test_rapidocr.py` (2/2),
-полный сьют 154. Зависимость — extra `ocr` (`rapidocr_onnxruntime`).
+(`enabled=true`). Общий движок `kadr/ai/rapidocr.py`; `run_ocr` и sandbox-воркер
+(`parser_worker._ocr`) пробуют RapidOCR первым, tesseract — fallback. Тест
+`test_rapidocr.py` (2/2), полный сьют 154. Зависимость — extra `ocr`.
 
 ### FR-3.9 (лица) — заблокировано лицензией весов
 InsightFace/буффало-модель — non-commercial. Нужен коммерчески лицензируемый
