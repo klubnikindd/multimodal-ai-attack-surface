@@ -51,14 +51,19 @@ def main() -> int:
         settings = Settings(home=home, library_root=Path(tmp) / "library")
         catalog = Catalog(settings.catalog_path)
         report = scan_root(catalog, Path(args.inputs), settings)
-        rows = catalog.list_assets(limit=100000)
+        rows = []
+        for row in catalog.list_assets(limit=100000):
+            primary = catalog.primary_file(int(row["id"]))
+            d = dict(row)
+            d["name"] = Path(primary["rel_path"]).name if primary else f"#{row['id']}"
+            rows.append(d)
         catalog.close()
 
     print(f"scan: {report.scanned} просканировано, {report.added_assets} активов, {len(report.errors)} ошибок")
     date_ok = date_total = time_ok = src_ok = src_total = 0
     mismatches: list[str] = []
     for row in rows:
-        name = Path(row["path"]).name
+        name = row["name"]
         if name not in golden:
             continue
         g = golden[name]
