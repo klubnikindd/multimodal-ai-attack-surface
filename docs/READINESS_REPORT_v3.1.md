@@ -19,7 +19,7 @@
 | M0 — каркас, гейты, замеры | **95%** | Все 8 PR-гейтов зелёные; 5 спайков D→E→A→B→C пройдены или закрыты решением по гейту §14; остаток — полный lifecycle-набор и форматы пакетов (M6) |
 | M1 — движок сортировки | **90%** | +FR-2.14 (дубли), FR-1.7 (прогресс скана), case-insensitive коллизии; дыры: FR-2.8 (системная корзина), FR-2.9 (per-OS), FR-2.12 (редактор) |
 | M2 — AI-lite | **100%** | SigLIP2 + RapidOCR вшиты, ANN 0.95@100K, каскад L0→L1, видео-сцены, лица (SCRFD+SigLIP2); golden: adversarial 10.3% + hard 41.7%, eval_quality «по дате» 100%; остаток: FR-3.11/3.12 (ансамбль/персонализация) |
-| M3 — security-контур | **60%** | Корпус SEC-01 (ASR 0%), PII/path-корпус, decompression-bomb, Job Object (SEC-17), zero-egress (SEC-12: `_deny_network` в воркере); seccomp/Seatbelt (нет Linux/macOS-прогона — пропущен), SEC-02/03 — остаются |
+| M3 — security-контур | **70%** | Корпус SEC-01 (ASR 0%), PII/path-корпус, decompression-bomb + resource-bomb (decompression/pixel/zip), Job Object (SEC-17), zero-egress (SEC-12); SEC-02/03 L1-измерено (typographic ASR 0%, калибровка ok); seccomp/Seatbelt — остаётся (нет Linux/macOS) |
 | M4 — каталогизатор/UI | **5%** | API/CLI полные, UI — демо-страница; Tauri не начат |
 | M5 — видео/аудио/VLM | **45%** | VLM-runtime подключён end-to-end, ASR-модуль добавлен; scene-cut/ключевые кадры/обложка — нет |
 | M6 — дистрибуция | **15%** | one-dir собирается (82,2 МБ, 430 мс повторный старт, 0 orphan); Tauri/установщики/подпись/updater — нет |
@@ -260,8 +260,8 @@
 2. **Rust-тулчейн** — P1-04/P1-07 плана стоят из-за его отсутствия; спайк B в реальном Tauri-хосте и сборка установщиков невозможны.
 
 **Блокируют M3 (M2 — закрыт):**
-1. **seccomp/Seatbelt** (SEC-05) — только Windows Job Object; Linux/macOS песочницы нет (нет возможности прогона).
-2. **SEC-02 / SEC-03** (инъекция + калибровка) — не измерены.
+1. **seccomp/Seatbelt** (SEC-05) — нет Linux/macOS-прогона.
+2. **VLM-ASR** (SEC-02) — L1 (SigLIP2) измерен (ASR 0%), но VLM-инъекция не измерена.
 
 **Долг по честности (быстро):**
 7. **Дрейф `KNOWN_LIMITATIONS.md`** — файл всё ещё пишет «манифест содержит только disabled записи», хотя Qwen3-VL-2B/4B уже `enabled: true` (аудит P1-06). Также «комфортная зона 50–100K» устарела (замерено 200K). Обновить.
