@@ -125,7 +125,10 @@ __pycache__/
 venv/
 
 # Медиафайлы (важно для вашего проекта)
+data/
 *.jpg
+*.raw
+*.raf
 *.jpeg
 *.png
 *.gif
@@ -133,6 +136,7 @@ venv/
 *.mov
 *.avi
 *.mkv
+
 # --- Артефакты CI ---
 .pytest-junit.xml
 pytest-*.xml
