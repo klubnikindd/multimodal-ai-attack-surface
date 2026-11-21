@@ -25,9 +25,9 @@ def test_default_manifest_is_honest_and_passes():
     report = validate_manifest_file()
     assert report.ok
     # v0.1: включены верифицированные VLM + SigLIP2 embeddings + RapidOCR (P3-01).
-    assert report.enabled_count == 4
+    assert report.enabled_count == 5
     enabled = [model for model in report.models if model["enabled"]]
-    assert {model["role"] for model in enabled} == {"vlm", "embeddings", "ocr"}
+    assert {model["role"] for model in enabled} == {"vlm", "embeddings", "ocr", "faces"}
     assert all(model.get("license_verified_at") for model in enabled)
     assert all(model["commercial_use"] for model in enabled)
 

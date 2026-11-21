@@ -27,6 +27,23 @@ models:
     allowed_profiles: [lite, balanced, pro]
     notes: "ONNX int8 (text_model + vision_model) в .models-test/siglip2/, sha256 запинены. OnnxEmbeddingBackend реализован (tokenizers + preprocessing 224×224 + L2); эмбеддинги включаются через setting embedding_backend=onnx."
 
+  - id: scrfd-500m-det
+    role: faces
+    family: SCRFD
+    variant: "500m"
+    revision: "3d9a1b3bc9f8a50635817929118fb9184f5bc30b"
+    enabled: true
+    verification_status: verified
+    files:
+      - {name: scrfd_500m.onnx, sha256: "72ce8732254ed6678d78e8a8c4b8bf2d4258128afe714edec877eaa90f7b7958", bytes: 2296021}
+    license: Apache-2.0
+    license_source_url: "https://huggingface.co/RuteNL/SCRFD-face-detection-ONNX"
+    license_verified_at: "2026-11-21"
+    license_verified_by: "владелец продукта"
+    commercial_use: true
+    allowed_profiles: [balanced, pro]
+    notes: "SCRFD-500M детектор лиц (apache-2.0) + SigLIP2-энкодер кропов (уже запинен); вшито в kadr/ai/faces.py."
+
   - id: rapidocr-onnx
     role: ocr
     family: RapidOCR
