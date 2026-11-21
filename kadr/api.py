@@ -402,6 +402,13 @@ def create_app(
             "tree_text": render_tree(plan),
         }
 
+    @app.get("/v1/presets")
+    def presets(request: Request) -> dict[str, Any]:
+        """Пресеты раскладки (FR-2.11) — для UI «Правила» (safety + rules)."""
+        from .rules.presets import PRESETS
+
+        return {"presets": {name: dict(ruleset) for name, ruleset in PRESETS.items()}}
+
     @app.get("/v1/plans")
     def list_plans(request: Request, limit: int = 50) -> dict[str, Any]:
         return {"items": [dict(row) for row in state(request).catalog.list_plans(limit=limit)]}

@@ -104,6 +104,9 @@ export default function App() {
   const [colors, setColors] = useState<Record<number, number>>(() => loadLS("colors", {}));
 
   const [preset, setPreset] = useState("date");
+  const [mode, setMode] = useState("copy");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [presetsData, setPresetsData] = useState<Record<string, any>>({});
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [plan, setPlan] = useState<any>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -152,6 +155,7 @@ export default function App() {
   const loadReview = useCallback(async () => { try { setReview((await req("GET", "/v1/review?limit=100")).items || []); } catch (e) { setError(String(e)); } }, []);
   const loadJobs = useCallback(async () => { try { setJobs((await req("GET", "/v1/jobs?limit=50")).items || []); } catch (e) { setError(String(e)); } }, []);
   const loadPlans = useCallback(async () => { try { setPlans((await req("GET", "/v1/plans?limit=50")).items || []); } catch (e) { setError(String(e)); } }, []);
+  const loadPresets = useCallback(async () => { try { setPresetsData((await req("GET", "/v1/presets")).presets || {}); } catch (e) { setError(String(e)); } }, []);
 
   const pickSource = async () => { const d = await open({ directory: true, title: "Выберите папку-источник" }); if (typeof d === "string") setSourceDir(d); };
   const pickDest = async () => { const d = await open({ directory: true, title: "Выберите папку назначения" }); if (typeof d === "string") setDestDir(d); };
@@ -169,8 +173,18 @@ export default function App() {
 
   const buildPlan = async () => {
     setStatus("Построение плана…");
-    try { const res = await req("POST", "/v1/plans", { preset, library_root: destDir || undefined }); setPlan(res); await loadPlans(); setStatus(null); }
-    catch (e) { setError(String(e)); setStatus(null); }
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const body: any = { library_root: destDir || undefined };
+      const p = presetsData[preset];
+      if (p) {
+        body.rules = { ...p, safety: { ...(p.safety || {}), mode } };
+      } else {
+        body.preset = preset;
+      }
+      const res = await req("POST", "/v1/plans", body);
+      setPlan(res); await loadPlans(); setStatus(null);
+    } catch (e) { setError(String(e)); setStatus(null); }
   };
   const applyPlan = async (id: number) => { setStatus("Применение…"); try { await req("POST", `/v1/plans/${id}/apply`, { force: false }); setStatus(null); } catch (e) { setError(String(e)); setStatus(null); } };
   const undoPlan = async (id: number) => { setStatus("Откат…"); try { await req("POST", `/v1/plans/${id}/undo`); setStatus(null); } catch (e) { setError(String(e)); setStatus(null); } };
@@ -194,7 +208,7 @@ export default function App() {
       }
     }
   }, [cards, thumbs]);
-  useEffect(() => { if (tab === "status") loadStatus(); if (tab === "review") loadReview(); if (tab === "jobs") loadJobs(); if (tab === "rules") loadPlans(); }, [tab, loadStatus, loadReview, loadJobs, loadPlans]);
+  useEffect(() => { if (tab === "status") loadStatus(); if (tab === "review") loadReview(); if (tab === "jobs") loadJobs(); if (tab === "rules") { loadPlans(); loadPresets(); } }, [tab, loadStatus, loadReview, loadJobs, loadPlans]);
   useEffect(() => saveLS("kindFilter", kindFilter), [kindFilter]);
   useEffect(() => saveLS("sortBy", sortBy), [sortBy]);
 
@@ -344,8 +358,31 @@ export default function App() {
           <div className="toolbar">
             <button onClick={pickDest}>Куда (библиотека)… {destDir && <small>{destDir}</small>}</button>
             <select value={preset} onChange={(e) => setPreset(e.target.value)}>{PRESETS.map((p) => <option key={p} value={p}>{p}</option>)}</select>
+            <select value={mode} onChange={(e) => setMode(e.target.value)}>
+              <option value="copy">Копировать</option>
+              <option value="move">Переместить</option>
+              <option value="hardlink">Жёсткая ссылка</option>
+            </select>
             <button onClick={buildPlan}>Построить план</button>
           </div>
+          {presetsData[preset]?.rules && (
+            <>
+              <h3>Правила пресета «{preset}»</h3>
+              <table className="tbl">
+                <thead><tr><th>правило</th><th>куда (шаблон)</th><th>условие</th></tr></thead>
+                <tbody>
+                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                  {(presetsData[preset].rules as any[]).map((r: any) => (
+                    <tr key={r.id}>
+                      <td>{r.id}</td>
+                      <td>{r.then?.path ?? "—"}</td>
+                      <td className="when">{r.when ? JSON.stringify(r.when) : "всегда"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </>
+          )}
           {plan?.tree_text && <pre className="tree">{plan.tree_text}</pre>}
           <h3>История планов</h3>
           {plans.length === 0 && <p className="empty">Планов нет.</p>}

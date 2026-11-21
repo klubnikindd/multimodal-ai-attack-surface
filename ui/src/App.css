@@ -294,3 +294,13 @@ select {
 .tl-grid .card .ph {
   height: 100px;
 }
+
+.when {
+  font-family: monospace;
+  font-size: 0.7rem;
+  color: #999;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
