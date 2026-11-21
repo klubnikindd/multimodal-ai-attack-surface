@@ -83,6 +83,8 @@ def main() -> int:
         if name not in golden:
             continue
         g = golden[name]
+        if g.get("evil"):
+            continue  # adversarial — отдельный тест устойчивости, не «по дате»
         engine_folder = _folder(row.get("taken_at"))
         golden_folder = g.get("folder") or expected.get(name)
         date_total += 1
