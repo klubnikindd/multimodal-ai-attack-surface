@@ -1,9 +1,7 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { open } from "@tauri-apps/plugin-dialog";
 import { openPath, revealItemInDir } from "@tauri-apps/plugin-opener";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
 import "./App.css";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -51,40 +49,53 @@ const PRESETS = ["date", "family", "wedding", "stock", "video"];
 const COLORS = ["red", "gold", "green", "dodgerblue", "purple"];
 
 function MapView({ assets, colors }: { assets: Card[]; colors: Record<number, number> }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<L.Map | null>(null);
+  const pts = assets.filter((a) => a.gps_lat != null && a.gps_lon != null);
+  if (pts.length === 0) {
+    return <div className="map" style={{ height: 400, background: "#111", color: "#888", display: "grid", placeItems: "center" }}>нет GPS-координат</div>;
+  }
+  const W = 800, H = 500, PAD = 24;
+  const lats = pts.map((a) => a.gps_lat as number);
+  const lons = pts.map((a) => a.gps_lon as number);
+  const minLat = Math.min(...lats), maxLat = Math.max(...lats);
+  const minLon = Math.min(...lons), maxLon = Math.max(...lons);
+  const x = (lon: number) => PAD + ((lon - minLon) / (maxLon - minLon || 1)) * (W - 2 * PAD);
+  const y = (lat: number) => PAD + ((maxLat - lat) / (maxLat - minLat || 1)) * (H - 2 * PAD);
+  return (
+    <svg className="map" viewBox={"0 0 " + W + " " + H} style={{ width: "100%", height: "auto", background: "#111", borderRadius: 8 }}>
+      {pts.map((a) => (
+        <circle key={a.id} cx={x(a.gps_lon as number)} cy={y(a.gps_lat as number)} r={4} fill={colors[a.id] ? COLORS[colors[a.id] - 1] : "#4a8"}>
+          <title>{filename(a.path)}</title>
+        </circle>
+      ))}
+      <text x={W / 2} y={H - 6} textAnchor="middle" fill="#888" fontSize={11}>офлайн: относительные GPS-координаты (lat/lon)</text>
+    </svg>
+  );
+}
 
-  useEffect(() => {
-    if (!ref.current || mapRef.current) return;
-    const map = L.map(ref.current).setView([55, 37], 4);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "© OpenStreetMap",
-    }).addTo(map);
-    mapRef.current = map;
-    return () => {
-      map.remove();
-      mapRef.current = null;
-    };
-  }, []);
+const FIELDS = ["kind", "ai.scene_type", "ai.event_type", "camera.make", "camera.model"];
+const OPS = ["eq", "in", "gte", "lte", "contains", "exists"];
 
-  useEffect(() => {
-    const map = mapRef.current;
-    if (!map) return;
-    map.eachLayer((layer) => {
-      if (layer instanceof L.CircleMarker) map.removeLayer(layer);
-    });
-    for (const a of assets) {
-      if (a.gps_lat == null || a.gps_lon == null) continue;
-      L.circleMarker([a.gps_lat, a.gps_lon], {
-        radius: 5,
-        color: colors[a.id] ? COLORS[colors[a.id] - 1] : "#4a8",
-      })
-        .addTo(map)
-        .bindPopup(filename(a.path) || `#${a.id}`);
-    }
-  }, [assets, colors]);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function whenToConditions(when: any): { field: string; op: string; value: string }[] {
+  if (!when || typeof when !== "object" || when.all || when.any || when.not) return [];
+  return Object.entries(when).map(([field, cond]) => {
+    const [op, val] = Object.entries(cond as Record<string, unknown>)[0] || ["eq", ""];
+    return { field, op, value: Array.isArray(val) ? val.join(", ") : String(val) };
+  });
+}
 
-  return <div ref={ref} className="map" style={{ height: 500, width: "100%" }} />;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function conditionsToWhen(conds: { field: string; op: string; value: string }[]): any {
+  const when: Record<string, Record<string, unknown>> = {};
+  for (const c of conds) {
+    if (!c.field) continue;
+    if (c.op === "exists") { when[c.field] = { exists: c.value === "true" }; continue; }
+    let val: unknown = c.value;
+    if (c.op === "in") val = c.value.split(",").map((s) => s.trim()).filter(Boolean);
+    else if (c.op === "gte" || c.op === "lte") val = parseFloat(c.value) || 0;
+    when[c.field] = { [c.op]: val };
+  }
+  return Object.keys(when).length ? when : null;
 }
 
 export default function App() {
@@ -104,6 +115,7 @@ export default function App() {
   const [selectedReview, setSelectedReview] = useState<Set<number>>(new Set());
   const [ratings, setRatings] = useState<Record<number, number>>(() => loadLS("ratings", {}));
   const [marks, setMarks] = useState<Record<number, boolean>>(() => loadLS("marks", {}));
+  const [tagged, setTagged] = useState<Record<number, boolean>>(() => loadLS("tagged", {}));
   const [colors, setColors] = useState<Record<number, number>>(() => loadLS("colors", {}));
 
   const [preset, setPreset] = useState("date");
@@ -186,6 +198,30 @@ export default function App() {
   });
   const addRule = () => setRulesData((d: any) => (d ? { ...d, rules: [...d.rules, { id: `custom${Date.now()}`, when: null, then: { path: "Custom/{date:%Y/%Y-%m}", tags: [] } }] } : d));
   const removeRule = (idx: number) => setRulesData((d: any) => (d ? { ...d, rules: d.rules.filter((_: any, i: number) => i !== idx) } : d));
+  const updateCondition = (ruleIdx: number, condIdx: number, key: string, val: string) => setRulesData((d: any) => {
+    if (!d) return d;
+    const rules = [...d.rules];
+    const conds = whenToConditions(rules[ruleIdx].when);
+    if (rules[ruleIdx].when && conds.length === 0) return d; // вложенные all/any — не редактируем
+    conds[condIdx] = { ...conds[condIdx], [key]: val };
+    rules[ruleIdx] = { ...rules[ruleIdx], when: conditionsToWhen(conds) };
+    return { ...d, rules };
+  });
+  const addCondition = (ruleIdx: number) => setRulesData((d: any) => {
+    if (!d) return d;
+    const rules = [...d.rules];
+    const conds = whenToConditions(rules[ruleIdx].when);
+    conds.push({ field: "kind", op: "eq", value: "photo" });
+    rules[ruleIdx] = { ...rules[ruleIdx], when: conditionsToWhen(conds) };
+    return { ...d, rules };
+  });
+  const removeCondition = (ruleIdx: number, condIdx: number) => setRulesData((d: any) => {
+    if (!d) return d;
+    const rules = [...d.rules];
+    const conds = whenToConditions(rules[ruleIdx].when).filter((_, i) => i !== condIdx);
+    rules[ruleIdx] = { ...rules[ruleIdx], when: conditionsToWhen(conds) };
+    return { ...d, rules };
+  });
 
   const buildPlan = async () => {
     setStatus("Построение плана…");
@@ -303,6 +339,11 @@ export default function App() {
         setColors((cc) => { const n = { ...cc, [selected]: c }; saveLS("colors", n); return n; });
       } else if (selected != null && (e.key === "x" || e.key === "X")) {
         setMarks((mm) => { const n = { ...mm, [selected]: !mm[selected] }; saveLS("marks", n); return n; });
+      } else if (selected != null && (e.key === "t" || e.key === "T")) {
+        setTagged((tt) => { const n = { ...tt, [selected]: !tt[selected] }; saveLS("tagged", n); return n; });
+      } else if (selected != null && e.key === " ") {
+        e.preventDefault();
+        setLightbox(selected);
       }
     };
     window.addEventListener("keydown", onKey);
@@ -355,6 +396,7 @@ export default function App() {
             {filtered.map((c) => (
               <figure key={c.id} className={c.id === selected ? "card selected" : "card"} onClick={() => { setSelected(c.id); setLightbox(c.id); }}>
                 {colors[c.id] && <span className="dot" style={{ background: COLORS[colors[c.id] - 1] }} />}
+                {tagged[c.id] && <span className="tagged">T</span>}
                 {thumbs[c.id] ? (
                   <img src={`data:image/jpeg;base64,${thumbs[c.id]}`} alt={filename(c.path)} loading="lazy" />
                 ) : (
@@ -442,7 +484,22 @@ export default function App() {
                     <tr key={r.id}>
                       <td>{r.id}</td>
                       <td><input value={r.then?.path ?? ""} onChange={(e) => updateRulePath(i, e.target.value)} /></td>
-                      <td className="when">{r.when ? JSON.stringify(r.when) : "всегда"}</td>
+                      <td className="when">
+                      {whenToConditions(r.when).map((c: { field: string; op: string; value: string }, ci: number) => (
+                        <div key={ci} className="cond">
+                          <select value={c.field} onChange={(e) => updateCondition(i, ci, "field", e.target.value)}>{FIELDS.map((f) => <option key={f} value={f}>{f}</option>)}</select>
+                          <select value={c.op} onChange={(e) => updateCondition(i, ci, "op", e.target.value)}>{OPS.map((o) => <option key={o} value={o}>{o}</option>)}</select>
+                          {c.op === "exists" ? (
+                            <select value={c.value} onChange={(e) => updateCondition(i, ci, "value", e.target.value)}><option value="true">true</option><option value="false">false</option></select>
+                          ) : (
+                            <input value={c.value} placeholder="значение" onChange={(e) => updateCondition(i, ci, "value", e.target.value)} />
+                          )}
+                          <button onClick={() => removeCondition(i, ci)}>✕</button>
+                        </div>
+                      ))}
+                      {r.when && whenToConditions(r.when).length === 0 && <code>{JSON.stringify(r.when)}</code>}
+                      <button onClick={() => addCondition(i)}>+ условие</button>
+                    </td>
                       <td><button onClick={() => removeRule(i)}>✕</button></td>
                     </tr>
                   ))}
