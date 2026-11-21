@@ -26,6 +26,11 @@
   "bundle": {
     "active": true,
     "targets": "all",
-    "externalBin": ["binaries/kadr-engine"]
+    "externalBin": [
+      "binaries/kadr-engine"
+    ],
+    "icon": [
+      "icons/icon.ico"
+    ]
   }
 }

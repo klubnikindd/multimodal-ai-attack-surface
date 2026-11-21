@@ -129,8 +129,8 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![engine_status])
         .setup(|app| {
             let handle = app.handle().clone();
-            let state = app.state::<EngineState>();
             tauri::async_runtime::spawn(async move {
+                let state = handle.state::<EngineState>();
                 if let Err(e) = spawn_engine(&handle, &state) {
                     eprintln!("engine spawn failed: {e}");
                 }
