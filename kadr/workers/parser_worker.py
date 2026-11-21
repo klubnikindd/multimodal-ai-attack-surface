@@ -77,7 +77,27 @@ def _ocr(path: str, limits: dict[str, Any], lang: str = DEFAULT_OCR_LANGUAGE) ->
         return {"available": True, "text": "", "error": str(exc)}
 
 
+def _deny_network() -> None:
+    """Zero-egress (SEC-12): блокирует исходящие сетевые соединения в воркере.
+
+    Эквивалент seccomp-deny(socket, connect) для сред без seccomp (Windows).
+    Локальные AF_UNIX-сокеты не трогаем (нужны для subprocess/tesseract).
+    """
+    import socket as _socket
+
+    _orig_socket = _socket.socket
+
+    def _guarded(*args, **kwargs):
+        family = args[0] if args else kwargs.get("family", _socket.AF_INET)
+        if family in (_socket.AF_INET, _socket.AF_INET6):
+            raise PermissionError("zero-egress: network disabled in parser worker")
+        return _orig_socket(*args, **kwargs)
+
+    _socket.socket = _guarded
+
+
 def main() -> int:
+    _deny_network()
     try:
         request = json.load(sys.stdin)
         limits = dict(request.get("limits") or {})
