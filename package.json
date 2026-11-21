@@ -1,0 +1,14 @@
+{
+  "name": "kadr",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "tauri": "tauri",
+    "dev": "pnpm --dir ui dev",
+    "build": "pnpm --dir ui build",
+    "preview": "pnpm --dir ui preview"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2"
+  }
+}

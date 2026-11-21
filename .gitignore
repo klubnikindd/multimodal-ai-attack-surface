@@ -72,8 +72,6 @@ temp/
 .dsh/
 openhands-data/
 Modelfile-*
-pnpm-lock.yaml
-package.json
 node_modules/
 
 # --- VS Code ---
