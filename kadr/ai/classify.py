@@ -21,6 +21,7 @@ from ..workers.client import run_ocr_sandboxed
 from .concepts import zero_shot_tags
 from .duplicates import compute_dup_groups
 from .cascade import classify_scene
+from .video_pipeline import run_video_pipeline
 from .embeddings import ConceptHashingEmbedding, embed_asset, get_embedding_backend
 
 logger = logging.getLogger(__name__)
@@ -99,6 +100,10 @@ def run_ocr(
 
 
 def _media_path(catalog: Catalog, asset_id: int) -> Path | None:
+    # FR-3.6 + FR-3.7: видео — сцены/ключевые кадры + ASR (опционально)
+    if kind == "video" and path is not None:
+        run_video_pipeline(catalog, asset_id, path)
+
     primary = catalog.primary_file(asset_id)
     if primary is None:
         return None
