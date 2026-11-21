@@ -31,17 +31,22 @@ models:
     role: ocr
     family: RapidOCR
     variant: onnx
-    revision: null
+    revision: "1cfba2e90fc938db55889873735088de210cc173"
     enabled: false
-    verification_status: pending
-    files: []
+    verification_status: verified
+    files:
+      - {name: ch_PP-OCRv4_det_infer.onnx, sha256: "d2a7720d45a54257208b1e13e36a8479894cb74155a5efe29462512d42f49da9", bytes: 4745517}
+      - {name: ch_PP-OCRv4_rec_infer.onnx, sha256: "48fc40f24f6d2a207a2b1091d3437eb3cc3eb6b676dc3ef9c37384005483683b", bytes: 10857958}
+      - {name: ch_ppocr_mobile_v2.0_cls_infer.onnx, sha256: "e47acedf663230f8863ff1ab0e64dd2d82b838fceb5957146dab185a89d6215c", bytes: 585532}
+      - {name: ppocr_keys_v1.txt, sha256: "28b2362ad4ab2dc38769aa72feb535e3a9ddb3fd2a7585a05920e6393b1dc7f7", bytes: 26249}
     license: Apache-2.0
-    license_source_url: "https://github.com/RapidAI/RapidOCR"
-    license_verified_at: null
-    license_verified_by: null
-    commercial_use: false
+    license_source_url: "https://huggingface.co/SWHL/RapidOCR"
+    dict_source_url: "https://huggingface.co/karmueo/PaddleOcr"
+    license_verified_at: "2026-11-21"
+    license_verified_by: "владелец продукта"
+    commercial_use: true
     allowed_profiles: [lite, balanced, pro]
-    notes: "Проверить лицензию ONNX-весов; tesseract остаётся fallback."
+    notes: "ONNX-веса (PP-OCRv4 det/rec + cls) в .models-test/rapidocr/, sha256 запинены. enabled=false: OCR-инференс не вшит, tesseract остаётся fallback."
 
   - id: qwen3-vl-2b-instruct-q4_k_m
     role: vlm
