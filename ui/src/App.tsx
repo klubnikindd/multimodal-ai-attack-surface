@@ -110,6 +110,8 @@ export default function App() {
   const [kindFilter, setKindFilter] = useState<string | null>(() => loadLS("kindFilter", null));
   const [sortBy, setSortBy] = useState<string>(() => loadLS("sortBy", "taken_at"));
   const [selected, setSelected] = useState<number | null>(null);
+  const [selection, setSelection] = useState<Set<number>>(new Set());
+  const [savedSearches, setSavedSearches] = useState<{ name: string; query: string; kind: string | null }[]>(() => loadLS("savedSearches", []));
   const [lightbox, setLightbox] = useState<number | null>(null);
   const [largeThumbs, setLargeThumbs] = useState<Record<number, string>>({});
   const [selectedReview, setSelectedReview] = useState<Set<number>>(new Set());
@@ -238,6 +240,13 @@ export default function App() {
     } catch (e) { setError(String(e)); setStatus(null); }
   };
   const applyPlan = async (id: number) => { setStatus("Применение…"); try { await req("POST", `/v1/plans/${id}/apply`, { force: false }); setStatus(null); } catch (e) { setError(String(e)); setStatus(null); } };
+    const applyBatchRating = (r: number) => setRatings((rr) => { const n = { ...rr }; selection.forEach((id) => { n[id] = r; }); saveLS("ratings", n); return n; });
+  const applyBatchTag = () => setTagged((tt) => { const n = { ...tt }; selection.forEach((id) => { n[id] = true; }); saveLS("tagged", n); return n; });
+  const applyBatchMark = () => setMarks((mm) => { const n = { ...mm }; selection.forEach((id) => { n[id] = true; }); saveLS("marks", n); return n; });
+  const saveSearch = () => { if (!query.trim()) return; const name = query.trim().slice(0, 40); setSavedSearches((s) => { const n = [...s, { name, query, kind: kindFilter }]; saveLS("savedSearches", n); return n; }); };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const applySearch = (s: { name: string; query: string; kind: string | null }) => { setQuery(s.query); setKindFilter(s.kind); doSearch(s.query); };
+
   const undoPlan = async (id: number) => { setStatus("Откат…"); try { await req("POST", `/v1/plans/${id}/undo`); setStatus(null); } catch (e) { setError(String(e)); setStatus(null); } };
 
     const cancelJob = async (id: number) => { try { await req("POST", `/v1/jobs/${id}/cancel`); await loadJobs(); } catch (e) { setError(String(e)); } };
@@ -379,6 +388,13 @@ export default function App() {
               <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Поиск…" />
               <button type="submit">Найти</button>
               <button type="button" onClick={() => { setQuery(""); loadGallery(); }}>Все</button>
+              <button type="button" title="Сохранить поиск" onClick={saveSearch}>💾</button>
+              {savedSearches.length > 0 && (
+                <select value="" onChange={(e) => { const s = savedSearches[parseInt(e.target.value, 10)]; if (s) applySearch(s); }}>
+                  <option value="">Сохранённые…</option>
+                  {savedSearches.map((s, si) => <option key={si} value={si}>{s.name}</option>)}
+                </select>
+              )}
             </form>
             <div className="facets">
               <button className={!kindFilter ? "chip active" : "chip"} onClick={() => setKindFilter(null)}>Все</button>
@@ -392,9 +408,18 @@ export default function App() {
               <option value="kind">По типу</option>
             </select>
           </div>
+          {selection.size > 0 && (
+            <div className="batchbar">
+              <span>Выбрано: {selection.size}</span>
+              {[1, 2, 3, 4, 5].map((r) => <button key={r} onClick={() => applyBatchRating(r)}>★{r}</button>)}
+              <button onClick={applyBatchTag}>T</button>
+              <button onClick={applyBatchMark}>✗</button>
+              <button onClick={() => setSelection(new Set())}>Сброс</button>
+            </div>
+          )}
           <section className="gallery">
             {filtered.map((c) => (
-              <figure key={c.id} className={c.id === selected ? "card selected" : "card"} onClick={() => { setSelected(c.id); setLightbox(c.id); }}>
+              <figure key={c.id} className={c.id === selected || selection.has(c.id) ? "card selected" : "card"} onClick={(e) => { if (e.shiftKey) { setSelection((s) => { const n = new Set(s); if (n.has(c.id)) n.delete(c.id); else n.add(c.id); return n; }); } else { setSelected(c.id); setLightbox(c.id); } }}>
                 {colors[c.id] && <span className="dot" style={{ background: COLORS[colors[c.id] - 1] }} />}
                 {tagged[c.id] && <span className="tagged">T</span>}
                 {thumbs[c.id] ? (
@@ -534,6 +559,15 @@ export default function App() {
           </dl>
           <button onClick={exportJson}>Экспорт каталога (JSON)</button>
           <button onClick={exportCsv}>Экспорт (CSV)</button>
+          <h3>Что знаем</h3>
+          <ul className="know">
+            <li>С датой: {cards.filter((c) => c.taken_at).length}/{cards.length}</li>
+            <li>С GPS: {cards.filter((c) => c.gps_lat != null).length}/{cards.length}</li>
+            <li>С тегами: {cards.filter((c) => (c.tags || []).length > 0).length}/{cards.length}</li>
+            <li>Рейтинг ★: {Object.values(ratings).filter((r) => r > 0).length}</li>
+            <li>Тег T: {Object.values(tagged).filter(Boolean).length}</li>
+            <li>Метка ✗: {Object.values(marks).filter(Boolean).length}</li>
+          </ul>
           <h3>Модели</h3>
           <table className="tbl">
             <thead><tr><th>id</th><th>роль</th><th>статус</th><th>лицензия</th></tr></thead>

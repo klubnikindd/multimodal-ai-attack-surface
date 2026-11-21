@@ -392,3 +392,21 @@ select {
   border-radius: 3px;
   z-index: 2;
 }
+
+.batchbar {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  padding: 0.4rem 0.6rem;
+  background: #1a1a2e;
+  border: 1px solid #3a5;
+  border-radius: 6px;
+  margin-bottom: 0.6rem;
+}
+.batchbar span {
+  color: #9f9;
+  margin-right: 0.5rem;
+}
+.know li {
+  color: #bbb;
+}
