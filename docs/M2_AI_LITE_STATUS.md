@@ -13,12 +13,18 @@
 
 ## Осталось / заблокировано
 
-### SigLIP2 / RapidOCR ONNX — НЕ запинены (нужна сеть ~700 МБ)
-`OnnxEmbeddingBackend` (`kadr/ai/embeddings.py`) — слот готов, но веса
-(`siglip2-base` text/vision.onnx ~700 МБ) не скачаны и не зафиксированы по
-sha256. Сейчас работает concept-hash fallback; OCR — tesseract fallback.
-Действие: скачать ONNX-веса, вычислить sha256 в `data/models/siglip2-base/sha256.txt`,
-припинить ревизию и включить `OnnxEmbeddingBackend`.
+### SigLIP2 ONNX — запинен, но не вшит (2026-11-21)
+✅ Скачаны int8 ONNX (`onnx-community/siglip2-base-patch16-224-ONNX`) в
+`.models-test/siglip2/`: `text_model.onnx` (270 МБ) + `vision_model.onnx` (90 МБ)
++ tokenizer/config. sha256 запинены в `models/manifest.yaml` (revision
+`ba1f3b08…`, оба файла, `verification_status: verified`). ONNX загружаются
+onnxruntime (768-dim, pooler_output).
+Осталось: реализовать инференс `OnnxEmbeddingBackend.embed_text/embed_image`
+(токенизация + preprocessing 224×224 + нормализация) и переключить
+`index_generation` — тогда `enabled=true` вместо concept-hash fallback.
+
+### RapidOCR ONNX — НЕ запинен
+OCR по-прежнему tesseract fallback; ONNX-веса RapidOCR не скачаны.
 
 ### FR-3.9 (лица) — заблокировано лицензией весов
 InsightFace/буффало-модель — non-commercial. Нужен коммерчески лицензируемый
