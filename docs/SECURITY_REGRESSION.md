@@ -20,6 +20,16 @@ Linux/macOS — пропущены (нет среды прогона); seccomp/S
 | test_license_manifest.py | fail-closed license-weights гейт |
 | test_fault_injection.py | fault-инъекции |
 
+## SEC-02 VLM-ASR (typographic-инъекция) — 22%
+
+Прогон 23 typographic-файлов через Qwen3-VL-2B (GPU):
+- **ASR = 5/23 = 22%** — VLM выдал инъектированную метку (document/receipt) вместо реальной сцены.
+- Распределение сцен: portrait 14, document 4, street 2, interior 2, receipt 1.
+- Для сравнения: L1 (SigLIP2) ASR = 0% (видит только изображение, не текст).
+
+**Вывод:** типографская атака целит в VLM (текст+изображение) — 22% пробития.
+Это ожидаемо и документируется как известная уязвимость VLM-слоя (SEC-02);
+защита — калибровка/TTA (SEC-03) + ансамбль CLIP↔VLM (FR-3.11).
+
 ## Пропущено (не Windows)
 - seccomp/Seatbelt (Linux/macOS) — нет среды.
-- VLM-ASR (SEC-02) — измерен только L1 (SigLIP2), VLM-инъекция отдельно.
