@@ -14,19 +14,19 @@
 | Устройства | HUAWEI CLT-L29 (298), FUJIFILM X-T4 (18), HUAWEI BLN-L21 (13), GoPro HERO9 Black (1), без метаданных (27) |
 | Точные дубли | **38 групп** × 2 файла = 76 файлов (blake3) |
 | Почти-дубли | **76 ресайз-копий**, связаны с 38 оригиналами (`-DuplicateNNNNN`) |
-| С датой (`taken_at`) | 338; **без даты — 19** (8 RAF + 11 MOV/MP4 без exiftool/ffprobe) |
+| С датой (`taken_at`) | **357 (все)** — exif 338, quicktime 11, filename 8 |
 
 ## Статус
 
 | Артефакт | Статус |
 |---|---|
 | `manifest.json` | ✅ 357 файлов: blake3 + sha256, размер, kind, камера, taken_at, source, license |
-| `labels.json` | ⚠️ авто-поля заполнены; **scene/event/quality = null** — ждут владельца |
+| `labels.json` | ✅ 330 фото размечены VLM (scene/event/quality); `hard` = 8 файлов с filename-датой |
 | `expected.json` | ✅ папка «по дате» (`YYYY/YYYY-MM-DD` или `_Unsorted`) для каждого файла |
 | владелец датасета | ⚠️ назначен «Denis Klubnikin» (по git-идентичности) — **подтвердить** |
-| `eval_quality.py` (precision@5, nDCG@10, CER, «по дате») | ☐ M2 |
+| `eval_quality.py` («по дате»/источник/дата+время; precision@5, nDCG@10, CER — заглушки) | ✅ написан |
 | adversarial ≥10% (§13.2.1) | ☐ **отсутствуют** — добавить из `security/corpus` |
-| «трудные» ≥40% | ☐ факт ≈ 8% (27 файлов без EXIF) — довести до нормы |
+| «трудные» ≥40% | ⚠️ факт 2.2% (8 файлов с filename-датой) — довести до нормы |
 
 ## Что осталось за владельцем (по §13.2.1)
 

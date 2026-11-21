@@ -22,7 +22,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": false
     },
     {
       "name": "DSCF1374.MOV",
@@ -41,7 +42,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": false
     },
     {
       "name": "DSCF1375.MOV",
@@ -60,7 +62,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": false
     },
     {
       "name": "DSCF1396.RAF",
@@ -79,7 +82,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": false
     },
     {
       "name": "DSCF1397.RAF",
@@ -98,7 +102,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": false
     },
     {
       "name": "DSCF1398.RAF",
@@ -117,7 +122,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": false
     },
     {
       "name": "DSCF1406.RAF",
@@ -136,7 +142,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": false
     },
     {
       "name": "DSCF1407.RAF",
@@ -155,7 +162,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": false
     },
     {
       "name": "DSCF1408.RAF",
@@ -174,7 +182,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": false
     },
     {
       "name": "DSCF1409.RAF",
@@ -193,7 +202,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": false
     },
     {
       "name": "DSCF1410.RAF",
@@ -212,7 +222,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": false
     },
     {
       "name": "DSCF1608.JPG",
@@ -234,7 +245,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Мухоморы на камнях в лесу",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "DSCF1609.JPG",
@@ -256,7 +268,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Мухоморы на камне в природе",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "DSCF1610.JPG",
@@ -278,7 +291,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Мухоморы на камне в природе",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "DSCF1611.JPG",
@@ -300,7 +314,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Зелёные папоротники в лесу",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "DSCF1612.JPG",
@@ -322,7 +337,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Зелёные папоротники в лесу",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "DSCF1613.JPG",
@@ -344,7 +360,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Зелёные листья на ветке в лесу",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "DSCF1614.JPG",
@@ -366,7 +383,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Зелёные листья на ветке в лесу под ярким солнцем",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "DSCF1615.JPG",
@@ -388,7 +406,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Зелёные листья фернами в лесу",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "DSCF1616.JPG",
@@ -410,7 +429,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Зелёные листья на ветке в лесу",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "DSCF1617.JPG",
@@ -432,7 +452,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Зелёные листья дерева на фоне природы",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "DSCF1618.JPG",
@@ -454,7 +475,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Зелёное лесное место с высокими деревьями и ярким светом, проникающим сквозь крону.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "DSCF1619.JPG",
@@ -476,7 +498,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Зелёный лес с высокими деревьями и густой листвой",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "DSCF1788.JPG",
@@ -498,7 +521,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Панорама поселения на склоне горы в сумерках, окутанной туманом",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "DSCF1789.JPG",
@@ -520,7 +544,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа людей на улице у подъезда к лестнице и эскалатору. На переднем плане — синий забор.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "DSCF1790.JPG",
@@ -542,7 +567,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа людей на улице, стоящих у барьера.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "DSCF1791.JPG",
@@ -564,7 +590,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Лесная местность с солнечными панелями на склоне",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "DSCF1792.JPG",
@@ -586,7 +613,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Вид на городской пейзаж с горами и скидкой на вершине",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "DSCF1793.JPG",
@@ -608,7 +636,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Снимок с высоты на лыжню и горы",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "DSCF1892.MOV",
@@ -627,7 +656,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": false
     },
     {
       "name": "GOPR0377.JPG",
@@ -649,7 +679,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены и помощники на сцене в зале. На заднем плане — экран с логотипом \"ЗЕНИТ\".",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "GX010371.MP4",
@@ -668,7 +699,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": false
     },
     {
       "name": "GX010372.MP4",
@@ -687,7 +719,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": false
     },
     {
       "name": "GX010373.MP4",
@@ -706,7 +739,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": false
     },
     {
       "name": "GX010374.MP4",
@@ -725,7 +759,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": false
     },
     {
       "name": "GX010375.MP4",
@@ -744,7 +779,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": false
     },
     {
       "name": "GX010376.MP4",
@@ -763,7 +799,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": false
     },
     {
       "name": "GX010378.MP4",
@@ -782,7 +819,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": false
     },
     {
       "name": "IMG_20190103_144003.jpg",
@@ -804,7 +842,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Снимок улицы с автомобилями и пальмами на фоне современного городского здания.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20190103_144008.jpg",
@@ -826,7 +865,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Высотное здание в процессе строительства с кранами на фоне городской застройки и пальм.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20190103_171608.jpg",
@@ -848,7 +888,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Солнечный свет падает на современные здания в Дубае, создавая теплую атмосферу на реке. На воде идёт катер с туристами.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20190103_171618.jpg",
@@ -870,7 +911,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Солнечный свет падает на современные здания в Дубае, создавая эффект золотого часа. На реке идёт катер с людьми, а на берегу — пешеходы.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20190103_171619.jpg",
@@ -892,7 +934,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Солнечный свет падает на высокие здания в Дубае, создавая эффект золотого часа. На реке идёт круиз, а на берегу стоят люди.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20190103_171652.jpg",
@@ -914,7 +957,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Солнечный свет падает на высокие здания в Дубае, создавая красивую тень на воде. На реке идёт несколько лодок.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20190103_171705.jpg",
@@ -936,7 +980,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Солнечный свет освещает высокие здания на фоне реки в Дубае.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20190103_173234.jpg",
@@ -958,7 +1003,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Садовая зона с цветущими бугенвейлями на фоне городской застройки",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20190103_173237.jpg",
@@ -980,7 +1026,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Садовая зона с цветущими растениями и зелеными деревьями на фоне городской застройки.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20190103_173320.jpg",
@@ -1002,7 +1049,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Изображение с водной архитектурой и магазинами в городе",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20190103_173338.jpg",
@@ -1024,7 +1072,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Фонтан в центре городской площади с фонтаном и зоной с камнями. На заднем плане виден магазин Carrefour city.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20190103_173345.jpg",
@@ -1046,7 +1095,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Фонтан в центре городской площади с зданиями и магазинами",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20190103_223950.jpg",
@@ -1068,7 +1118,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Ночная городская панорама с высокими зданиями и яркими огнями на фоне темного неба.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135417.jpg",
@@ -1090,7 +1141,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Дорога в лесу под ясным голубым небом",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135418.jpg",
@@ -1112,7 +1164,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Автомобиль движется по дороге вдоль леса в зимний день.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135418_1.jpg",
@@ -1134,7 +1187,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Автомобиль движется по дороге вдоль леса в зимний день.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135419.jpg",
@@ -1156,7 +1210,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Дорога в зимний день, посреди леса, с голыми деревьями и ясным голубым небом.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135420.jpg",
@@ -1178,7 +1233,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Дорога в лесу под ясным небом",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135420_1.jpg",
@@ -1200,7 +1256,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Автомобиль движется по дороге вдоль леса под ясным солнечным небом.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135448.jpg",
@@ -1222,7 +1279,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Пустая дорога в зимний день, с деревьями и ограждениями по обе стороны.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135448_1.jpg",
@@ -1244,7 +1302,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Автомобиль движется по дороге вдоль леса под ясным голубым небом.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135449.jpg",
@@ -1266,7 +1325,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Дорога в зимний день, с деревьями и голыми ветвями. Солнечный свет на дороге.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135449_1.jpg",
@@ -1288,7 +1348,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Пустая дорога в лесу под ясным голубым небом",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135450.jpg",
@@ -1310,7 +1371,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Дорога в зимний день, по которой движется автомобиль. Деревья и ограждение на обочинах.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135450_1.jpg",
@@ -1332,7 +1394,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Дорога в лесу в ясный день",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135613.jpg",
@@ -1354,7 +1417,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Автомобиль движется по дороге вдоль леса под ясным голубым небом.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135614.jpg",
@@ -1376,7 +1440,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Автомобиль движется по дороге вдоль леса под ясным голубым небом.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135614_1.jpg",
@@ -1398,7 +1463,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Дорога в лесу под ясным голубым небом",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135615.jpg",
@@ -1420,7 +1486,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Дорога в лесу под ясным голубым небом",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135616.jpg",
@@ -1442,7 +1509,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Дорога в лесу под ясным небом",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135616_1.jpg",
@@ -1464,7 +1532,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Дорога в лесу под ясным голубым небом",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135617.jpg",
@@ -1486,7 +1555,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Дорога в лесу под ясным небом",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135617_1.jpg",
@@ -1508,7 +1578,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Дорога в лесу под ясным голубым небом",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135618.jpg",
@@ -1530,7 +1601,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Дорога в лесу под ясным голубым небом",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135618_1.jpg",
@@ -1552,7 +1624,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Дорога в лесу под ясным небом",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135619.jpg",
@@ -1574,7 +1647,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Дорога в лесу под ясным голубым небом",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_135620.jpg",
@@ -1596,7 +1670,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Дорога в лесу под ясным голубым небом",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_142316.jpg",
@@ -1618,7 +1693,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Зимний лес с снегом и голыми деревьями",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_142334.jpg",
@@ -1640,7 +1716,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Солнце на ясном небе над городом",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185742.jpg",
@@ -1662,7 +1739,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Стоп-кадр с стопкой черных офисных стульев на фоне синего тента.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185928.jpg",
@@ -1684,7 +1762,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185928_1.jpg",
@@ -1706,7 +1785,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185929.jpg",
@@ -1728,7 +1808,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185930.jpg",
@@ -1750,7 +1831,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185930_1.jpg",
@@ -1772,7 +1854,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185931.jpg",
@@ -1794,7 +1877,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185931_1.jpg",
@@ -1816,7 +1900,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185932.jpg",
@@ -1838,7 +1923,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185932_1.jpg",
@@ -1860,7 +1946,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185933.jpg",
@@ -1882,7 +1969,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185933_1.jpg",
@@ -1904,7 +1992,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185934.jpg",
@@ -1926,7 +2015,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Клубная фотография команды волейбола и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185934_1.jpg",
@@ -1948,7 +2038,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Клубная фотография команды волейбола и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185934_2.jpg",
@@ -1970,7 +2061,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185935.jpg",
@@ -1992,7 +2084,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185935_1.jpg",
@@ -2014,7 +2107,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185935_2.jpg",
@@ -2036,7 +2130,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185936.jpg",
@@ -2058,7 +2153,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185936_1.jpg",
@@ -2080,7 +2176,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185937.jpg",
@@ -2102,7 +2199,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185937_1.jpg",
@@ -2124,7 +2222,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185937_2.jpg",
@@ -2146,7 +2245,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185938.jpg",
@@ -2168,7 +2268,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185938_1.jpg",
@@ -2190,7 +2291,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185939.jpg",
@@ -2212,7 +2314,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185939_1.jpg",
@@ -2234,7 +2337,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185939_2.jpg",
@@ -2256,7 +2360,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185940.jpg",
@@ -2278,7 +2383,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185940_1.jpg",
@@ -2300,7 +2406,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185940_2.jpg",
@@ -2322,7 +2429,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185941.jpg",
@@ -2344,7 +2452,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185941_1.jpg",
@@ -2366,7 +2475,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185941_2-Duplicate00001.jpg",
@@ -2388,7 +2498,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185941_2-Duplicate00002.jpg",
@@ -2410,7 +2521,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185941_2.jpg",
@@ -2435,7 +2547,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185941_3.jpg",
@@ -2457,7 +2570,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185942.jpg",
@@ -2479,7 +2593,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185942_1-Duplicate00001.jpg",
@@ -2501,7 +2616,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185942_1-Duplicate00002.jpg",
@@ -2523,7 +2639,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185942_1.jpg",
@@ -2548,7 +2665,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185942_2.jpg",
@@ -2570,7 +2688,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185942_3-Duplicate00001.jpg",
@@ -2592,7 +2711,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185942_3-Duplicate00002.jpg",
@@ -2614,7 +2734,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185942_3.jpg",
@@ -2639,7 +2760,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Клубная фотография волейбольной команды и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185943-Duplicate00001.jpg",
@@ -2661,7 +2783,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185943-Duplicate00002.jpg",
@@ -2683,7 +2806,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185943.jpg",
@@ -2708,7 +2832,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185943_1.jpg",
@@ -2730,7 +2855,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Клубная фотография волейбольной команды и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185943_2-Duplicate00001.jpg",
@@ -2752,7 +2878,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185943_2-Duplicate00002.jpg",
@@ -2774,7 +2901,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185943_2.jpg",
@@ -2799,7 +2927,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185943_3.jpg",
@@ -2821,7 +2950,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185944-Duplicate00001.jpg",
@@ -2843,7 +2973,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185944-Duplicate00002.jpg",
@@ -2865,7 +2996,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185944.jpg",
@@ -2890,7 +3022,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185944_1.jpg",
@@ -2912,7 +3045,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185944_2.jpg",
@@ -2934,7 +3068,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185945-Duplicate00001.jpg",
@@ -2956,7 +3091,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185945-Duplicate00002.jpg",
@@ -2978,7 +3114,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185945.jpg",
@@ -3003,7 +3140,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185945_1.jpg",
@@ -3025,7 +3163,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185945_2-Duplicate00001.jpg",
@@ -3047,7 +3186,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185945_2-Duplicate00002.jpg",
@@ -3069,7 +3209,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185945_2.jpg",
@@ -3094,7 +3235,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185945_3.jpg",
@@ -3116,7 +3258,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185946-Duplicate00001.jpg",
@@ -3138,7 +3281,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185946-Duplicate00002.jpg",
@@ -3160,7 +3304,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185946.jpg",
@@ -3185,7 +3330,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185946_1-Duplicate00001.jpg",
@@ -3207,7 +3353,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185946_1-Duplicate00002.jpg",
@@ -3229,7 +3376,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185946_1.jpg",
@@ -3254,7 +3402,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185946_2-Duplicate00001.jpg",
@@ -3276,7 +3425,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185946_2-Duplicate00002.jpg",
@@ -3298,7 +3448,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185946_2.jpg",
@@ -3323,7 +3474,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185946_3-Duplicate00001.jpg",
@@ -3345,7 +3497,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185946_3-Duplicate00002.jpg",
@@ -3367,7 +3520,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185946_3.jpg",
@@ -3392,7 +3546,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185947.jpg",
@@ -3414,7 +3569,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185947_1-Duplicate00001.jpg",
@@ -3436,7 +3592,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185947_1-Duplicate00002.jpg",
@@ -3458,7 +3615,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185947_1.jpg",
@@ -3483,7 +3641,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185947_2-Duplicate00001.jpg",
@@ -3505,7 +3664,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185947_2-Duplicate00002.jpg",
@@ -3527,7 +3687,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185947_2.jpg",
@@ -3552,7 +3713,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185947_3-Duplicate00001.jpg",
@@ -3574,7 +3736,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185947_3-Duplicate00002.jpg",
@@ -3596,7 +3759,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185947_3.jpg",
@@ -3621,7 +3785,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185948-Duplicate00001.jpg",
@@ -3643,7 +3808,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185948-Duplicate00002.jpg",
@@ -3665,7 +3831,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185948.jpg",
@@ -3690,7 +3857,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185948_1-Duplicate00001.jpg",
@@ -3712,7 +3880,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185948_1-Duplicate00002.jpg",
@@ -3734,7 +3903,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185948_1.jpg",
@@ -3759,7 +3929,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185948_2.jpg",
@@ -3781,7 +3952,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185949-Duplicate00001.jpg",
@@ -3803,7 +3975,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185949-Duplicate00002.jpg",
@@ -3825,7 +3998,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185949.jpg",
@@ -3850,7 +4024,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Клубная фотография волейбольной команды и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185949_1.jpg",
@@ -3872,7 +4047,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185949_2.jpg",
@@ -3894,7 +4070,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185949_3.jpg",
@@ -3916,7 +4093,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185950.jpg",
@@ -3938,7 +4116,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185950_1.jpg",
@@ -3960,7 +4139,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185950_2.jpg",
@@ -3982,7 +4162,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185950_3.jpg",
@@ -4004,7 +4185,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_185950_4.jpg",
@@ -4026,7 +4208,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190137.jpg",
@@ -4048,7 +4231,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На сцене в спортивном зале девушки в красных костюмах стоят на фоне синего занавеса. Один из них держит микрофон и говорит.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190138.jpg",
@@ -4070,7 +4254,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На церемонии венчания девушки в красных костюмах стоят на сцене с трофеями.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190139.jpg",
@@ -4092,7 +4277,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На церемонии в зале с синими занавесами и сценой, женщина в светлой одежде держит лист бумаги, а рядом стоят пять женщин в красных и белых костюмах с бантами.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190139_1.jpg",
@@ -4114,7 +4300,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На церемонии венчания на сцене с танцующими девушками в красных костюмах.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190140.jpg",
@@ -4136,7 +4323,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Концертная группа на сцене в спортивном зале",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190141.jpg",
@@ -4158,7 +4346,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На сцене в спортивном зале девушки в красных и белых костюмах стоят на фоне синего занавеса. Слева женщина в светлой одежде держит планшет и говорит.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190142.jpg",
@@ -4180,7 +4369,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На сцене в спортивном зале девушки в красных и белых костюмах стоят на фоне синего занавеса. Слева женщина в светлой одежде держит планшет и говорит.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190143.jpg",
@@ -4202,7 +4392,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На сцене в зале с танцующими девушками и женщиной, держащей ручку.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190144.jpg",
@@ -4224,7 +4415,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На церемонии венчания на сцене с танцующими девушками в красных и белых костюмах.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190150.jpg",
@@ -4246,7 +4438,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа cheerleaders на спортивной площадке в помещении.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190150_1.jpg",
@@ -4268,7 +4461,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На сцене в спортивном зале девушки в красных костюмах стоят в ряд, держа в руках бант. Слева стоит женщина в светлой одежде, держа микрофон. На полу виден логотип.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190151.jpg",
@@ -4290,7 +4484,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На сцене в спортивном зале стоят девушки-помощники, готовые к выступлению.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190152.jpg",
@@ -4312,7 +4507,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На спортивной площадке в зале с синим занавесом и сеткой, четыре девушки в красно-белых костюмах стоят на площадке, а женщина в светлой одежде с микрофоном выступает на сцене.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190152_1.jpg",
@@ -4334,7 +4530,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На сцене в спортивном зале девушки в красных и белых костюмах стоят на фоне синего занавеса. Слева стоит женщина в светлых брюках и костюме с микрофоном.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190203.jpg",
@@ -4356,7 +4553,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда cheerleaders на сцене во время спортивного мероприятия.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190204.jpg",
@@ -4378,7 +4576,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На сцене в спортивном зале девушки в красных и белых костюмах стоят на фоне синего занавеса. Слева женщина с микрофоном выступает на сцене.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190204_1.jpg",
@@ -4400,7 +4599,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда cheerleaders на сцене во время спортивного мероприятия.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190205.jpg",
@@ -4422,7 +4622,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На сцене в спортивном зале девушки в красных костюмах стоят на фоне синего занавеса, а женщина в светлой одежде выступает с микрофоном.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190206.jpg",
@@ -4444,7 +4645,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На сцене в спортивном зале девушки в красных костюмах стоят на фоне темного занавеса, а женщина в светлой одежде выступает с микрофоном.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190206_1.jpg",
@@ -4466,7 +4668,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На сцене в спортивном зале девушки в красных костюмах стоят в ряд, а женщина в светлой одежде выступает с микрофоном.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190207.jpg",
@@ -4488,7 +4691,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На сцене в спортивном зале сидят и стоят cheerleaders и женщина в костюме, возможно, ведущая мероприятие.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190212.jpg",
@@ -4510,7 +4714,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Четыре женщины в красно-белых костюмах стоят на сцене с трофеями и лентами.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190213.jpg",
@@ -4532,7 +4737,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа cheerleaders на спортивной площадке, стоящих с трофеем.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190213_1.jpg",
@@ -4554,7 +4760,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа cheerleaders на сцене в спортивном зале.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190214.jpg",
@@ -4576,7 +4783,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Четыре девушки в красно-белых костюмах стоят на спортивной площадке с трофеем и флагами.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190215.jpg",
@@ -4598,7 +4806,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Четыре девушки в красно-белых костюмах стоят на спортивной площадке с трофеем и рюкзаками.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190215_1.jpg",
@@ -4620,7 +4829,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Четыре женщины в красных и белых костюмах стоят в ряд на спортивной площадке с трофеями и рюкзаками.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190216.jpg",
@@ -4642,7 +4852,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа cheerleaders на спортивной площадке, стоящих с трофеем.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190217.jpg",
@@ -4664,7 +4875,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа cheerleaders на сцене в спортивном зале.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190217_1.jpg",
@@ -4686,7 +4898,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа cheerleaders на сцене в спортивном зале.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190218.jpg",
@@ -4708,7 +4921,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Четыре девушки в красных и белых костюмах стоят на спортивной площадке с трофеем и рюкзаками.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190322.jpg",
@@ -4730,7 +4944,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены на церемонии награждения.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190322_1.jpg",
@@ -4752,7 +4967,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены на спортивной площадке, готовятся к выступлению.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190323.jpg",
@@ -4774,7 +4990,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены на церемонии награждения.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190323_1.jpg",
@@ -4796,7 +5013,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Сцена с cheerleaders и игроками на спортивной площадке. Слева — тренер с документами.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190323_2.jpg",
@@ -4818,7 +5036,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены в красных и белых костюмах стоят на площадке перед тренером, держа ручки с лентами. На заднем плане — тишинный фон.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190324.jpg",
@@ -4840,7 +5059,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены на церемонии награждения.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190324_1.jpg",
@@ -4862,7 +5082,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Девушки в красных и белых костюмах стоят на сцене с трофеями, а мужчины в спортивной одежде стоят рядом.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190324_2.jpg",
@@ -4884,7 +5105,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены в красных костюмах на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190324_3.jpg",
@@ -4906,7 +5128,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены в красных костюмах стоят на площадке, получая награду.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190325.jpg",
@@ -4928,7 +5151,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены и члены команды на спортивной площадке. Студенты в красных костюмах держат тренажер, а мужчина в синем пальто стоит рядом.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190325_1.jpg",
@@ -4950,7 +5174,8 @@
       "evil": false,
       "vlm_confidence": 0.75,
       "vlm_caption_ru": "Спортсмены и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190325_2.jpg",
@@ -4972,7 +5197,8 @@
       "evil": false,
       "vlm_confidence": 0.85,
       "vlm_caption_ru": "На спортивной площадке мужчины и женщины в красных костюмах стоят рядом с наградой.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190505.jpg",
@@ -4994,7 +5220,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены и тренер на спортивной площадке перед началом игры.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190505_1.jpg",
@@ -5016,7 +5243,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Врач и пациент в медицинском кабинете.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190506.jpg",
@@ -5038,7 +5266,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены и тренер на спортивной площадке в зале.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190507.jpg",
@@ -5060,7 +5289,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены и люди в помещении, возможно, во время спортивного мероприятия.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190507_1.jpg",
@@ -5082,7 +5312,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены и тренер на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190508.jpg",
@@ -5104,7 +5335,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены и дети на спортивной площадке, возможно, участники чемпионата или соревнований.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190509.jpg",
@@ -5126,7 +5358,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Сцена с волейболистами и cheerleaders на спортивной площадке во время тренировки или подготовки к игре.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190510.jpg",
@@ -5148,7 +5381,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены на поле во время игры в волейбол.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190510_1.jpg",
@@ -5170,7 +5404,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Сцена с волейболистами и cheerleaders на спортивной площадке во время мероприятия.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190512.jpg",
@@ -5192,7 +5427,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены и организаторы на спортивной площадке во время мероприятия.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190513.jpg",
@@ -5214,7 +5450,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Сцена с волейболистами и cheerleaders на спортивной площадке во время игры.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190514.jpg",
@@ -5236,7 +5473,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Врач и пациент на медицинской конференции.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190520.jpg",
@@ -5258,7 +5496,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Мужчина в синем костюме идет к группе молодых людей на спортивной площадке. В центре — взрослый мужчина, который поддерживает одного из участников.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190521.jpg",
@@ -5280,7 +5519,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены и тренер на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190521_1.jpg",
@@ -5302,7 +5542,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены и тренер в помещении на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190522.jpg",
@@ -5324,7 +5565,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На спортивной площадке в зале проходит мероприятие с участием игроков и тренеров. Студенты стоят в ряд, а на заднем плане — девушки в красных костюмах.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190523.jpg",
@@ -5346,7 +5588,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На спортивной площадке молодёжная команда и взрослые стоят в ряд, возможно, на церемонии или мероприятии.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190526.jpg",
@@ -5368,7 +5611,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На церемонии награждения спортсмены получают призы на сцене.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190527.jpg",
@@ -5390,7 +5634,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На сцене в спортивном зале женщины в спортивной форме с трофеями и наградами.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190528.jpg",
@@ -5412,7 +5657,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На сцене в спортивном зале девушки в красных и белых костюмах стоят с наградами и трофеями. На заднем плане — синий занавес.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190531.jpg",
@@ -5434,7 +5680,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсменки на церемонии награждения.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190532.jpg",
@@ -5456,7 +5703,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На церемонии венчания четырёх женщин в красных костюмах и трофеях.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190532_1.jpg",
@@ -5478,7 +5726,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены на церемонии награждения.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190533.jpg",
@@ -5500,7 +5749,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На церемонии венчания женщины в красной одежде сидят на подиуме, держа в руках трофеи и ленты.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190534.jpg",
@@ -5522,7 +5772,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсменки на сцене получают призы на мероприятии.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190534_1.jpg",
@@ -5544,7 +5795,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Четыре женщины в красных и белых спортивных костюмах стоят на спортивной площадке, получившие награды и призы.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190535.jpg",
@@ -5566,7 +5818,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Сцена из невестного торжества, где женщины в красных и белых костюмах стоят на сцене с табличками и трофеями.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190539.jpg",
@@ -5588,7 +5841,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Девушки в спортивной форме стоят на площадке с трофеями и предметами.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190540.jpg",
@@ -5610,7 +5864,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На изображении показаны люди в помещении, возможно, на мероприятии. В центре внимания — женщина в светлой одежде, держащая документы, и другие люди в фоне.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190541-Duplicate00001.jpg",
@@ -5632,7 +5887,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Сцена из церемонии свадьбы, где четыре женщины в красных и белых костюмах стоят на сцене с трофеями и лентами.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190541-Duplicate00002.jpg",
@@ -5654,7 +5910,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Сцена из церемонии свадьбы, где четыре женщины в красных и белых костюмах стоят на сцене с трофеями и лентами.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190541.jpg",
@@ -5679,7 +5936,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На церемонии венчания четырёх девушек в красных и белых костюмах с трофеями и лентами.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190541_1-Duplicate00001.jpg",
@@ -5701,7 +5959,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсменки на сцене после завершения соревнования",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190541_1-Duplicate00002.jpg",
@@ -5723,7 +5982,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены на сцене, стоят и смотрят в камеру.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190541_1.jpg",
@@ -5748,7 +6008,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На церемонии награждения спортсмены в красных костюмах стоят на сцене с трофеями и держат в руках ленты.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190608.jpg",
@@ -5770,7 +6031,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "На церемонии венчания, женщина с микрофоном и четыре девушки в костюмах на сцене.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190609.jpg",
@@ -5792,7 +6054,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Семь девушек в красных и белых костюмах стоят на сцене, держа в руках трубы и трофеи. Это кажется, что они участвуют в церемонии.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190610.jpg",
@@ -5814,7 +6077,8 @@
       "evil": false,
       "vlm_confidence": 0.75,
       "vlm_caption_ru": "Девушки в спортивной форме стоят на спортивной площадке, получая что-то.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190610_1.jpg",
@@ -5836,7 +6100,8 @@
       "evil": false,
       "vlm_confidence": 0.75,
       "vlm_caption_ru": "Клубные cheerleaders на сцене в вечернее время.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190611.jpg",
@@ -5858,7 +6123,8 @@
       "evil": false,
       "vlm_confidence": 0.75,
       "vlm_caption_ru": "Сцена из церемонии венчания, где женщины в красных и белых костюмах получают награды.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190611_1.jpg",
@@ -5880,7 +6146,8 @@
       "evil": false,
       "vlm_confidence": 0.75,
       "vlm_caption_ru": "Спортсмены на сцене, получают награды.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190617-Duplicate00001.jpg",
@@ -5902,7 +6169,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены на поле во время игры в волейбол. На заднем плане — табло с результатами и флаги.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190617-Duplicate00002.jpg",
@@ -5924,7 +6192,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены на поле во время игры в волейбол. На заднем плане — табло с результатами и флаги.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190617.jpg",
@@ -5949,7 +6218,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены на поле во время игры в волейбол",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190816.jpg",
@@ -5971,7 +6241,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и тренер на спортивной площадке после игры.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190817.jpg",
@@ -5993,7 +6264,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа волейболистов и тренеров на спортивной площадке перед началом или после игры.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190818-Duplicate00001.jpg",
@@ -6015,7 +6287,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа волейболистов и тренер в спортзале",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190818-Duplicate00002.jpg",
@@ -6037,7 +6310,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа волейболистов и тренер в спортзале на мероприятии.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190818.jpg",
@@ -6062,7 +6336,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа волейболистов и тренер в спортзале на мероприятии.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190818_1-Duplicate00001.jpg",
@@ -6084,7 +6359,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда на спортивной площадке, готовая к соревнованию.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190818_1-Duplicate00002.jpg",
@@ -6106,7 +6382,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда на мероприятии в спортивном зале",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190818_1.jpg",
@@ -6131,7 +6408,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа игроков в волейбольной форме на спортивной площадке, стоящая в ряд для снимка.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190819.jpg",
@@ -6153,7 +6431,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и тренер на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190820.jpg",
@@ -6175,7 +6454,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и тренер с детьми и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190821.jpg",
@@ -6197,7 +6477,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "команда волейбола на мероприятии",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190821_1.jpg",
@@ -6219,7 +6500,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190822.jpg",
@@ -6241,7 +6523,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа волейболистов и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190823.jpg",
@@ -6263,7 +6546,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа игроков и cheerleaders на спортивной площадке перед соревнованиями.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190824-Duplicate00001.jpg",
@@ -6285,7 +6569,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке после игры.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190824-Duplicate00002.jpg",
@@ -6307,7 +6592,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке после игры.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190824.jpg",
@@ -6332,7 +6618,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190825.jpg",
@@ -6354,7 +6641,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190826.jpg",
@@ -6376,7 +6664,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке перед началом или после игры.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190826_1.jpg",
@@ -6398,7 +6687,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190829.jpg",
@@ -6420,7 +6710,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Клубная команда волейбола с болельщиками и медалями на фоне волейбольной сетки.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190830.jpg",
@@ -6442,7 +6733,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190831-Duplicate00001.jpg",
@@ -6464,7 +6756,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Спортсмены и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190831-Duplicate00002.jpg",
@@ -6486,7 +6779,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа игроков и cheerleaders на спортивной площадке после игры в волейбол.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190831.jpg",
@@ -6511,7 +6805,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа игроков и cheerleaders на спортивной площадке перед фото.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190832.jpg",
@@ -6533,7 +6828,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке перед началом или после игры.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190833.jpg",
@@ -6555,7 +6851,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке перед началом или после игры.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190835-Duplicate00001.jpg",
@@ -6577,7 +6874,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке после игры.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190835-Duplicate00002.jpg",
@@ -6599,7 +6897,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190835.jpg",
@@ -6624,7 +6923,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190836.jpg",
@@ -6646,7 +6946,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на мероприятии.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190838.jpg",
@@ -6668,7 +6969,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190839-Duplicate00001.jpg",
@@ -6690,7 +6992,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190839-Duplicate00002.jpg",
@@ -6712,7 +7015,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190839.jpg",
@@ -6737,7 +7041,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190840-Duplicate00001.jpg",
@@ -6759,7 +7064,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190840-Duplicate00002.jpg",
@@ -6781,7 +7087,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа волейболистов и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190840.jpg",
@@ -6806,7 +7113,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190842-Duplicate00001.jpg",
@@ -6828,7 +7136,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке после игры.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190842-Duplicate00002.jpg",
@@ -6850,7 +7159,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке, снимается на фото.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190842.jpg",
@@ -6875,7 +7185,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке, снимается с фото.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190843.jpg",
@@ -6897,7 +7208,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке, готовые к фотографированию.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190844.jpg",
@@ -6919,7 +7231,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа волейболистов и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190845.jpg",
@@ -6941,7 +7254,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке после игры.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190847.jpg",
@@ -6963,7 +7277,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа игроков и cheerleaders на спортивной площадке после игры в волейбол.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190848-Duplicate00001.jpg",
@@ -6985,7 +7300,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа игроков и cheerleaders на спортивной площадке перед волейбольным сетом.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190848-Duplicate00002.jpg",
@@ -7007,7 +7323,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа игроков и cheerleaders на спортивной площадке перед волейбольным сетом.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190848.jpg",
@@ -7032,7 +7349,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190851-Duplicate00001.jpg",
@@ -7054,7 +7372,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190851-Duplicate00002.jpg",
@@ -7076,7 +7395,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190851.jpg",
@@ -7101,7 +7421,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190851_1-Duplicate00001.jpg",
@@ -7123,7 +7444,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190851_1-Duplicate00002.jpg",
@@ -7145,7 +7467,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190851_1.jpg",
@@ -7170,7 +7493,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190852-Duplicate00001.jpg",
@@ -7192,7 +7516,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190852-Duplicate00002.jpg",
@@ -7214,7 +7539,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190852.jpg",
@@ -7239,7 +7565,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке, позирующие для фотографии.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190853-Duplicate00001.jpg",
@@ -7261,7 +7588,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190853-Duplicate00002.jpg",
@@ -7283,7 +7611,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190853.jpg",
@@ -7308,7 +7637,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190854-Duplicate00001.jpg",
@@ -7330,7 +7660,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190854-Duplicate00002.jpg",
@@ -7352,7 +7683,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190854.jpg",
@@ -7377,7 +7709,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "команда волейбола и помощники на спортивной площадке",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190855-Duplicate00001.jpg",
@@ -7399,7 +7732,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190855-Duplicate00002.jpg",
@@ -7421,7 +7755,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190855.jpg",
@@ -7446,7 +7781,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Группа волейболистов и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190857-Duplicate00001.jpg",
@@ -7468,7 +7804,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190857-Duplicate00002.jpg",
@@ -7490,7 +7827,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190857.jpg",
@@ -7515,7 +7853,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190858-Duplicate00001.jpg",
@@ -7537,7 +7876,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке перед началом или после игры.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190858-Duplicate00002.jpg",
@@ -7559,7 +7899,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и болельщики на спортивной площадке перед началом или после игры.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_190858.jpg",
@@ -7584,7 +7925,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_193651.jpg",
@@ -7606,7 +7948,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Снимок с улицы в вечернее время, на дороге движутся автомобили, по обе стороны расположены здания и деревья.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_193652.jpg",
@@ -7628,7 +7971,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Снимок с улицы в сумерках, на дороге движутся автомобили, по обе стороны расположены здания и деревья.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_193653.jpg",
@@ -7650,7 +7994,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Улица в вечернее время с небом, на котором видны городские здания и автомобили.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_193653_1.jpg",
@@ -7672,7 +8017,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Снимок из города в сумерках. На дороге движутся автомобили, а по обеим сторонам расположены здания и деревья.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_193654.jpg",
@@ -7694,7 +8040,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Снимок с улицы в сумерках, на дороге движутся автомобили и грузовик. На заднем плане видны здания и деревья без листвы.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_193655.jpg",
@@ -7716,7 +8063,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Снимок с дороги в городской среде в сумерках",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "IMG_20210425_193656.jpg",
@@ -7738,7 +8086,8 @@
       "evil": false,
       "vlm_confidence": 0.95,
       "vlm_caption_ru": "Снимок с дороги в городской среде в сумерках. На дороге движутся автомобили, а на обочине — люди и деревья.",
-      "vlm_labeled": true
+      "vlm_labeled": true,
+      "hard": false
     },
     {
       "name": "VID_20210417_085551.mp4",
@@ -7757,7 +8106,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": true
     },
     {
       "name": "VID_20210417_085629.mp4",
@@ -7776,7 +8126,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": true
     },
     {
       "name": "VID_20210417_085634.mp4",
@@ -7795,7 +8146,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": true
     },
     {
       "name": "VID_20210417_085639.mp4",
@@ -7814,7 +8166,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": true
     },
     {
       "name": "VID_20210417_085657.mp4",
@@ -7833,7 +8186,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": true
     },
     {
       "name": "VID_20210417_085731.mp4",
@@ -7852,7 +8206,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": true
     },
     {
       "name": "VID_20210417_085806.mp4",
@@ -7871,7 +8226,8 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": true
     },
     {
       "name": "VID_20210417_085830.mp4",
@@ -7890,8 +8246,10 @@
         "near_dup_base": null,
         "near_dup_copies": null
       },
-      "evil": false
+      "evil": false,
+      "hard": true
     }
   ],
-  "vlm_prompt_rev": "vlm-json-v5-2026-11-21"
+  "vlm_prompt_rev": "vlm-json-v5-2026-11-21",
+  "hard_ratio_note": "«трудные» (слабая дата filename ИЛИ vlm_confidence<0.75): 8/357"
 }

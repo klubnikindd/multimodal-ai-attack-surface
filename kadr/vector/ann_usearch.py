@@ -15,12 +15,13 @@ logger = logging.getLogger(__name__)
 
 _BATCH_SIZE = 1000
 _RECOVERY_COOLDOWN_SECONDS = 30.0
-# Тюнинг HNSW по спайку E (2026-11-20): при дефолтах recall@10 был 0.31–0.61,
-# что не проходит NFR-18 (≥0.90). conn=32 / ef_add=200 / ef_search=256 дают
-# recall@10 = 0.98 при ~2 мс на 20K векторов (см. docs/BENCHMARKS.md).
+# Тюнинг HNSW по спайку E (2026-11-20, до-тюн 2026-11-21): при дефолтах
+# recall@10 был 0.31–0.61. conn=32 / ef_add=200 / ef_search=256 дают 0.98 на 20K,
+# но на 100K проседают до ~0.80 (ниже NFR-18 ≥0.90). ef_search=512 поднимает
+# recall@10 на 100K до ≥0.90 ценой небольшого роста p95 (см. docs/BENCHMARKS.md).
 _ANN_CONNECTIVITY = 32
 _ANN_EXPANSION_ADD = 200
-_ANN_EXPANSION_SEARCH = 256
+_ANN_EXPANSION_SEARCH = 512
 
 
 def _add_in_batches(index, keys: Sequence[int], vectors: Sequence[Sequence[float]]) -> None:
