@@ -181,9 +181,10 @@ fn engine_status(state: State<EngineState>) -> EngineStatus {
 }
 
 /// Проксирует HTTP-запрос frontend → engine (CORS закрыт, SEC-10; bearer + CSRF).
+/// Асинхронный (spawn_blocking): долгий скан/анализ не блокирует UI.
 #[tauri::command]
-fn engine_request(
-    state: State<EngineState>,
+async fn engine_request(
+    state: State<'_, EngineState>,
     method: String,
     path: String,
     body: Option<String>,
@@ -197,49 +198,60 @@ fn engine_request(
         .clone()
         .unwrap_or_else(|| token.clone());
     let url = format!("{base_url}{path}");
-    let auth = format!("Bearer {token}");
+    let method = method.to_uppercase();
 
-    let result = match method.to_uppercase().as_str() {
-        "GET" => ureq::get(&url)
-            .set("Authorization", &auth)
-            .set("X-Kadr-CSRF", &csrf)
-            .call(),
-        "POST" => ureq::post(&url)
-            .set("Authorization", &auth)
-            .set("X-Kadr-CSRF", &csrf)
-            .set("Content-Type", "application/json")
-            .send_string(body.as_deref().unwrap_or("{}")),
-        other => return Err(format!("unsupported method: {other}")),
-    };
-
-    match result {
-        Ok(resp) => resp.into_string().map_err(|e| format!("read response: {e}")),
-        Err(ureq::Error::Status(code, resp)) => {
-            let detail = resp.into_string().unwrap_or_default();
-            Err(format!("HTTP {code}: {detail}"))
+    tauri::async_runtime::spawn_blocking(move || {
+        let result = match method.as_str() {
+            "GET" => ureq::get(&url)
+                .set("Authorization", &format!("Bearer {token}"))
+                .set("X-Kadr-CSRF", &csrf)
+                .timeout(std::time::Duration::from_secs(3600))
+                .call(),
+            "POST" => ureq::post(&url)
+                .set("Authorization", &format!("Bearer {token}"))
+                .set("X-Kadr-CSRF", &csrf)
+                .set("Content-Type", "application/json")
+                .timeout(std::time::Duration::from_secs(3600))
+                .send_string(body.as_deref().unwrap_or("{}")),
+            other => return Err(format!("unsupported method: {other}")),
+        };
+        match result {
+            Ok(resp) => resp.into_string().map_err(|e| format!("read response: {e}")),
+            Err(ureq::Error::Status(code, resp)) => {
+                let detail = resp.into_string().unwrap_or_default();
+                Err(format!("HTTP {code}: {detail}"))
+            }
+            Err(e) => Err(format!("engine request failed: {e}")),
         }
-        Err(e) => Err(format!("engine request failed: {e}")),
-    }
+    })
+    .await
+    .map_err(|e| e.to_string())?
 }
 
 /// Возвращает миниатюру (JPEG) в base64 для галереи.
 #[tauri::command]
-fn engine_thumbnail(state: State<EngineState>, asset_id: i64) -> Result<String, String> {
+async fn engine_thumbnail(state: State<'_, EngineState>, asset_id: i64) -> Result<String, String> {
     use std::io::Read;
 
     let base_url = state.base_url.lock().unwrap().clone().ok_or("engine not ready")?;
     let token = state.token.lock().unwrap().clone().ok_or("no token")?;
     let url = format!("{base_url}/v1/assets/{asset_id}/thumbnail");
-    let resp = ureq::get(&url)
-        .set("Authorization", &format!("Bearer {token}"))
-        .call()
-        .map_err(|e| format!("thumbnail failed: {e}"))?;
-    let mut reader = resp.into_reader();
-    let mut bytes = Vec::new();
-    reader
-        .read_to_end(&mut bytes)
-        .map_err(|e| format!("read thumbnail: {e}"))?;
-    Ok(STANDARD.encode(&bytes))
+    let result = tauri::async_runtime::spawn_blocking(move || {
+        let resp = ureq::get(&url)
+            .set("Authorization", &format!("Bearer {token}"))
+            .timeout(std::time::Duration::from_secs(60))
+            .call()
+            .map_err(|e| format!("thumbnail failed: {e}"))?;
+        let mut reader = resp.into_reader();
+        let mut bytes = Vec::new();
+        reader
+            .read_to_end(&mut bytes)
+            .map_err(|e| format!("read thumbnail: {e}"))?;
+        Ok(STANDARD.encode(&bytes))
+    })
+    .await
+    .map_err(|e| e.to_string())?;
+    result
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]

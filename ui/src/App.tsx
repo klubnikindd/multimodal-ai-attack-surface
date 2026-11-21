@@ -1,21 +1,25 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { open } from "@tauri-apps/plugin-dialog";
-import { openPath } from "@tauri-apps/plugin-opener";
+import { openPath, revealItemInDir } from "@tauri-apps/plugin-opener";
 import "./App.css";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function req(method: string, path: string, body?: object): Promise<any> {
-  const text = await invoke<string>("engine_request", {
-    method,
-    path,
-    body: body ? JSON.stringify(body) : null,
-  });
+  const text = await invoke<string>("engine_request", { method, path, body: body ? JSON.stringify(body) : null });
   return JSON.parse(text);
 }
 
 function filename(p: string | null): string {
   return p ? (p.split(/[\\/]/).pop() ?? p) : "";
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function loadLS<T>(key: string, def: T): T {
+  try { const v = localStorage.getItem(key); return v ? JSON.parse(v) as T : def; } catch { return def; }
+}
+function saveLS(key: string, val: unknown) {
+  try { localStorage.setItem(key, JSON.stringify(val)); } catch { /* ignore */ }
 }
 
 interface Card {
@@ -28,32 +32,29 @@ interface Card {
 }
 
 type Tab = "gallery" | "rules" | "status" | "review" | "jobs";
-
 const PRESETS = ["date", "family", "wedding", "stock", "video"];
 
 export default function App() {
   const [tab, setTab] = useState<Tab>("gallery");
 
-  // folders
   const [sourceDir, setSourceDir] = useState<string | null>(null);
   const [destDir, setDestDir] = useState<string | null>(null);
 
-  // gallery
   const [cards, setCards] = useState<Card[]>([]);
   const [thumbs, setThumbs] = useState<Record<number, string>>({});
   const [query, setQuery] = useState("");
-  const [kindFilter, setKindFilter] = useState<string | null>(null);
-  const [sortBy, setSortBy] = useState<string>("taken_at");
+  const [kindFilter, setKindFilter] = useState<string | null>(() => loadLS("kindFilter", null));
+  const [sortBy, setSortBy] = useState<string>(() => loadLS("sortBy", "taken_at"));
   const [selected, setSelected] = useState<number | null>(null);
+  const [ratings, setRatings] = useState<Record<number, number>>(() => loadLS("ratings", {}));
+  const [marks, setMarks] = useState<Record<number, boolean>>(() => loadLS("marks", {}));
 
-  // rules & plans
   const [preset, setPreset] = useState("date");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [plan, setPlan] = useState<any>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [plans, setPlans] = useState<any[]>([]);
 
-  // other
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [sysStatus, setSysStatus] = useState<any>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -68,32 +69,21 @@ export default function App() {
     setStatus("Загрузка…");
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const res = await req("GET", "/v1/assets?limit=500");
+      const res = await req("GET", "/v1/assets?limit=1000");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       setCards((res.items || []).map((a: any) => ({
-        id: a.id,
-        kind: a.kind || "?",
-        path: a.path || null,
-        taken_at: a.taken_at || null,
-        tags: a.tags || [],
+        id: a.id, kind: a.kind || "?", path: a.path || null, taken_at: a.taken_at || null, tags: a.tags || [],
       })));
       setStatus(null);
-    } catch (e) {
-      setError(String(e));
-      setStatus(null);
-    }
+    } catch (e) { setError(String(e)); setStatus(null); }
   }, []);
 
   const doSearch = useCallback(async (q: string) => {
-    if (!q.trim()) {
-      loadGallery();
-      return;
-    }
-    setError(null);
-    setStatus("Поиск…");
+    if (!q.trim()) { loadGallery(); return; }
+    setError(null); setStatus("Поиск…");
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const res = await req("POST", "/v1/search", { query: q, k: 300 });
+      const res = await req("POST", "/v1/search", { query: q, k: 500 });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const hits = (res.hits || []) as any[];
       setCards(hits.map((h) => {
@@ -101,72 +91,55 @@ export default function App() {
         return { id: h.asset_id, kind: f.kind || "?", path: f.path || null, taken_at: f.taken_at || null, tags: f.tags || [], score: h.score };
       }));
       setStatus(null);
-    } catch (e) {
-      setError(String(e));
-      setStatus(null);
-    }
+    } catch (e) { setError(String(e)); setStatus(null); }
   }, [loadGallery]);
 
-  const loadStatus = useCallback(async () => {
-    try { setSysStatus(await req("GET", "/v1/system/status")); } catch (e) { setError(String(e)); }
-  }, []);
-  const loadReview = useCallback(async () => {
-    try { setReview((await req("GET", "/v1/review?limit=100")).items || []); } catch (e) { setError(String(e)); }
-  }, []);
-  const loadJobs = useCallback(async () => {
-    try { setJobs((await req("GET", "/v1/jobs?limit=50")).items || []); } catch (e) { setError(String(e)); }
-  }, []);
-  const loadPlans = useCallback(async () => {
-    try { setPlans((await req("GET", "/v1/plans?limit=50")).items || []); } catch (e) { setError(String(e)); }
-  }, []);
+  const loadStatus = useCallback(async () => { try { setSysStatus(await req("GET", "/v1/system/status")); } catch (e) { setError(String(e)); } }, []);
+  const loadReview = useCallback(async () => { try { setReview((await req("GET", "/v1/review?limit=100")).items || []); } catch (e) { setError(String(e)); } }, []);
+  const loadJobs = useCallback(async () => { try { setJobs((await req("GET", "/v1/jobs?limit=50")).items || []); } catch (e) { setError(String(e)); } }, []);
+  const loadPlans = useCallback(async () => { try { setPlans((await req("GET", "/v1/plans?limit=50")).items || []); } catch (e) { setError(String(e)); } }, []);
 
-  const pickSource = async () => {
-    const d = await open({ directory: true, title: "Выберите папку-источник" });
-    if (typeof d === "string") setSourceDir(d);
-  };
-  const pickDest = async () => {
-    const d = await open({ directory: true, title: "Выберите папку назначения" });
-    if (typeof d === "string") setDestDir(d);
-  };
+  const pickSource = async () => { const d = await open({ directory: true, title: "Выберите папку-источник" }); if (typeof d === "string") setSourceDir(d); };
+  const pickDest = async () => { const d = await open({ directory: true, title: "Выберите папку назначения" }); if (typeof d === "string") setDestDir(d); };
   const doScan = async () => {
     if (!sourceDir) return;
-    setStatus("Сканирование…");
+    setStatus("Сканирование… (может занять время для большой папки)");
     try {
       await req("POST", "/v1/scan", { root: sourceDir });
-      await req("POST", "/v1/analyze", { limit: 0, run_ocr_enabled: false });
       await loadGallery();
       setStatus(null);
-    } catch (e) {
-      setError(String(e));
-      setStatus(null);
-    }
+    } catch (e) { setError(String(e)); setStatus(null); }
   };
-  const revealDest = async () => {
-    if (destDir) await openPath(destDir);
-    else if (sourceDir) await openPath(sourceDir);
+  const revealDest = async () => { if (destDir) await openPath(destDir); else if (sourceDir) await openPath(sourceDir); };
+
+  const revealAsset = async (id: number) => {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const res = await req("GET", `/v1/assets/${id}/absolute-path`);
+      await revealItemInDir(res.path);
+    } catch (e) { setError(String(e)); }
   };
 
   const buildPlan = async () => {
     setStatus("Построение плана…");
     try {
       const res = await req("POST", "/v1/plans", { preset, library_root: destDir || undefined });
-      setPlan(res);
-      await loadPlans();
-      setStatus(null);
-    } catch (e) {
-      setError(String(e));
-      setStatus(null);
-    }
+      setPlan(res); await loadPlans(); setStatus(null);
+    } catch (e) { setError(String(e)); setStatus(null); }
   };
-  const applyPlan = async (id: number) => {
-    setStatus("Применение…");
-    try { await req("POST", `/v1/plans/${id}/apply`, { force: false }); setStatus(null); }
-    catch (e) { setError(String(e)); setStatus(null); }
-  };
-  const undoPlan = async (id: number) => {
-    setStatus("Откат…");
-    try { await req("POST", `/v1/plans/${id}/undo`); setStatus(null); }
-    catch (e) { setError(String(e)); setStatus(null); }
+  const applyPlan = async (id: number) => { setStatus("Применение…"); try { await req("POST", `/v1/plans/${id}/apply`, { force: false }); setStatus(null); } catch (e) { setError(String(e)); setStatus(null); } };
+  const undoPlan = async (id: number) => { setStatus("Откат…"); try { await req("POST", `/v1/plans/${id}/undo`); setStatus(null); } catch (e) { setError(String(e)); setStatus(null); } };
+
+  const exportJson = async () => {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const res = await req("GET", "/v1/export/catalog?limit=5000");
+      const blob = new Blob([JSON.stringify(res, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = "kadr-catalog.json"; a.click();
+      URL.revokeObjectURL(url);
+    } catch (e) { setError(String(e)); }
   };
 
   useEffect(() => { loadGallery(); }, [loadGallery]);
@@ -179,12 +152,9 @@ export default function App() {
       }
     }
   }, [cards, thumbs]);
-  useEffect(() => {
-    if (tab === "status") loadStatus();
-    if (tab === "review") loadReview();
-    if (tab === "jobs") loadJobs();
-    if (tab === "rules") loadPlans();
-  }, [tab, loadStatus, loadReview, loadJobs, loadPlans]);
+  useEffect(() => { if (tab === "status") loadStatus(); if (tab === "review") loadReview(); if (tab === "jobs") loadJobs(); if (tab === "rules") loadPlans(); }, [tab, loadStatus, loadReview, loadJobs, loadPlans]);
+  useEffect(() => saveLS("kindFilter", kindFilter), [kindFilter]);
+  useEffect(() => saveLS("sortBy", sortBy), [sortBy]);
 
   const kinds = Array.from(new Set(cards.map((c) => c.kind)));
   const filtered = useMemo(() => {
@@ -196,19 +166,19 @@ export default function App() {
     return s;
   }, [cards, kindFilter, sortBy]);
 
-  // hotkeys: стрелки — навигация, Esc — сброс
+  // hotkeys: ←/→ навигация, Esc сброс, 1-5 рейтинг, X метка
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (tab !== "gallery" || filtered.length === 0) return;
       const idx = filtered.findIndex((c) => c.id === selected);
-      if (e.key === "ArrowRight") {
-        const n = idx < filtered.length - 1 ? filtered[idx + 1].id : filtered[0].id;
-        setSelected(n);
-      } else if (e.key === "ArrowLeft") {
-        const n = idx > 0 ? filtered[idx - 1].id : filtered[filtered.length - 1].id;
-        setSelected(n);
-      } else if (e.key === "Escape") {
-        setSelected(null);
+      if (e.key === "ArrowRight") { setSelected(filtered[idx < filtered.length - 1 ? idx + 1 : 0].id); }
+      else if (e.key === "ArrowLeft") { setSelected(filtered[idx > 0 ? idx - 1 : filtered.length - 1].id); }
+      else if (e.key === "Escape") { setSelected(null); }
+      else if (selected != null && e.key >= "1" && e.key <= "5") {
+        const r = parseInt(e.key, 10);
+        setRatings((rr) => { const n = { ...rr, [selected]: r }; saveLS("ratings", n); return n; });
+      } else if (selected != null && (e.key === "x" || e.key === "X")) {
+        setMarks((mm) => { const n = { ...mm, [selected]: !mm[selected] }; saveLS("marks", n); return n; });
       }
     };
     window.addEventListener("keydown", onKey);
@@ -267,7 +237,19 @@ export default function App() {
                 )}
                 <figcaption>
                   <div className="nm" title={c.path ?? ""}>{filename(c.path) || `#${c.id}`}</div>
-                  <div className="mt">{c.kind} · {c.taken_at?.slice(0, 10) ?? "—"}{c.score != null ? ` · ${c.score.toFixed(2)}` : ""}</div>
+                  <div className="mt">
+                    {c.kind} · {c.taken_at?.slice(0, 10) ?? "—"}
+                    {ratings[c.id] ? ` · ★${ratings[c.id]}` : ""}
+                    {marks[c.id] ? " · ✗" : ""}
+                    {c.score != null ? ` · ${c.score.toFixed(2)}` : ""}
+                  </div>
+                  <button
+                    className="reveal"
+                    title="Показать в папке"
+                    onClick={(e) => { e.stopPropagation(); revealAsset(c.id); }}
+                  >
+                    📂
+                  </button>
                 </figcaption>
               </figure>
             ))}
@@ -286,9 +268,7 @@ export default function App() {
             </select>
             <button onClick={buildPlan}>Построить план</button>
           </div>
-          {plan?.tree_text && (
-            <pre className="tree">{plan.tree_text}</pre>
-          )}
+          {plan?.tree_text && <pre className="tree">{plan.tree_text}</pre>}
           <h3>История планов</h3>
           {plans.length === 0 && <p className="empty">Планов нет.</p>}
           {plans.map((p) => (
@@ -309,10 +289,10 @@ export default function App() {
             <dt>Продукт</dt><dd>{sysStatus.product} {sysStatus.version}</dd>
             <dt>Профиль</dt><dd>{sysStatus.profile?.profile ?? "—"}</dd>
             <dt>Активов</dt><dd>{sysStatus.stats?.assets ?? "—"}</dd>
-            <dt>Векторный индекс</dt>
-            <dd>{sysStatus.vector_index?.backend ?? "—"} · {sysStatus.vector_index?.status ?? "—"}{sysStatus.vector_index?.vector_count != null ? ` (${sysStatus.vector_index.vector_count})` : ""}</dd>
+            <dt>Векторный индекс</dt><dd>{sysStatus.vector_index?.backend ?? "—"} · {sysStatus.vector_index?.status ?? "—"}{sysStatus.vector_index?.vector_count != null ? ` (${sysStatus.vector_index.vector_count})` : ""}</dd>
             <dt>Офлайн</dt><dd>{sysStatus.offline ? "да" : "нет"}</dd>
           </dl>
+          <button onClick={exportJson}>Экспорт каталога (JSON)</button>
           <h3>Модели</h3>
           <table className="tbl">
             <thead><tr><th>id</th><th>роль</th><th>статус</th><th>лицензия</th></tr></thead>

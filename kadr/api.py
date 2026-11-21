@@ -334,6 +334,23 @@ def create_app(
         except Exception as exc:
             raise HTTPException(status_code=415, detail="not a renderable image") from exc
 
+    @app.get("/v1/assets/{asset_id}/absolute-path")
+    def asset_absolute_path(asset_id: int, request: Request) -> dict[str, Any]:
+        """Абсолютный путь primary-файла — для «показать в папке» (FR-5.6)."""
+        catalog_ = state(request).catalog
+        primary = catalog_.primary_file(asset_id)
+        if primary is None:
+            raise HTTPException(status_code=404, detail="asset has no primary file")
+        root = catalog_.volume_root(int(primary["volume_id"]))
+        if not root:
+            raise HTTPException(status_code=404, detail="volume not found")
+        path = (Path(root) / primary["rel_path"]).resolve()
+        try:
+            path.relative_to(Path(root).resolve())
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail="path outside volume") from exc
+        return {"path": str(path)}
+
     @app.post("/v1/search")
     def search(payload: SearchRequest, request: Request) -> dict[str, Any]:
         result = execute_search(
