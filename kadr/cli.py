@@ -435,6 +435,43 @@ def cmd_serve(args: argparse.Namespace) -> int:
     except Exception as exc:
         raise SystemExit(f"Для serve нужны fastapi/uvicorn: {exc}") from exc
     app = create_app(settings)
+
+    if args.sidecar:
+        import socket
+        import threading
+        import urllib.request
+
+        from .lifecycle import handshake_payload
+
+        with socket.socket() as sock:
+            sock.bind(("127.0.0.1", 0))
+            port = int(sock.getsockname()[1])
+
+        def _run() -> None:
+            uvicorn.run(app, host="127.0.0.1", port=port, log_level=args.log_level)
+
+        thread = threading.Thread(target=_run, daemon=True)
+        thread.start()
+
+        url = f"http://127.0.0.1:{port}/health"
+        deadline = time.monotonic() + 15.0
+        ready = False
+        while time.monotonic() < deadline:
+            try:
+                with urllib.request.urlopen(url, timeout=1) as response:  # noqa: S310 - localhost
+                    if response.status == 200:
+                        ready = True
+                        break
+            except Exception:
+                time.sleep(0.1)
+        if not ready:
+            raise SystemExit("sidecar server did not become ready")
+
+        # stdout-handshake — единственный канал порта/токена (не URL, не логи).
+        print(handshake_payload(port, settings.api_token, os.getpid()), flush=True)
+        thread.join()
+        return 0
+
     if args.print_token:
         print(f"KADR_API_TOKEN={settings.api_token}", file=sys.stderr)
     uvicorn.run(app, host="127.0.0.1", port=args.port, log_level=args.log_level)
@@ -543,6 +580,11 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--port", type=int, default=8765)
     p.add_argument("--log-level", default="info")
     p.add_argument("--print-token", action="store_true")
+    p.add_argument(
+        "--sidecar",
+        action="store_true",
+        help="Режим sidecar: случайный порт + stdout-handshake для Tauri-оболочки (§11.2)",
+    )
     p.set_defaults(func=cmd_serve)
     return parser
 

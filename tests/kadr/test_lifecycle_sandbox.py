@@ -140,3 +140,50 @@ def test_worker_output_is_read_with_a_limit():
     assert _read_limited(io.BytesIO(b"abc"), 3, "stdout") == b"abc"
     with pytest.raises(WorkerError):
         _read_limited(io.BytesIO(b"abcd"), 3, "stdout")
+
+
+def test_serve_sidecar_emits_handshake_and_health():
+    """Sidecar-режим печатает stdout-handshake после готовности /health (§11.2)."""
+    pytest.importorskip("uvicorn")
+    import json
+    import subprocess
+    import urllib.request
+
+    proc = subprocess.Popen(
+        [sys.executable, "-m", "kadr", "serve", "--sidecar"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL,
+        text=True,
+    )
+    handshake = None
+    deadline = time.monotonic() + 20.0
+    try:
+        while time.monotonic() < deadline and handshake is None:
+            line = proc.stdout.readline()
+            if not line:
+                if proc.poll() is not None:
+                    break
+                time.sleep(0.05)
+                continue
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                data = json.loads(line)
+                if "port" in data and "token" in data and data.get("ready"):
+                    handshake = data
+            except ValueError:
+                pass
+        assert handshake is not None, "sidecar handshake not emitted"
+        assert 1 <= handshake["port"] <= 65535
+        assert handshake["token"]
+        with urllib.request.urlopen(
+            f"http://127.0.0.1:{handshake['port']}/health", timeout=5
+        ) as response:
+            assert response.status == 200
+    finally:
+        proc.terminate()
+        try:
+            proc.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            proc.kill()

@@ -56,14 +56,32 @@ fn sidecar_path(app: &tauri::AppHandle) -> Result<PathBuf, String> {
         target_triple(),
         if cfg!(windows) { ".exe" } else { "" }
     );
-    let res = app.path().resource_dir().map_err(|e| e.to_string())?;
-    Ok(res.join("binaries").join(exe))
+    let mut candidates: Vec<PathBuf> = Vec::new();
+    // release: ресурсный каталог бандла (binaries/ рядом с ресурсами).
+    if let Ok(res) = app.path().resource_dir() {
+        candidates.push(res.join("binaries").join(&exe));
+    }
+    // dev: target/debug/kadr.exe → вверх 3 уровня → src-tauri/binaries/.
+    if let Ok(cur) = std::env::current_exe() {
+        if let Some(dev) = cur
+            .parent()
+            .and_then(|d| d.parent())
+            .and_then(|d| d.parent())
+        {
+            candidates.push(dev.join("binaries").join(&exe));
+        }
+    }
+    candidates
+        .into_iter()
+        .find(|c| c.exists())
+        .ok_or_else(|| format!("sidecar binary not found: {exe}"))
 }
 
 /// Спавнит engine и блокируется до JSON-handshake в stdout.
 fn spawn_engine(app: &tauri::AppHandle, state: &State<EngineState>) -> Result<(), String> {
     let exe = sidecar_path(app)?;
     let mut child = Command::new(&exe)
+        .args(["serve", "--sidecar"])
         .stdout(Stdio::piped())
         .stderr(Stdio::null())
         .spawn()
@@ -96,6 +114,7 @@ fn spawn_engine(app: &tauri::AppHandle, state: &State<EngineState>) -> Result<()
     let (url, token) = creds.ok_or("sidecar handshake timeout")?;
     *state.base_url.lock().unwrap() = Some(url.clone());
     *state.token.lock().unwrap() = Some(token.clone());
+    println!("[kadr] engine ready at {url}");
     Ok(())
 }
 
