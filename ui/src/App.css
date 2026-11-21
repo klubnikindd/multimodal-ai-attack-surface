@@ -215,3 +215,38 @@ button:hover {
 .prog {
   color: #7ab;
 }
+
+.folders {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.folders small {
+  display: block;
+  font-size: 0.7rem;
+  color: #999;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+select {
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #222;
+  color: #eee;
+}
+.card.selected {
+  outline: 2px solid #4a8;
+}
+.tree {
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 0.8rem;
+  overflow: auto;
+  max-height: 400px;
+  font-size: 0.8rem;
+  white-space: pre;
+}
