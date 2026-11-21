@@ -85,6 +85,7 @@ fn spawn_engine(app: &tauri::AppHandle, state: &State<EngineState>) -> Result<()
     let exe = sidecar_path(app)?;
     let mut child = Command::new(&exe)
         .args(["serve", "--sidecar"])
+        .stdin(Stdio::piped())
         .stdout(Stdio::piped())
         .stderr(Stdio::null())
         .spawn()

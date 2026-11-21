@@ -441,7 +441,7 @@ def cmd_serve(args: argparse.Namespace) -> int:
         import threading
         import urllib.request
 
-        from .lifecycle import handshake_payload
+        from .lifecycle import Watchdog, handshake_payload
 
         with socket.socket() as sock:
             sock.bind(("127.0.0.1", 0))
@@ -451,6 +451,10 @@ def cmd_serve(args: argparse.Namespace) -> int:
         server = uvicorn.Server(config)
         thread = threading.Thread(target=server.run, daemon=True)
         thread.start()
+
+        # Watchdog: самозавершение при смерти родителя (Linux/macOS — getppid;
+        # Windows — Job Object kill-on-close у Rust-хоста).
+        Watchdog(stdin=sys.stdin).start()
 
         url = f"http://127.0.0.1:{port}/health"
         deadline = time.monotonic() + 15.0
