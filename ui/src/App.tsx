@@ -99,6 +99,9 @@ export default function App() {
   const [kindFilter, setKindFilter] = useState<string | null>(() => loadLS("kindFilter", null));
   const [sortBy, setSortBy] = useState<string>(() => loadLS("sortBy", "taken_at"));
   const [selected, setSelected] = useState<number | null>(null);
+  const [lightbox, setLightbox] = useState<number | null>(null);
+  const [largeThumbs, setLargeThumbs] = useState<Record<number, string>>({});
+  const [selectedReview, setSelectedReview] = useState<Set<number>>(new Set());
   const [ratings, setRatings] = useState<Record<number, number>>(() => loadLS("ratings", {}));
   const [marks, setMarks] = useState<Record<number, boolean>>(() => loadLS("marks", {}));
   const [colors, setColors] = useState<Record<number, number>>(() => loadLS("colors", {}));
@@ -107,6 +110,8 @@ export default function App() {
   const [mode, setMode] = useState("copy");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [presetsData, setPresetsData] = useState<Record<string, any>>({});
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [rulesData, setRulesData] = useState<any>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [plan, setPlan] = useState<any>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -171,14 +176,24 @@ export default function App() {
     catch (e) { setError(String(e)); }
   };
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const updateSafety = (key: string, val: any) => setRulesData((d: any) => (d ? { ...d, safety: { ...d.safety, [key]: val } } : d));
+  const updateRulePath = (idx: number, path: string) => setRulesData((d: any) => {
+    if (!d) return d;
+    const rules = [...d.rules];
+    rules[idx] = { ...rules[idx], then: { ...rules[idx].then, path } };
+    return { ...d, rules };
+  });
+  const addRule = () => setRulesData((d: any) => (d ? { ...d, rules: [...d.rules, { id: `custom${Date.now()}`, when: null, then: { path: "Custom/{date:%Y/%Y-%m}", tags: [] } }] } : d));
+  const removeRule = (idx: number) => setRulesData((d: any) => (d ? { ...d, rules: d.rules.filter((_: any, i: number) => i !== idx) } : d));
+
   const buildPlan = async () => {
     setStatus("Построение плана…");
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const body: any = { library_root: destDir || undefined };
-      const p = presetsData[preset];
-      if (p) {
-        body.rules = { ...p, safety: { ...(p.safety || {}), mode } };
+      if (rulesData) {
+        body.rules = rulesData;
       } else {
         body.preset = preset;
       }
@@ -188,6 +203,23 @@ export default function App() {
   };
   const applyPlan = async (id: number) => { setStatus("Применение…"); try { await req("POST", `/v1/plans/${id}/apply`, { force: false }); setStatus(null); } catch (e) { setError(String(e)); setStatus(null); } };
   const undoPlan = async (id: number) => { setStatus("Откат…"); try { await req("POST", `/v1/plans/${id}/undo`); setStatus(null); } catch (e) { setError(String(e)); setStatus(null); } };
+
+    const cancelJob = async (id: number) => { try { await req("POST", `/v1/jobs/${id}/cancel`); await loadJobs(); } catch (e) { setError(String(e)); } };
+  const toggleReview = (id: number) => setSelectedReview((s) => { const n = new Set(s); if (n.has(id)) n.delete(id); else n.add(id); return n; });
+  const resolveSelected = async () => {
+    for (const id of selectedReview) { try { await req("POST", `/v1/review/${id}/resolve`); } catch (e) { setError(String(e)); } }
+    setSelectedReview(new Set());
+    await loadReview();
+  };
+  const exportCsv = () => {
+    const header = ["id","kind","path","taken_at","tags","gps_lat","gps_lon"];
+    const rows = cards.map((c) => [c.id, c.kind, `"${(c.path || "").replace(/"/g, '""')}"`, c.taken_at || "", `"${(c.tags || []).join("; ")}"`, c.gps_lat ?? "", c.gps_lon ?? ""]);
+    const csv = [header.join(","), ...rows.map((r) => r.join(","))].join("\n");
+    const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a"); a.href = url; a.download = "kadr-catalog.csv"; a.click();
+    URL.revokeObjectURL(url);
+  };
 
   const exportJson = async () => {
     try {
@@ -211,6 +243,29 @@ export default function App() {
   useEffect(() => { if (tab === "status") loadStatus(); if (tab === "review") loadReview(); if (tab === "jobs") loadJobs(); if (tab === "rules") { loadPlans(); loadPresets(); } }, [tab, loadStatus, loadReview, loadJobs, loadPlans]);
   useEffect(() => saveLS("kindFilter", kindFilter), [kindFilter]);
   useEffect(() => saveLS("sortBy", sortBy), [sortBy]);
+  useEffect(() => {
+    if (tab !== "jobs") return;
+    const id = setInterval(loadJobs, 3000);
+    return () => clearInterval(id);
+  }, [tab, loadJobs]);
+  useEffect(() => {
+    const id = lightbox;
+    if (id != null && !largeThumbs[id]) {
+      invoke<string>("engine_thumbnail", { assetId: id, size: 1024 })
+        .then((b64) => setLargeThumbs((t) => ({ ...t, [id]: b64 })))
+        .catch(() => {});
+    }
+  }, [lightbox, largeThumbs]);
+  useEffect(() => {
+    const p = presetsData[preset];
+    if (p) {
+      setRulesData({
+        safety: { ...(p.safety || {}), mode },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        rules: (p.rules || []).map((r: any) => ({ ...r, then: { ...(r.then || {}) } })),
+      });
+    }
+  }, [preset, mode, presetsData]);
 
   const kinds = Array.from(new Set(cards.map((c) => c.kind)));
   const filtered = useMemo(() => {
@@ -239,7 +294,7 @@ export default function App() {
       const idx = filtered.findIndex((c) => c.id === selected);
       if (e.key === "ArrowRight") setSelected(filtered[idx < filtered.length - 1 ? idx + 1 : 0].id);
       else if (e.key === "ArrowLeft") setSelected(filtered[idx > 0 ? idx - 1 : filtered.length - 1].id);
-      else if (e.key === "Escape") setSelected(null);
+      else if (e.key === "Escape") { setSelected(null); setLightbox(null); }
       else if (selected != null && !e.ctrlKey && e.key >= "1" && e.key <= "5") {
         const r = parseInt(e.key, 10);
         setRatings((rr) => { const n = { ...rr, [selected]: r }; saveLS("ratings", n); return n; });
@@ -298,7 +353,7 @@ export default function App() {
           </div>
           <section className="gallery">
             {filtered.map((c) => (
-              <figure key={c.id} className={c.id === selected ? "card selected" : "card"} onClick={() => setSelected(c.id)}>
+              <figure key={c.id} className={c.id === selected ? "card selected" : "card"} onClick={() => { setSelected(c.id); setLightbox(c.id); }}>
                 {colors[c.id] && <span className="dot" style={{ background: COLORS[colors[c.id] - 1] }} />}
                 {thumbs[c.id] ? (
                   <img src={`data:image/jpeg;base64,${thumbs[c.id]}`} alt={filename(c.path)} loading="lazy" />
@@ -365,22 +420,35 @@ export default function App() {
             </select>
             <button onClick={buildPlan}>Построить план</button>
           </div>
-          {presetsData[preset]?.rules && (
+          {rulesData && (
             <>
-              <h3>Правила пресета «{preset}»</h3>
+              <h3>Правила (редактируемые)</h3>
+              <div className="safety">
+                <label>Коллизии:
+                  <select value={rulesData.safety?.collision ?? "suffix"} onChange={(e) => updateSafety("collision", e.target.value)}>
+                    {["suffix", "skip", "ask", "hash"].map((c) => <option key={c} value={c}>{c}</option>)}
+                  </select>
+                </label>
+                <label>
+                  <input type="checkbox" checked={!!rulesData.safety?.never_delete} onChange={(e) => updateSafety("never_delete", e.target.checked)} />
+                  Никогда не удалять оригиналы
+                </label>
+              </div>
               <table className="tbl">
-                <thead><tr><th>правило</th><th>куда (шаблон)</th><th>условие</th></tr></thead>
+                <thead><tr><th>правило</th><th>куда (шаблон)</th><th>условие</th><th></th></tr></thead>
                 <tbody>
                   {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                  {(presetsData[preset].rules as any[]).map((r: any) => (
+                  {rulesData.rules.map((r: any, i: number) => (
                     <tr key={r.id}>
                       <td>{r.id}</td>
-                      <td>{r.then?.path ?? "—"}</td>
+                      <td><input value={r.then?.path ?? ""} onChange={(e) => updateRulePath(i, e.target.value)} /></td>
                       <td className="when">{r.when ? JSON.stringify(r.when) : "всегда"}</td>
+                      <td><button onClick={() => removeRule(i)}>✕</button></td>
                     </tr>
                   ))}
                 </tbody>
               </table>
+              <button onClick={addRule}>+ Добавить правило</button>
             </>
           )}
           {plan?.tree_text && <pre className="tree">{plan.tree_text}</pre>}
@@ -408,6 +476,7 @@ export default function App() {
             <dt>Офлайн</dt><dd>{sysStatus.offline ? "да" : "нет"}</dd>
           </dl>
           <button onClick={exportJson}>Экспорт каталога (JSON)</button>
+          <button onClick={exportCsv}>Экспорт (CSV)</button>
           <h3>Модели</h3>
           <table className="tbl">
             <thead><tr><th>id</th><th>роль</th><th>статус</th><th>лицензия</th></tr></thead>
@@ -423,9 +492,11 @@ export default function App() {
       {tab === "review" && (
         <section className="panel">
           <h2>Review inbox</h2>
+            {review.length > 0 && <button onClick={resolveSelected} disabled={selectedReview.size === 0}>Подтвердить выбранные ({selectedReview.size})</button>}
           {review.length === 0 && <p className="empty">Нет элементов на ревью.</p>}
           {review.map((r) => (
             <div key={r.id} className="row">
+              <input type="checkbox" checked={selectedReview.has(r.id)} onChange={() => toggleReview(r.id)} />
               <span className="sev">{r.severity ?? "?"}</span>
               <span className="reason">{r.reason ?? r.state ?? `#${r.id}`}</span>
               <span className="st">{r.state}</span>
@@ -442,10 +513,19 @@ export default function App() {
             <div key={j.id} className="row">
               <span className="kind">{j.kind}</span>
               <span className="st">{j.state}</span>
-              <span className="prog">{j.progress != null ? `${j.progress}%` : ""}</span>
+              <span className="prog">{j.progress != null ? `${j.progress}%` : ""}</span> {(j.state === "running" || j.state === "queued") && <button onClick={() => cancelJob(j.id)}>Отменить</button>}
             </div>
           ))}
         </section>
+      )}
+      {lightbox != null && (
+        <div className="lightbox" onClick={() => setLightbox(null)}>
+          <div className="lightbox-inner" onClick={(e) => e.stopPropagation()}>
+            {largeThumbs[lightbox] ? <img src={"data:image/jpeg;base64," + largeThumbs[lightbox]} alt="" /> : <div className="ph">Загрузка…</div>}
+            <div className="lightbox-meta">{filename(cards.find((c) => c.id === lightbox)?.path ?? null)}</div>
+            <button className="lightbox-close" onClick={() => setLightbox(null)}>✕</button>
+          </div>
+        </div>
       )}
     </main>
   );

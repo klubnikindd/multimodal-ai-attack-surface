@@ -230,12 +230,13 @@ async fn engine_request(
 
 /// Возвращает миниатюру (JPEG) в base64 для галереи.
 #[tauri::command]
-async fn engine_thumbnail(state: State<'_, EngineState>, asset_id: i64) -> Result<String, String> {
+async fn engine_thumbnail(state: State<'_, EngineState>, asset_id: i64, size: Option<i64>) -> Result<String, String> {
     use std::io::Read;
 
     let base_url = state.base_url.lock().unwrap().clone().ok_or("engine not ready")?;
     let token = state.token.lock().unwrap().clone().ok_or("no token")?;
-    let url = format!("{base_url}/v1/assets/{asset_id}/thumbnail");
+    let size = size.unwrap_or(256);
+    let url = format!("{base_url}/v1/assets/{asset_id}/thumbnail?size={size}");
     let result = tauri::async_runtime::spawn_blocking(move || {
         let resp = ureq::get(&url)
             .set("Authorization", &format!("Bearer {token}"))

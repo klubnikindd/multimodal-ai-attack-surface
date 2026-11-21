@@ -60,6 +60,8 @@
   MP4/MOV/MP3 embedded-запись откладывается до P1.
 - Свойства ОС (Windows `IPropertyStore`, Finder comment, Linux xattr) — P1.
   xattr/теги теряются на FAT/exFAT и при копировании через некоторые облака.
+- Карта в UI использует онлайн-тайлы OpenStreetMap (нужен интернет). Офлайн-тайлы
+  (MBTiles) для NFR-08 не реализованы — P2.
 
 ## Лица, приватность, экспорт
 
