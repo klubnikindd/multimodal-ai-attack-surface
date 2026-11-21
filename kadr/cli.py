@@ -447,10 +447,9 @@ def cmd_serve(args: argparse.Namespace) -> int:
             sock.bind(("127.0.0.1", 0))
             port = int(sock.getsockname()[1])
 
-        def _run() -> None:
-            uvicorn.run(app, host="127.0.0.1", port=port, log_level=args.log_level)
-
-        thread = threading.Thread(target=_run, daemon=True)
+        config = uvicorn.Config(app, host="127.0.0.1", port=port, log_level=args.log_level)
+        server = uvicorn.Server(config)
+        thread = threading.Thread(target=server.run, daemon=True)
         thread.start()
 
         url = f"http://127.0.0.1:{port}/health"
@@ -467,9 +466,15 @@ def cmd_serve(args: argparse.Namespace) -> int:
         if not ready:
             raise SystemExit("sidecar server did not become ready")
 
-        # stdout-handshake — единственный канал порта/токена (не URL, не логи).
-        print(handshake_payload(port, settings.api_token, os.getpid()), flush=True)
-        thread.join()
+        # stdout-handshake — единственный канал порта/токена/CSRF (не URL, не логи).
+        csrf_token = app.state.security.csrf_token
+        print(handshake_payload(port, settings.api_token, os.getpid(), csrf_token=csrf_token), flush=True)
+
+        # Graceful shutdown: POST /internal/shutdown ставит флаг → сервер мягко останавливается.
+        while not app.state.shutdown_requested:
+            time.sleep(0.1)
+        server.should_exit = True
+        thread.join(timeout=5)
         return 0
 
     if args.print_token:

@@ -21,6 +21,7 @@ pub struct EngineState {
     child: Mutex<Option<Child>>,
     base_url: Mutex<Option<String>>,
     token: Mutex<Option<String>>,
+    csrf_token: Mutex<Option<String>>,
     #[cfg(windows)]
     job: Mutex<Option<job_object::JobObject>>,
 }
@@ -29,6 +30,8 @@ pub struct EngineState {
 struct Handshake {
     port: u16,
     token: String,
+    #[serde(default)]
+    csrf_token: Option<String>,
     #[serde(default)]
     ready: bool,
 }
@@ -96,7 +99,7 @@ fn spawn_engine(app: &tauri::AppHandle, state: &State<EngineState>) -> Result<()
 
     let stdout = child.stdout.take().ok_or("sidecar stdout unavailable")?;
     let reader = BufReader::new(stdout);
-    let mut creds: Option<(String, String)> = None;
+    let mut creds: Option<(String, String, Option<String>)> = None;
     for line in reader.lines() {
         let line = line.map_err(|e| e.to_string())?;
         let t = line.trim();
@@ -105,16 +108,17 @@ fn spawn_engine(app: &tauri::AppHandle, state: &State<EngineState>) -> Result<()
         }
         if let Ok(h) = serde_json::from_str::<Handshake>(t) {
             if h.ready && h.port > 0 && !h.token.is_empty() {
-                creds = Some((format!("http://127.0.0.1:{}", h.port), h.token));
+                creds = Some((format!("http://127.0.0.1:{}", h.port), h.token, h.csrf_token));
                 break;
             }
         }
     }
     *state.child.lock().unwrap() = Some(child);
-    let (url, token) = creds.ok_or("sidecar handshake timeout")?;
+    let (url, token, csrf) = creds.ok_or("sidecar handshake timeout")?;
     *state.base_url.lock().unwrap() = Some(url.clone());
     *state.token.lock().unwrap() = Some(token.clone());
-    println!("[kadr] engine ready at {url}");
+    *state.csrf_token.lock().unwrap() = csrf;
+    eprintln!("[kadr] engine ready at {url}");
     Ok(())
 }
 
@@ -122,11 +126,16 @@ fn spawn_engine(app: &tauri::AppHandle, state: &State<EngineState>) -> Result<()
 fn app_shutdown(state: &State<EngineState>) {
     let url = state.base_url.lock().unwrap().clone();
     let token = state.token.lock().unwrap().clone();
+    let csrf = state.csrf_token.lock().unwrap().clone();
     if let (Some(url), Some(token)) = (url, token) {
-        let _ = ureq::post(&format!("{url}/internal/shutdown"))
+        let csrf = csrf.unwrap_or_else(|| token.clone());
+        let r = ureq::post(&format!("{url}/internal/shutdown"))
             .set("Authorization", &format!("Bearer {token}"))
-            .set("X-Kadr-CSRF", &token)
+            .set("X-Kadr-CSRF", &csrf)
             .send_string("{}");
+        eprintln!("[kadr] shutdown POST -> {:?}", r.map(|resp| resp.status()));
+    } else {
+        eprintln!("[kadr] shutdown: no url/token");
     }
     if let Some(mut child) = state.child.lock().unwrap().take() {
         for _ in 0..20 {

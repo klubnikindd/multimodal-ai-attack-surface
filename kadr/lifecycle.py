@@ -355,9 +355,12 @@ class Watchdog:
             self._stop.set()
 
 
-def handshake_payload(port: int, token: str, pid: int) -> str:
-    """stdout-handshake: токен не попадает в URL/логи."""
-    return json.dumps({"port": port, "token": token, "pid": pid, "ready": True})
+def handshake_payload(port: int, token: str, pid: int, csrf_token: str | None = None) -> str:
+    """stdout-handshake: токен/CSRF не попадают в URL/логи."""
+    payload: dict[str, Any] = {"port": port, "token": token, "pid": pid, "ready": True}
+    if csrf_token:
+        payload["csrf_token"] = csrf_token
+    return json.dumps(payload)
 
 
 def parse_handshake(line: str) -> dict[str, Any]:
