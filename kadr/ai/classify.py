@@ -102,7 +102,7 @@ def run_ocr(
 def _media_path(catalog: Catalog, asset_id: int) -> Path | None:
     # FR-3.6 + FR-3.7: видео — сцены/ключевые кадры + ASR (опционально)
     if kind == "video" and path is not None:
-        run_video_pipeline(catalog, asset_id, path)
+        run_video_pipeline(catalog, asset_id, path, run_asr=False)  # ASR — opt-in (тяжёлая)
 
     primary = catalog.primary_file(asset_id)
     if primary is None:
