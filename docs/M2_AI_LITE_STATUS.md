@@ -32,9 +32,12 @@ InsightFace/буффало-модель — non-commercial. Нужен комм�
 детектор+энкодер (например, SCRFD + AdaFace/ArcFace под допустимой лицензией)
 или собственный лёгкий энкодер. Пока лица выключены.
 
-### FR-3.10 (каскад L0→L4) / FR-3.11 (ансамбль+TTA) / FR-3.12 (персонализация)
-Отложено: требуют активного SigLIP2/CLIP-энкодера (см. выше) и VLM-ансамбля.
-SEC-03 (калибровка/TTA-consistency) тоже зависит от этого.
+### FR-3.10 (каскад L0→L4)
+✅ L0 (эвристика) + **L1 (SigLIP2 image→text zero-shot по сценам)** вшит в
+`classify_asset` (`kadr/ai/cascade.py`, `scene_l1` AI-output, флаг `needs_vlm` для L2).
+L2 (авто-VLM по низкой уверенности) — через ночной планировщик, не автоматически.
+### FR-3.11 (ансамбль+TTA) / FR-3.12 (персонализация)
+Отложено: согласие CLIP↔VLM (TTA) и feedback-реранжинг — отдельный код.
 
 ### Golden: adversarial ≥10% и «трудные» ≥40%
 - adversarial: ✅ **36/393 = 9.2%** (malformed/typographic/exif_spoof/pixel, `generate_adversarial.py` из `v1/target_raw/`).

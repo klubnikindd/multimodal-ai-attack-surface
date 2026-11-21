@@ -20,6 +20,7 @@ from ..security.paths import safe_join
 from ..workers.client import run_ocr_sandboxed
 from .concepts import zero_shot_tags
 from .duplicates import compute_dup_groups
+from .cascade import classify_scene
 from .embeddings import ConceptHashingEmbedding, embed_asset, get_embedding_backend
 
 logger = logging.getLogger(__name__)
@@ -232,10 +233,23 @@ def classify_asset(
             runtime_ms=(time.monotonic() - started) * 1000,
             device="cpu",
         )
-    catalog.update_asset_ai(asset_id, media_class=media_class, scene_type=scene_type)
-
     backend = get_embedding_backend(catalog)
     vector = embed_asset(catalog, asset_id, backend)
+    # L1 (FR-3.10): zero-shot по изображению (SigLIP2 image→text)
+    l1_scene, l1_conf, needs_vlm = classify_scene(vector, backend)
+    if scene_type in (None, "unknown"):
+        scene_type = l1_scene
+    catalog.set_ai_output(
+        asset_id,
+        "scene_l1",
+        backend.model_id,
+        {"scene": l1_scene, "confidence": round(l1_conf, 4), "needs_vlm": needs_vlm},
+        confidence=l1_conf,
+        device="cpu",
+    )
+
+    catalog.update_asset_ai(asset_id, media_class=media_class, scene_type=scene_type)
+
     all_tags = [row["name"] for row in catalog.tags_for_asset(asset_id)]
     catalog.fts_upsert(
         asset_id,
