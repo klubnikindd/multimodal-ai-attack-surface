@@ -5487,6 +5487,20 @@
       "license": "personal-derivative"
     },
     {
+      "name": "adv_malformed_10.jpg",
+      "bytes": 11228,
+      "blake3": "7a14615dc9d97ea5f9aa9be4b1f0d1bbf99f027fec8bb54b720a1d1a2e1b4330",
+      "sha256": "a4ba9908421c9c21d48f1e1dfbdd10fe114b3df65dc30109b8c9ab4eca665639",
+      "ext": "jpg",
+      "kind": "other",
+      "make": null,
+      "model": null,
+      "taken_at": null,
+      "taken_at_source": null,
+      "source": "adversarial-generated",
+      "license": "personal-derivative"
+    },
+    {
       "name": "adv_typo_01.jpg",
       "bytes": 22764,
       "blake3": "67e11af4d4e4140e006ff37ffdd4c80cfc3f600be370bee92fb26ec142adbb06",
@@ -5603,6 +5617,20 @@
       "bytes": 403758,
       "blake3": "8544fed79665c6ca95d68ed27fcf927a6c84b2c4380ad05aeb91030a17286001",
       "sha256": "5e1ca4062fe58888bbac585526e052ac51784760fd1c037b991725b3971f3e34",
+      "ext": "jpg",
+      "kind": "photo",
+      "make": null,
+      "model": null,
+      "taken_at": null,
+      "taken_at_source": null,
+      "source": "adversarial-generated",
+      "license": "personal-derivative"
+    },
+    {
+      "name": "adv_typo_10.jpg",
+      "bytes": 283156,
+      "blake3": "9926d8511d80fffbd9b64affcee855b1fe41de08452cba1d8ae039e88638cbbe",
+      "sha256": "e444c2f814ec6d65a808030b8c00d4f2cde03326f7c7c910488cce36a53fcbc6",
       "ext": "jpg",
       "kind": "photo",
       "make": null,
@@ -5739,6 +5767,20 @@
       "license": "personal-derivative"
     },
     {
+      "name": "adv_exif_10.jpg",
+      "bytes": 349277,
+      "blake3": "8b62e521c3289b662837e990b6d06af4a5e6727461330220b4939e50df3da179",
+      "sha256": "e5920cb41dcf9a0c648fb4c41dd5cfada1c7b469ed34c3e61a933f7d3dbda0f2",
+      "ext": "jpg",
+      "kind": "photo",
+      "make": "FAKE-CAM",
+      "model": "FAKE-MODEL",
+      "taken_at": null,
+      "taken_at_source": null,
+      "source": "adversarial-generated",
+      "license": "personal-derivative"
+    },
+    {
       "name": "adv_pixel_01.jpg",
       "bytes": 1039553,
       "blake3": "c9e9b5be95bdc7cbc4895dd7bca7cd57e6460eb90269c32b2a36321e9e91fab9",
@@ -5855,6 +5897,20 @@
       "bytes": 1075848,
       "blake3": "7a5318dfe60968eeb02107d6251994816af0bd24d241e3e649ffbaee6e49dbca",
       "sha256": "409c635047035d0e5998cad98c78b334651621b2ff6bb71dec91521c3225d4e7",
+      "ext": "jpg",
+      "kind": "photo",
+      "make": null,
+      "model": null,
+      "taken_at": null,
+      "taken_at_source": null,
+      "source": "adversarial-generated",
+      "license": "personal-derivative"
+    },
+    {
+      "name": "adv_pixel_10.jpg",
+      "bytes": 678810,
+      "blake3": "6fcedcb88e7a9e87be4a6fc03e87ddc4a1ad20d7e556cb6337eda520e1809839",
+      "sha256": "a47a8ab09c0f36eba84c7bdd6d27fe6f280c72ef9a15e5882952c6349e34ddc4",
       "ext": "jpg",
       "kind": "photo",
       "make": null,

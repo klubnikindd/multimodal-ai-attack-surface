@@ -23,7 +23,7 @@ MANIFEST = REPO / "tests" / "golden" / "manifest.json"
 LABELS = REPO / "tests" / "golden" / "labels.json"
 EXPECTED = REPO / "tests" / "golden" / "expected.json"
 
-_TEXTS = ["RECEIPT 123", "ЧЕК 456", "DOCUMENT", "PASSPORT", "СВАДЬБА", "CONTRACT", "SCREENSHOT", "INVOICE 789", "ДОГОВОР"]
+_TEXTS = ["RECEIPT 123", "ЧЕК 456", "DOCUMENT", "PASSPORT", "СВАДЬБА", "CONTRACT", "SCREENSHOT", "INVOICE 789", "ДОГОВОР", "БИЛЕТ"]
 
 
 def _blake3(b: bytes) -> str:
@@ -66,7 +66,7 @@ def gen_malformed(bases: list[Path]) -> list[dict]:
         b = bases[i].read_bytes()
         data.append(("wrongext", b))
     data.append(("zero", b""))
-    for i in range(6, 8):
+    for i in range(6, 9):
         b = bytearray(bases[i].read_bytes())
         for j in range(min(8, len(b))):
             b[j] ^= 0xFF
@@ -83,7 +83,7 @@ def gen_malformed(bases: list[Path]) -> list[dict]:
 
 def gen_typographic(bases: list[Path]) -> list[dict]:
     entries = []
-    for i in range(9):
+    for i in range(10):
         p = bases[(i + 8) % len(bases)]
         img = _to_rgb(Image.open(p))
         draw = ImageDraw.Draw(img)
@@ -98,7 +98,7 @@ def gen_typographic(bases: list[Path]) -> list[dict]:
 def gen_exif_spoof(bases: list[Path]) -> list[dict]:
     entries = []
     fake_dates = ["1900:01:01 00:00:00", "2099:12:31 23:59:59", "1999:06:15 12:00:00"]
-    for i in range(9):
+    for i in range(10):
         p = bases[(i + 17) % len(bases)]
         img = _to_rgb(Image.open(p))
         dt = fake_dates[i % len(fake_dates)]
@@ -129,7 +129,7 @@ def gen_pixel(bases: list[Path]) -> list[dict]:
     import numpy as np
 
     entries = []
-    for i in range(9):
+    for i in range(10):
         p = bases[(i + 26) % len(bases)]
         img = _to_rgb(Image.open(p))
         arr = np.asarray(img, dtype=np.float32)
@@ -161,7 +161,12 @@ def build_entries() -> None:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     labels = json.loads(LABELS.read_text(encoding="utf-8"))
     expected = json.loads(EXPECTED.read_text(encoding="utf-8"))
-    existing = {a["name"] for a in labels["assets"]}
+    labels["assets"] = [a for a in labels["assets"] if not a["name"].startswith("adv_")]
+    manifest["files"] = [f for f in manifest["files"] if not f["name"].startswith("adv_")]
+    for k in list(expected):
+        if k.startswith("adv_"):
+            del expected[k]
+    existing = set()
 
     generated = []
     generated += [(e, "malformed") for e in gen_malformed(bases)]

@@ -8439,6 +8439,27 @@
       "hard": false
     },
     {
+      "name": "adv_malformed_10.jpg",
+      "kind": "other",
+      "camera": null,
+      "taken_at": null,
+      "taken_at_source": null,
+      "folder": "_Unsorted",
+      "scene": null,
+      "event": null,
+      "quality": [],
+      "duplicate": {
+        "group": "single",
+        "copies": 0,
+        "is_original": true,
+        "near_dup_base": null,
+        "near_dup_copies": null
+      },
+      "evil": true,
+      "evil_reason": "malformed: corrupt",
+      "hard": false
+    },
+    {
       "name": "adv_typo_01.jpg",
       "kind": "photo",
       "camera": null,
@@ -8625,6 +8646,27 @@
       },
       "evil": true,
       "evil_reason": "typographic: ДОГОВОР",
+      "hard": true
+    },
+    {
+      "name": "adv_typo_10.jpg",
+      "kind": "photo",
+      "camera": null,
+      "taken_at": null,
+      "taken_at_source": null,
+      "folder": "_Unsorted",
+      "scene": null,
+      "event": null,
+      "quality": [],
+      "duplicate": {
+        "group": "single",
+        "copies": 0,
+        "is_original": true,
+        "near_dup_base": null,
+        "near_dup_copies": null
+      },
+      "evil": true,
+      "evil_reason": "typographic: БИЛЕТ",
       "hard": true
     },
     {
@@ -8817,6 +8859,27 @@
       "hard": false
     },
     {
+      "name": "adv_exif_10.jpg",
+      "kind": "photo",
+      "camera": null,
+      "taken_at": null,
+      "taken_at_source": null,
+      "folder": "_Unsorted",
+      "scene": null,
+      "event": null,
+      "quality": [],
+      "duplicate": {
+        "group": "single",
+        "copies": 0,
+        "is_original": true,
+        "near_dup_base": null,
+        "near_dup_copies": null
+      },
+      "evil": true,
+      "evil_reason": "exif_spoof: 1900:01:01 00:00:00",
+      "hard": false
+    },
+    {
       "name": "adv_pixel_01.jpg",
       "kind": "photo",
       "camera": null,
@@ -9004,9 +9067,30 @@
       "evil": true,
       "evil_reason": "pixel: gauss-noise-sigma35-seed1008",
       "hard": true
+    },
+    {
+      "name": "adv_pixel_10.jpg",
+      "kind": "photo",
+      "camera": null,
+      "taken_at": null,
+      "taken_at_source": null,
+      "folder": "_Unsorted",
+      "scene": null,
+      "event": null,
+      "quality": [],
+      "duplicate": {
+        "group": "single",
+        "copies": 0,
+        "is_original": true,
+        "near_dup_base": null,
+        "near_dup_copies": null
+      },
+      "evil": true,
+      "evil_reason": "pixel: gauss-noise-sigma35-seed1009",
+      "hard": true
     }
   ],
   "vlm_prompt_rev": "vlm-json-v5-2026-11-21",
   "hard_ratio_note": "«трудные» (слабая дата filename ИЛИ vlm_confidence<0.75): 8/357",
-  "adversarial_note": "adversarial (evil) файлы: 36 сгенерированы из inputs/Target/"
+  "adversarial_note": "adversarial (evil) файлы: 40 сгенерированы из inputs/Target/"
 }

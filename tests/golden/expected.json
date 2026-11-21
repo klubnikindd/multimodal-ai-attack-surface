@@ -365,6 +365,7 @@
   "adv_malformed_07.jpg": "_Unsorted",
   "adv_malformed_08.jpg": "_Unsorted",
   "adv_malformed_09.jpg": "_Unsorted",
+  "adv_malformed_10.jpg": "_Unsorted",
   "adv_typo_01.jpg": "_Unsorted",
   "adv_typo_02.jpg": "_Unsorted",
   "adv_typo_03.jpg": "_Unsorted",
@@ -374,6 +375,7 @@
   "adv_typo_07.jpg": "_Unsorted",
   "adv_typo_08.jpg": "_Unsorted",
   "adv_typo_09.jpg": "_Unsorted",
+  "adv_typo_10.jpg": "_Unsorted",
   "adv_exif_01.jpg": "_Unsorted",
   "adv_exif_02.jpg": "_Unsorted",
   "adv_exif_03.jpg": "_Unsorted",
@@ -383,6 +385,7 @@
   "adv_exif_07.jpg": "_Unsorted",
   "adv_exif_08.jpg": "_Unsorted",
   "adv_exif_09.jpg": "_Unsorted",
+  "adv_exif_10.jpg": "_Unsorted",
   "adv_pixel_01.jpg": "_Unsorted",
   "adv_pixel_02.jpg": "_Unsorted",
   "adv_pixel_03.jpg": "_Unsorted",
@@ -391,5 +394,6 @@
   "adv_pixel_06.jpg": "_Unsorted",
   "adv_pixel_07.jpg": "_Unsorted",
   "adv_pixel_08.jpg": "_Unsorted",
-  "adv_pixel_09.jpg": "_Unsorted"
+  "adv_pixel_09.jpg": "_Unsorted",
+  "adv_pixel_10.jpg": "_Unsorted"
 }
