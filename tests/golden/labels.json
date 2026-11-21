@@ -3,7 +3,7 @@
   "owner": "Denis Klubnikin",
   "labeler": "VLM (Qwen3-VL-2B, GPU, 768px) + ревью владельца",
   "labeled_blind": true,
-  "note": "scene/event/quality заполнены VLM автоматически (Qwen3-VL-2B, prompt_rev=vlm-json-v4). scene_type/event_type валидны; quality частично пуст (модель вернула не-список). Обязателен ревью владельца вслепую (§13.2.1). merged=330 valid=244 invalid_json=86 errors=0",
+  "note": "scene/event/quality заполнены VLM (Qwen3-VL-2B, prompt_rev=v5, json_schema-constrained + repeat_penalty). 100% валидный JSON. Обязателен ревью владельца вслепую (§13.2.1). merged=330 valid=330",
   "assets": [
     {
       "name": "DSCF1028.MOV",
@@ -276,8 +276,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": 0.85,
-      "vlm_caption_ru": "Мухоморы на камне в ночном лесу",
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Мухоморы на камне в природе",
       "vlm_labeled": true
     },
     {
@@ -311,9 +311,7 @@
       "folder": "2022/2022-06-08",
       "scene": "landscape",
       "event": "none",
-      "quality": [
-        "some shadows"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -335,9 +333,7 @@
       "folder": "2022/2022-06-08",
       "scene": "landscape",
       "event": "none",
-      "quality": [
-        "blurry"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -369,7 +365,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Зелёные листья на ветке в лесу",
+      "vlm_caption_ru": "Зелёные листья на ветке в лесу под ярким солнцем",
       "vlm_labeled": true
     },
     {
@@ -381,9 +377,7 @@
       "folder": "2022/2022-06-08",
       "scene": "landscape",
       "event": "none",
-      "quality": [
-        "some blur"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -414,7 +408,7 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": 0.85,
+      "vlm_confidence": 0.95,
       "vlm_caption_ru": "Зелёные листья на ветке в лесу",
       "vlm_labeled": true
     },
@@ -427,9 +421,7 @@
       "folder": "2022/2022-06-08",
       "scene": "landscape",
       "event": "none",
-      "quality": [
-        "some leaves are slightly blurred"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -451,9 +443,7 @@
       "folder": "2022/2022-06-08",
       "scene": "landscape",
       "event": "none",
-      "quality": [
-        "blurry foreground"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -463,7 +453,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Зелёный лес в дневное время",
+      "vlm_caption_ru": "Зелёное лесное место с высокими деревьями и ярким светом, проникающим сквозь крону.",
       "vlm_labeled": true
     },
     {
@@ -485,7 +475,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Зелёный лес с деревьями и кустарниками",
+      "vlm_caption_ru": "Зелёный лес с высокими деревьями и густой листвой",
       "vlm_labeled": true
     },
     {
@@ -506,8 +496,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": 0.85,
-      "vlm_caption_ru": "Город на холме в сумерках, окутанном туманом",
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Панорама поселения на склоне горы в сумерках, окутанной туманом",
       "vlm_labeled": true
     },
     {
@@ -529,7 +519,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа людей на улице в городе, стоящих у ступенек и лестницы.",
+      "vlm_caption_ru": "Группа людей на улице у подъезда к лестнице и эскалатору. На переднем плане — синий забор.",
       "vlm_labeled": true
     },
     {
@@ -551,7 +541,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа людей на улице в дневное время, на фоне городской застройки.",
+      "vlm_caption_ru": "Группа людей на улице, стоящих у барьера.",
       "vlm_labeled": true
     },
     {
@@ -583,8 +573,8 @@
       "taken_at": "2022-06-08T17:13:46",
       "taken_at_source": "exif",
       "folder": "2022/2022-06-08",
-      "scene": null,
-      "event": null,
+      "scene": "architecture",
+      "event": "none",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -594,8 +584,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Вид на городской пейзаж с горами и скидкой на вершине",
       "vlm_labeled": true
     },
     {
@@ -606,11 +596,8 @@
       "taken_at_source": "exif",
       "folder": "2022/2022-06-08",
       "scene": "architecture",
-      "event": "sport",
-      "quality": [
-        "blurry",
-        "distorted"
-      ],
+      "event": "none",
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -620,7 +607,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Вид на лыжню и горы с кабельной дорогой из кабинки на вершине.",
+      "vlm_caption_ru": "Снимок с высоты на лыжню и горы",
       "vlm_labeled": true
     },
     {
@@ -649,8 +636,8 @@
       "taken_at": "2021-04-24T19:49:31",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-24",
-      "scene": null,
-      "event": null,
+      "scene": "event",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -660,8 +647,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Спортсмены и помощники на сцене в зале. На заднем плане — экран с логотипом \"ЗЕНИТ\".",
       "vlm_labeled": true
     },
     {
@@ -806,31 +793,6 @@
       "folder": "2019/2019-01-03",
       "scene": "street",
       "event": "none",
-      "quality": [
-        "нечеткость",
-        "смазка"
-      ],
-      "duplicate": {
-        "group": "single",
-        "copies": 0,
-        "is_original": true,
-        "near_dup_base": null,
-        "near_dup_copies": null
-      },
-      "evil": false,
-      "vlm_confidence": 0.85,
-      "vlm_caption_ru": "Снимок улицы с автомобилями и пальмами на фоне современного городского пейзажа.",
-      "vlm_labeled": true
-    },
-    {
-      "name": "IMG_20190103_144008.jpg",
-      "kind": "photo",
-      "camera": "HUAWEI BLN-L21",
-      "taken_at": "2019-01-03T14:40:08",
-      "taken_at_source": "exif",
-      "folder": "2019/2019-01-03",
-      "scene": null,
-      "event": null,
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -840,8 +802,30 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Снимок улицы с автомобилями и пальмами на фоне современного городского здания.",
+      "vlm_labeled": true
+    },
+    {
+      "name": "IMG_20190103_144008.jpg",
+      "kind": "photo",
+      "camera": "HUAWEI BLN-L21",
+      "taken_at": "2019-01-03T14:40:08",
+      "taken_at_source": "exif",
+      "folder": "2019/2019-01-03",
+      "scene": "architecture",
+      "event": "none",
+      "quality": [],
+      "duplicate": {
+        "group": "single",
+        "copies": 0,
+        "is_original": true,
+        "near_dup_base": null,
+        "near_dup_copies": null
+      },
+      "evil": false,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Высотное здание в процессе строительства с кранами на фоне городской застройки и пальм.",
       "vlm_labeled": true
     },
     {
@@ -863,7 +847,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Солнечный пейзаж с высокими зданиями и кораблями на воде в Дубаи.",
+      "vlm_caption_ru": "Солнечный свет падает на современные здания в Дубае, создавая теплую атмосферу на реке. На воде идёт катер с туристами.",
       "vlm_labeled": true
     },
     {
@@ -874,7 +858,7 @@
       "taken_at_source": "exif",
       "folder": "2019/2019-01-03",
       "scene": "architecture",
-      "event": "travel",
+      "event": "none",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -885,7 +869,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Солнечный свет падает на современные здания в Дубае, создавая эффект золотого часа. На воде идёт катер с туристами, а на берегу — пешеходы. Это городской пейзаж в часы заката.",
+      "vlm_caption_ru": "Солнечный свет падает на современные здания в Дубае, создавая эффект золотого часа. На реке идёт катер с людьми, а на берегу — пешеходы.",
       "vlm_labeled": true
     },
     {
@@ -907,7 +891,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Солнечный свет падает на современные здания в Дубаи, создавая красивую атмосферу на фоне воды и кораблей.",
+      "vlm_caption_ru": "Солнечный свет падает на высокие здания в Дубае, создавая эффект золотого часа. На реке идёт круиз, а на берегу стоят люди.",
       "vlm_labeled": true
     },
     {
@@ -929,7 +913,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Солнечный свет падает на высокие здания в Дубае, создавая теплые отражения на воде. На воде два лодка, и на фоне — современный городской пейзаж.",
+      "vlm_caption_ru": "Солнечный свет падает на высокие здания в Дубае, создавая красивую тень на воде. На реке идёт несколько лодок.",
       "vlm_labeled": true
     },
     {
@@ -951,7 +935,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Солнечный свет падает на высокие здания в Дубае, создавая теплые отражения на воде. На воде идёт несколько лодок, а на берегу видны люди.",
+      "vlm_caption_ru": "Солнечный свет освещает высокие здания на фоне реки в Дубае.",
       "vlm_labeled": true
     },
     {
@@ -961,8 +945,8 @@
       "taken_at": "2019-01-03T17:32:35",
       "taken_at_source": "exif",
       "folder": "2019/2019-01-03",
-      "scene": null,
-      "event": null,
+      "scene": "landscape",
+      "event": "none",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -972,8 +956,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Садовая зона с цветущими бугенвейлями на фоне городской застройки",
       "vlm_labeled": true
     },
     {
@@ -985,30 +969,6 @@
       "folder": "2019/2019-01-03",
       "scene": "landscape",
       "event": "none",
-      "quality": [
-        "blurry"
-      ],
-      "duplicate": {
-        "group": "single",
-        "copies": 0,
-        "is_original": true,
-        "near_dup_base": null,
-        "near_dup_copies": null
-      },
-      "evil": false,
-      "vlm_confidence": 0.85,
-      "vlm_caption_ru": "Садовые растения и цветы в городской среде",
-      "vlm_labeled": true
-    },
-    {
-      "name": "IMG_20190103_173320.jpg",
-      "kind": "photo",
-      "camera": "HUAWEI BLN-L21",
-      "taken_at": "2019-01-03T17:33:21",
-      "taken_at_source": "exif",
-      "folder": "2019/2019-01-03",
-      "scene": null,
-      "event": null,
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -1018,8 +978,30 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Садовая зона с цветущими растениями и зелеными деревьями на фоне городской застройки.",
+      "vlm_labeled": true
+    },
+    {
+      "name": "IMG_20190103_173320.jpg",
+      "kind": "photo",
+      "camera": "HUAWEI BLN-L21",
+      "taken_at": "2019-01-03T17:33:21",
+      "taken_at_source": "exif",
+      "folder": "2019/2019-01-03",
+      "scene": "architecture",
+      "event": "none",
+      "quality": [],
+      "duplicate": {
+        "group": "single",
+        "copies": 0,
+        "is_original": true,
+        "near_dup_base": null,
+        "near_dup_copies": null
+      },
+      "evil": false,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Изображение с водной архитектурой и магазинами в городе",
       "vlm_labeled": true
     },
     {
@@ -1031,9 +1013,7 @@
       "folder": "2019/2019-01-03",
       "scene": "architecture",
       "event": "none",
-      "quality": [
-        "смазанный фонтан"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -1043,7 +1023,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Фонтан в центре городской улицы с пальмой и магазином Carrefour City",
+      "vlm_caption_ru": "Фонтан в центре городской площади с фонтаном и зоной с камнями. На заднем плане виден магазин Carrefour city.",
       "vlm_labeled": true
     },
     {
@@ -1086,7 +1066,7 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": 0.85,
+      "vlm_confidence": 0.95,
       "vlm_caption_ru": "Ночная городская панорама с высокими зданиями и яркими огнями на фоне темного неба.",
       "vlm_labeled": true
     },
@@ -1099,10 +1079,7 @@
       "folder": "2021/2021-04-25",
       "scene": "street",
       "event": "none",
-      "quality": [
-        "солнечный блеск",
-        "солнечный свет"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -1112,7 +1089,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Автомобиль движется по дороге вдоль леса под ясным голубым небом.",
+      "vlm_caption_ru": "Дорога в лесу под ясным голубым небом",
       "vlm_labeled": true
     },
     {
@@ -1124,10 +1101,7 @@
       "folder": "2021/2021-04-25",
       "scene": "street",
       "event": "none",
-      "quality": [
-        "снимок с низкой разрешённостью",
-        "смазанный экран"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -1149,9 +1123,7 @@
       "folder": "2021/2021-04-25",
       "scene": "street",
       "event": "none",
-      "quality": [
-        "солнечный свет"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -1161,7 +1133,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Автомобиль движется по дороге вдоль леса в ясный день.",
+      "vlm_caption_ru": "Автомобиль движется по дороге вдоль леса в зимний день.",
       "vlm_labeled": true
     },
     {
@@ -1173,9 +1145,7 @@
       "folder": "2021/2021-04-25",
       "scene": "street",
       "event": "none",
-      "quality": [
-        "солнечный свет"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -1185,7 +1155,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Дорога в зимний день, по которой движется автомобиль. По обеим сторонам растут деревья, а небо ясное и голубое.",
+      "vlm_caption_ru": "Дорога в зимний день, посреди леса, с голыми деревьями и ясным голубым небом.",
       "vlm_labeled": true
     },
     {
@@ -1197,10 +1167,7 @@
       "folder": "2021/2021-04-25",
       "scene": "street",
       "event": "none",
-      "quality": [
-        "снимок сделан с низкой разрешающей способностью",
-        "снимок сделан с низкой освещенностью"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -1209,8 +1176,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": 0.85,
-      "vlm_caption_ru": "Снимок с дороги в зимний день, посреди леса. Солнечный свет и чистое небо.",
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Дорога в лесу под ясным небом",
       "vlm_labeled": true
     },
     {
@@ -1222,10 +1189,7 @@
       "folder": "2021/2021-04-25",
       "scene": "street",
       "event": "none",
-      "quality": [
-        "солнечный блеск",
-        "смазка"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -1235,7 +1199,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Автомобиль движется по дороге вдоль леса в ясный день.",
+      "vlm_caption_ru": "Автомобиль движется по дороге вдоль леса под ясным солнечным небом.",
       "vlm_labeled": true
     },
     {
@@ -1247,10 +1211,7 @@
       "folder": "2021/2021-04-25",
       "scene": "street",
       "event": "none",
-      "quality": [
-        "солнечный блеск",
-        "световой эффект"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -1272,10 +1233,7 @@
       "folder": "2021/2021-04-25",
       "scene": "street",
       "event": "none",
-      "quality": [
-        "солнечный блеск",
-        "свет от солнца"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -1285,7 +1243,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Пустая дорога в зимний день, с деревьями и голыми ветвями на обеих сторонах. Солнечный свет и чистое небо.",
+      "vlm_caption_ru": "Автомобиль движется по дороге вдоль леса под ясным голубым небом.",
       "vlm_labeled": true
     },
     {
@@ -1297,10 +1255,7 @@
       "folder": "2021/2021-04-25",
       "scene": "street",
       "event": "none",
-      "quality": [
-        "солнечный блеск",
-        "свет от фонаря"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -1310,7 +1265,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Просмотр дороги в зимний день",
+      "vlm_caption_ru": "Дорога в зимний день, с деревьями и голыми ветвями. Солнечный свет на дороге.",
       "vlm_labeled": true
     },
     {
@@ -1322,10 +1277,7 @@
       "folder": "2021/2021-04-25",
       "scene": "street",
       "event": "none",
-      "quality": [
-        "солнечный блеск",
-        "свет от уличных фонарей"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -1347,10 +1299,7 @@
       "folder": "2021/2021-04-25",
       "scene": "street",
       "event": "none",
-      "quality": [
-        "свет",
-        "солнечный свет"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -1360,7 +1309,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Просмотр дороги в зимний день",
+      "vlm_caption_ru": "Дорога в зимний день, по которой движется автомобиль. Деревья и ограждение на обочинах.",
       "vlm_labeled": true
     },
     {
@@ -1372,10 +1321,7 @@
       "folder": "2021/2021-04-25",
       "scene": "street",
       "event": "none",
-      "quality": [
-        "свет не равномерный",
-        "небольшой шум"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -1385,7 +1331,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Пустая дорога в зимний день, посреди леса.",
+      "vlm_caption_ru": "Дорога в лесу в ясный день",
       "vlm_labeled": true
     },
     {
@@ -1407,7 +1353,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Автомобиль на дороге в лесу под ясным небом",
+      "vlm_caption_ru": "Автомобиль движется по дороге вдоль леса под ясным голубым небом.",
       "vlm_labeled": true
     },
     {
@@ -1429,7 +1375,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Дорога в лесу под ясным небом",
+      "vlm_caption_ru": "Автомобиль движется по дороге вдоль леса под ясным голубым небом.",
       "vlm_labeled": true
     },
     {
@@ -1451,7 +1397,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Автомобиль движется по дороге в лесу под ясным голубым небом.",
+      "vlm_caption_ru": "Дорога в лесу под ясным голубым небом",
       "vlm_labeled": true
     },
     {
@@ -1473,7 +1419,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Автомобиль на дороге в лесу в ясный день",
+      "vlm_caption_ru": "Дорога в лесу под ясным голубым небом",
       "vlm_labeled": true
     },
     {
@@ -1485,10 +1431,7 @@
       "folder": "2021/2021-04-25",
       "scene": "street",
       "event": "none",
-      "quality": [
-        "солнечный блеск",
-        "смазанный асфальт"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -1498,7 +1441,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Дорога в лесу под ясным голубым небом",
+      "vlm_caption_ru": "Дорога в лесу под ясным небом",
       "vlm_labeled": true
     },
     {
@@ -1532,10 +1475,7 @@
       "folder": "2021/2021-04-25",
       "scene": "street",
       "event": "none",
-      "quality": [
-        "загрязнение",
-        "погрешности"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -1567,7 +1507,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Автомобиль на дороге в городской местности",
+      "vlm_caption_ru": "Дорога в лесу под ясным голубым небом",
       "vlm_labeled": true
     },
     {
@@ -1588,8 +1528,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": 0.85,
-      "vlm_caption_ru": "Дорога в лесу под ясным небом",
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Дорога в лесу под ясным голубым небом",
       "vlm_labeled": true
     },
     {
@@ -1601,10 +1541,7 @@
       "folder": "2021/2021-04-25",
       "scene": "street",
       "event": "none",
-      "quality": [
-        "солнечный блеск",
-        "свет от фонаря"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -1626,10 +1563,7 @@
       "folder": "2021/2021-04-25",
       "scene": "street",
       "event": "none",
-      "quality": [
-        "солнечный блеск",
-        "смазанный экран"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -1661,7 +1595,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Дорога в лесу под ясным небом",
+      "vlm_caption_ru": "Дорога в лесу под ясным голубым небом",
       "vlm_labeled": true
     },
     {
@@ -1695,10 +1629,7 @@
       "folder": "2021/2021-04-25",
       "scene": "landscape",
       "event": "none",
-      "quality": [
-        "солнечный блеск",
-        "световой шум"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -1720,9 +1651,7 @@
       "folder": "2021/2021-04-25",
       "scene": "interior",
       "event": "none",
-      "quality": [
-        "blurry"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -1731,8 +1660,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": 0.85,
-      "vlm_caption_ru": "Стоп-кадр с стопкой черных стульев в помещении.",
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Стоп-кадр с стопкой черных офисных стульев на фоне синего тента.",
       "vlm_labeled": true
     },
     {
@@ -1930,7 +1859,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -1984,8 +1913,8 @@
       "taken_at": "2021-04-25T18:59:34",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -1995,8 +1924,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Клубная фотография команды волейбола и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -2018,7 +1947,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Клубная фотография команды волейбола и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -2040,7 +1969,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Клубные игроки и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -2084,7 +2013,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -2128,7 +2057,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -2160,8 +2089,8 @@
       "taken_at": "2021-04-25T18:59:38",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -2171,8 +2100,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -2194,7 +2123,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -2248,8 +2177,8 @@
       "taken_at": "2021-04-25T18:59:39",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -2259,8 +2188,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -2282,7 +2211,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -2292,8 +2221,8 @@
       "taken_at": "2021-04-25T18:59:40",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -2303,8 +2232,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -2314,8 +2243,8 @@
       "taken_at": "2021-04-25T18:59:40",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -2325,8 +2254,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -2348,7 +2277,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -2358,8 +2287,8 @@
       "taken_at": "2021-04-25T18:59:59",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -2369,8 +2298,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -2392,7 +2321,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -2424,8 +2353,8 @@
       "taken_at": "2021-04-25T18:59:42",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -2435,8 +2364,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -2458,7 +2387,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -2480,7 +2409,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -2505,7 +2434,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -2537,8 +2466,8 @@
       "taken_at": "2021-04-25T18:59:42",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -2548,8 +2477,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -2571,7 +2500,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -2593,7 +2522,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -2618,7 +2547,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -2662,7 +2591,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -2684,7 +2613,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -2709,7 +2638,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Клубная фотография волейбольной команды и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -2788,8 +2717,8 @@
       "taken_at": "2021-04-25T18:59:44",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -2799,8 +2728,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Клубная фотография волейбольной команды и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -2822,7 +2751,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -2844,7 +2773,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -2869,7 +2798,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -2879,8 +2808,8 @@
       "taken_at": "2021-04-25T18:59:44",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -2890,8 +2819,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -2901,8 +2830,8 @@
       "taken_at": "2021-04-25T18:59:56",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "exact-d924b64c",
@@ -2912,8 +2841,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -2923,8 +2852,8 @@
       "taken_at": "2021-04-25T18:59:56",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "exact-d924b64c",
@@ -2934,8 +2863,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -2970,8 +2899,8 @@
       "taken_at": "2021-04-25T18:59:45",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -2981,8 +2910,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -2992,8 +2921,8 @@
       "taken_at": "2021-04-25T18:59:45",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -3003,8 +2932,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -3026,7 +2955,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -3036,8 +2965,8 @@
       "taken_at": "2021-04-25T18:59:55",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "exact-c81608b8",
@@ -3047,8 +2976,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3058,8 +2987,8 @@
       "taken_at": "2021-04-25T18:59:55",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -3072,8 +3001,8 @@
         ]
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3095,7 +3024,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3117,7 +3046,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3139,7 +3068,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3174,8 +3103,8 @@
       "taken_at": "2021-04-25T18:59:46",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -3185,8 +3114,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3208,7 +3137,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -3218,8 +3147,8 @@
       "taken_at": "2021-04-25T18:59:54",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "exact-e41b3e90",
@@ -3229,8 +3158,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -3255,7 +3184,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -3334,8 +3263,8 @@
       "taken_at": "2021-04-25T18:59:54",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "exact-53030be2",
@@ -3345,8 +3274,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3356,8 +3285,8 @@
       "taken_at": "2021-04-25T18:59:54",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "exact-53030be2",
@@ -3367,8 +3296,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3393,7 +3322,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3415,7 +3344,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3437,7 +3366,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3462,7 +3391,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3528,7 +3457,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -3538,8 +3467,8 @@
       "taken_at": "2021-04-25T18:59:54",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -3552,8 +3481,8 @@
         ]
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3575,7 +3504,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Клубная команда волейбола с cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3597,7 +3526,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3644,7 +3573,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3666,7 +3595,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3691,7 +3620,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3760,7 +3689,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -3782,7 +3711,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3814,8 +3743,8 @@
       "taken_at": "2021-04-25T18:59:53",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -3828,8 +3757,8 @@
         ]
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3851,7 +3780,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3873,7 +3802,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -3895,7 +3824,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -3920,7 +3849,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Клубная команда волейбола с cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Клубная фотография волейбольной команды и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -3942,7 +3871,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -3952,8 +3881,8 @@
       "taken_at": "2021-04-25T18:59:50",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -3963,8 +3892,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -3986,7 +3915,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Команда волейбола с cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -4008,7 +3937,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -4018,8 +3947,8 @@
       "taken_at": "2021-04-25T18:59:52",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -4029,8 +3958,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -4052,7 +3981,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -4074,7 +4003,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -4118,7 +4047,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "На церемонии в зале сидят девушки в красных костюмах и держат в руках музыкальные инструменты. Слева стоит женщина с микрофоном.",
+      "vlm_caption_ru": "На сцене в спортивном зале девушки в красных костюмах стоят на фоне синего занавеса. Один из них держит микрофон и говорит.",
       "vlm_labeled": true
     },
     {
@@ -4129,7 +4058,7 @@
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
       "scene": "event",
-      "event": "sport",
+      "event": "wedding",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -4140,7 +4069,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "На церемонии в день свадьбы девушки в красных костюмах стоят на сцене, одна из них держит трофей.",
+      "vlm_caption_ru": "На церемонии венчания девушки в красных костюмах стоят на сцене с трофеями.",
       "vlm_labeled": true
     },
     {
@@ -4150,8 +4079,8 @@
       "taken_at": "2021-04-25T19:01:49",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "event",
+      "event": "wedding",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -4161,8 +4090,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "На церемонии в зале с синими занавесами и сценой, женщина в светлой одежде держит лист бумаги, а рядом стоят пять женщин в красных и белых костюмах с бантами.",
       "vlm_labeled": true
     },
     {
@@ -4173,7 +4102,7 @@
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
       "scene": "event",
-      "event": "sport",
+      "event": "wedding",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -4184,7 +4113,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "На церемонии в зале сидят девушки в красных костюмах и держат в руках музыкальные инструменты.",
+      "vlm_caption_ru": "На церемонии венчания на сцене с танцующими девушками в красных костюмах.",
       "vlm_labeled": true
     },
     {
@@ -4206,7 +4135,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "На сцене в зале сидят девушки в красных и белых костюмах, держа в руках бант. Слева стоит женщина в светлой одежде, держа в руках лист бумаги и говорит.",
+      "vlm_caption_ru": "Концертная группа на сцене в спортивном зале",
       "vlm_labeled": true
     },
     {
@@ -4216,8 +4145,8 @@
       "taken_at": "2021-04-25T19:01:48",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "event",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -4227,8 +4156,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "На сцене в спортивном зале девушки в красных и белых костюмах стоят на фоне синего занавеса. Слева женщина в светлой одежде держит планшет и говорит.",
       "vlm_labeled": true
     },
     {
@@ -4250,7 +4179,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "На сцене в спортивном зале девушки в красных костюмах стоят на фоне синего занавеса, а женщина в светлой одежде стоит слева и держит планшет. Сцена освещена искусственным светом.",
+      "vlm_caption_ru": "На сцене в спортивном зале девушки в красных и белых костюмах стоят на фоне синего занавеса. Слева женщина в светлой одежде держит планшет и говорит.",
       "vlm_labeled": true
     },
     {
@@ -4282,8 +4211,8 @@
       "taken_at": "2021-04-25T19:01:47",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "event",
+      "event": "wedding",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -4293,8 +4222,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "На церемонии венчания на сцене с танцующими девушками в красных и белых костюмах.",
       "vlm_labeled": true
     },
     {
@@ -4316,7 +4245,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа девушек в красных и белых костюмах стоит на спортивной площадке, рядом с ними — женщина в светлой одежде. На заднем плане — синий занавес и акустические системы.",
+      "vlm_caption_ru": "Группа cheerleaders на спортивной площадке в помещении.",
       "vlm_labeled": true
     },
     {
@@ -4338,7 +4267,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "На сцене в спортивном зале девушки в красных костюмах стоят на фоне синего занавеса. Слева женщина с микрофоном.",
+      "vlm_caption_ru": "На сцене в спортивном зале девушки в красных костюмах стоят в ряд, держа в руках бант. Слева стоит женщина в светлой одежде, держа микрофон. На полу виден логотип.",
       "vlm_labeled": true
     },
     {
@@ -4360,7 +4289,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Молодые женщины в красных костюмах стоят на спортивной площадке, возможно, на выступлении или тренировке.",
+      "vlm_caption_ru": "На сцене в спортивном зале стоят девушки-помощники, готовые к выступлению.",
       "vlm_labeled": true
     },
     {
@@ -4370,8 +4299,8 @@
       "taken_at": "2021-04-25T19:01:54",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -4381,8 +4310,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "На спортивной площадке в зале с синим занавесом и сеткой, четыре девушки в красно-белых костюмах стоят на площадке, а женщина в светлой одежде с микрофоном выступает на сцене.",
       "vlm_labeled": true
     },
     {
@@ -4404,7 +4333,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "На спортивной площадке девушки в красных и белых костюмах стоят на площадке, рядом с ними женщина с микрофоном.",
+      "vlm_caption_ru": "На сцене в спортивном зале девушки в красных и белых костюмах стоят на фоне синего занавеса. Слева стоит женщина в светлых брюках и костюме с микрофоном.",
       "vlm_labeled": true
     },
     {
@@ -4426,7 +4355,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "На сцене в спортивном зале девушки в красных костюмах стоят на фоне синего занавеса. Слева стоит женщина в светлой одежде с бумагами.",
+      "vlm_caption_ru": "Команда cheerleaders на сцене во время спортивного мероприятия.",
       "vlm_labeled": true
     },
     {
@@ -4448,7 +4377,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "На сцене в спортивном зале девушки в красных и белых костюмах стоят на фоне синего занавеса. Слева женщина в светлой одежде с микрофоном.",
+      "vlm_caption_ru": "На сцене в спортивном зале девушки в красных и белых костюмах стоят на фоне синего занавеса. Слева женщина с микрофоном выступает на сцене.",
       "vlm_labeled": true
     },
     {
@@ -4470,7 +4399,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа девушек в спортивной форме стоит на спортивной площадке, возможно, на мероприятии. На заднем плане — сцена с синим занавесом и акустическими системами.",
+      "vlm_caption_ru": "Команда cheerleaders на сцене во время спортивного мероприятия.",
       "vlm_labeled": true
     },
     {
@@ -4492,7 +4421,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "На сцене в спортивном зале девушки в красных костюмах стоят на фоне синего занавеса. На переднем плане женщина в светлой одежде говорит.",
+      "vlm_caption_ru": "На сцене в спортивном зале девушки в красных костюмах стоят на фоне синего занавеса, а женщина в светлой одежде выступает с микрофоном.",
       "vlm_labeled": true
     },
     {
@@ -4514,7 +4443,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "На сцене в спортивном зале девушки в красных костюмах стоят на фоне синего занавеса. Слева женщина в светлой одежде говорит в микрофон.",
+      "vlm_caption_ru": "На сцене в спортивном зале девушки в красных костюмах стоят на фоне темного занавеса, а женщина в светлой одежде выступает с микрофоном.",
       "vlm_labeled": true
     },
     {
@@ -4536,7 +4465,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "На сцене в спортивном зале девушки в красных костюмах стоят на фоне синих занавесов. Слева стоит женщина в светлой одежде, держащая микрофон.",
+      "vlm_caption_ru": "На сцене в спортивном зале девушки в красных костюмах стоят в ряд, а женщина в светлой одежде выступает с микрофоном.",
       "vlm_labeled": true
     },
     {
@@ -4558,7 +4487,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "На сцене в спортивном зале сидят и стоят cheerleaders и женщина в деловом костюме.",
+      "vlm_caption_ru": "На сцене в спортивном зале сидят и стоят cheerleaders и женщина в костюме, возможно, ведущая мероприятие.",
       "vlm_labeled": true
     },
     {
@@ -4580,7 +4509,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа cheerleaders на сцене в спортивном зале.",
+      "vlm_caption_ru": "Четыре женщины в красно-белых костюмах стоят на сцене с трофеями и лентами.",
       "vlm_labeled": true
     },
     {
@@ -4602,7 +4531,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Группа cheerleaders на спортивной площадке, стоящих с трофеем.",
       "vlm_labeled": true
     },
     {
@@ -4646,7 +4575,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа cheerleaders на сцене в спортивном зале.",
+      "vlm_caption_ru": "Четыре девушки в красно-белых костюмах стоят на спортивной площадке с трофеем и флагами.",
       "vlm_labeled": true
     },
     {
@@ -4668,7 +4597,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа cheerleaders на сцене во время спортивного мероприятия.",
+      "vlm_caption_ru": "Четыре девушки в красно-белых костюмах стоят на спортивной площадке с трофеем и рюкзаками.",
       "vlm_labeled": true
     },
     {
@@ -4690,7 +4619,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа cheerleaders на спортивной площадке, стоящих в ряд и держащих трофеи.",
+      "vlm_caption_ru": "Четыре женщины в красных и белых костюмах стоят в ряд на спортивной площадке с трофеями и рюкзаками.",
       "vlm_labeled": true
     },
     {
@@ -4712,7 +4641,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа девочек в красных и белых костюмах стоят на спортивной площадке с трофеем и рюкзаками.",
+      "vlm_caption_ru": "Группа cheerleaders на спортивной площадке, стоящих с трофеем.",
       "vlm_labeled": true
     },
     {
@@ -4734,7 +4663,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа девушек в красных и белых костюмах стоят на спортивной площадке с трофеем.",
+      "vlm_caption_ru": "Группа cheerleaders на сцене в спортивном зале.",
       "vlm_labeled": true
     },
     {
@@ -4756,7 +4685,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа девочек-хореографов в красных и белых костюмах стоят на спортивной площадке с трофеем и рюкзаками.",
+      "vlm_caption_ru": "Группа cheerleaders на сцене в спортивном зале.",
       "vlm_labeled": true
     },
     {
@@ -4778,7 +4707,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Четыре девушки в красно-белых костюмах стоят на спортивной площадке с трофеем и лентами.",
+      "vlm_caption_ru": "Четыре девушки в красных и белых костюмах стоят на спортивной площадке с трофеем и рюкзаками.",
       "vlm_labeled": true
     },
     {
@@ -4800,7 +4729,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "На церемонии награждения спортсмены получают призы на спортивной площадке.",
+      "vlm_caption_ru": "Спортсмены на церемонии награждения.",
       "vlm_labeled": true
     },
     {
@@ -4812,31 +4741,6 @@
       "folder": "2021/2021-04-25",
       "scene": "sport",
       "event": "sport",
-      "quality": [
-        "нечеткость",
-        "смазка"
-      ],
-      "duplicate": {
-        "group": "single",
-        "copies": 0,
-        "is_original": true,
-        "near_dup_base": null,
-        "near_dup_copies": null
-      },
-      "evil": false,
-      "vlm_confidence": 0.85,
-      "vlm_caption_ru": "Спортсмены и чаты на церемонии награждения.",
-      "vlm_labeled": true
-    },
-    {
-      "name": "IMG_20210425_190323.jpg",
-      "kind": "photo",
-      "camera": "HUAWEI CLT-L29",
-      "taken_at": "2021-04-25T19:03:36",
-      "taken_at_source": "exif",
-      "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -4846,8 +4750,30 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Спортсмены на спортивной площадке, готовятся к выступлению.",
+      "vlm_labeled": true
+    },
+    {
+      "name": "IMG_20210425_190323.jpg",
+      "kind": "photo",
+      "camera": "HUAWEI CLT-L29",
+      "taken_at": "2021-04-25T19:03:36",
+      "taken_at_source": "exif",
+      "folder": "2021/2021-04-25",
+      "scene": "sport",
+      "event": "sport",
+      "quality": [],
+      "duplicate": {
+        "group": "single",
+        "copies": 0,
+        "is_original": true,
+        "near_dup_base": null,
+        "near_dup_copies": null
+      },
+      "evil": false,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Спортсмены на церемонии награждения.",
       "vlm_labeled": true
     },
     {
@@ -4868,8 +4794,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": 0.85,
-      "vlm_caption_ru": "Сцена с cheerleaders и игроками на спортивной площадке во время соревнования.",
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Сцена с cheerleaders и игроками на спортивной площадке. Слева — тренер с документами.",
       "vlm_labeled": true
     },
     {
@@ -4891,7 +4817,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Сцена с cheerleaders и игроками в спортивном зале, возможно, после игры или награждения.",
+      "vlm_caption_ru": "Спортсмены в красных и белых костюмах стоят на площадке перед тренером, держа ручки с лентами. На заднем плане — тишинный фон.",
       "vlm_labeled": true
     },
     {
@@ -4903,10 +4829,7 @@
       "folder": "2021/2021-04-25",
       "scene": "sport",
       "event": "sport",
-      "quality": [
-        "нечеткость",
-        "смазка"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -4916,7 +4839,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Девушки в красных и белых костюмах стоят на спортивной площадке, получают награду. На заднем плане — мужчины в спортивной одежде.",
+      "vlm_caption_ru": "Спортсмены на церемонии награждения.",
       "vlm_labeled": true
     },
     {
@@ -4938,7 +4861,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Победители спортивного мероприятия получают награды на церемонии.",
+      "vlm_caption_ru": "Девушки в красных и белых костюмах стоят на сцене с трофеями, а мужчины в спортивной одежде стоят рядом.",
       "vlm_labeled": true
     },
     {
@@ -4948,8 +4871,8 @@
       "taken_at": "2021-04-25T19:03:26",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -4959,8 +4882,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Спортсмены в красных костюмах на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -4970,8 +4893,8 @@
       "taken_at": "2021-04-25T19:03:31",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -4981,8 +4904,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Спортсмены в красных костюмах стоят на площадке, получая награду.",
       "vlm_labeled": true
     },
     {
@@ -4992,8 +4915,8 @@
       "taken_at": "2021-04-25T19:03:29",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5003,8 +4926,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Спортсмены и члены команды на спортивной площадке. Студенты в красных костюмах держат тренажер, а мужчина в синем пальто стоит рядом.",
       "vlm_labeled": true
     },
     {
@@ -5014,8 +4937,8 @@
       "taken_at": "2021-04-25T19:03:28",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5025,8 +4948,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.75,
+      "vlm_caption_ru": "Спортсмены и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -5036,8 +4959,8 @@
       "taken_at": "2021-04-25T19:03:27",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5047,8 +4970,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.85,
+      "vlm_caption_ru": "На спортивной площадке мужчины и женщины в красных костюмах стоят рядом с наградой.",
       "vlm_labeled": true
     },
     {
@@ -5058,8 +4981,8 @@
       "taken_at": "2021-04-25T19:05:06",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5069,8 +4992,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Спортсмены и тренер на спортивной площадке перед началом игры.",
       "vlm_labeled": true
     },
     {
@@ -5080,8 +5003,8 @@
       "taken_at": "2021-04-25T19:05:07",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5091,8 +5014,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Врач и пациент в медицинском кабинете.",
       "vlm_labeled": true
     },
     {
@@ -5102,8 +5025,8 @@
       "taken_at": "2021-04-25T19:05:20",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5113,8 +5036,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Спортсмены и тренер на спортивной площадке в зале.",
       "vlm_labeled": true
     },
     {
@@ -5124,8 +5047,8 @@
       "taken_at": "2021-04-25T19:05:08",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "other",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5135,8 +5058,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Спортсмены и люди в помещении, возможно, во время спортивного мероприятия.",
       "vlm_labeled": true
     },
     {
@@ -5146,8 +5069,8 @@
       "taken_at": "2021-04-25T19:05:18",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5157,8 +5080,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Спортсмены и тренер на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -5168,8 +5091,8 @@
       "taken_at": "2021-04-25T19:05:10",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5179,8 +5102,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Спортсмены и дети на спортивной площадке, возможно, участники чемпионата или соревнований.",
       "vlm_labeled": true
     },
     {
@@ -5190,8 +5113,8 @@
       "taken_at": "2021-04-25T19:05:11",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5201,8 +5124,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Сцена с волейболистами и cheerleaders на спортивной площадке во время тренировки или подготовки к игре.",
       "vlm_labeled": true
     },
     {
@@ -5212,8 +5135,8 @@
       "taken_at": "2021-04-25T19:05:17",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5223,8 +5146,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Спортсмены на поле во время игры в волейбол.",
       "vlm_labeled": true
     },
     {
@@ -5234,8 +5157,8 @@
       "taken_at": "2021-04-25T19:05:12",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5245,8 +5168,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Сцена с волейболистами и cheerleaders на спортивной площадке во время мероприятия.",
       "vlm_labeled": true
     },
     {
@@ -5256,8 +5179,8 @@
       "taken_at": "2021-04-25T19:05:14",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5267,8 +5190,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Спортсмены и организаторы на спортивной площадке во время мероприятия.",
       "vlm_labeled": true
     },
     {
@@ -5278,8 +5201,8 @@
       "taken_at": "2021-04-25T19:05:15",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5289,8 +5212,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Сцена с волейболистами и cheerleaders на спортивной площадке во время игры.",
       "vlm_labeled": true
     },
     {
@@ -5300,8 +5223,8 @@
       "taken_at": "2021-04-25T19:05:16",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "other",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5311,8 +5234,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Врач и пациент на медицинской конференции.",
       "vlm_labeled": true
     },
     {
@@ -5322,8 +5245,8 @@
       "taken_at": "2021-04-25T19:05:22",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "other",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5333,8 +5256,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Мужчина в синем костюме идет к группе молодых людей на спортивной площадке. В центре — взрослый мужчина, который поддерживает одного из участников.",
       "vlm_labeled": true
     },
     {
@@ -5344,8 +5267,8 @@
       "taken_at": "2021-04-25T19:05:26",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5355,8 +5278,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Спортсмены и тренер на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -5366,8 +5289,8 @@
       "taken_at": "2021-04-25T19:05:23",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "other",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5377,8 +5300,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Спортсмены и тренер в помещении на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -5388,8 +5311,8 @@
       "taken_at": "2021-04-25T19:05:24",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "other",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5399,8 +5322,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "На спортивной площадке в зале проходит мероприятие с участием игроков и тренеров. Студенты стоят в ряд, а на заднем плане — девушки в красных костюмах.",
       "vlm_labeled": true
     },
     {
@@ -5410,8 +5333,8 @@
       "taken_at": "2021-04-25T19:05:25",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "other",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5421,8 +5344,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "На спортивной площадке молодёжная команда и взрослые стоят в ряд, возможно, на церемонии или мероприятии.",
       "vlm_labeled": true
     },
     {
@@ -5434,10 +5357,7 @@
       "folder": "2021/2021-04-25",
       "scene": "event",
       "event": "sport",
-      "quality": [
-        "небольшой шум",
-        "небольшой размытость"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -5447,7 +5367,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "На сцене в спортивном зале женщины в красных костюмах получают награды.",
+      "vlm_caption_ru": "На церемонии награждения спортсмены получают призы на сцене.",
       "vlm_labeled": true
     },
     {
@@ -5459,10 +5379,7 @@
       "folder": "2021/2021-04-25",
       "scene": "event",
       "event": "sport",
-      "quality": [
-        "небольшой шум",
-        "небольшой размытость"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -5472,7 +5389,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "На сцене в спортивном зале женщины в спортивной форме стоят с трофеями и наградами.",
+      "vlm_caption_ru": "На сцене в спортивном зале женщины в спортивной форме с трофеями и наградами.",
       "vlm_labeled": true
     },
     {
@@ -5494,7 +5411,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Четыре девушки в красных и белых костюмах стоят на сцене, получая награды. На заднем плане — синий занавес и часть стула.",
+      "vlm_caption_ru": "На сцене в спортивном зале девушки в красных и белых костюмах стоят с наградами и трофеями. На заднем плане — синий занавес.",
       "vlm_labeled": true
     },
     {
@@ -5506,9 +5423,7 @@
       "folder": "2021/2021-04-25",
       "scene": "event",
       "event": "sport",
-      "quality": [
-        "небольшой шум"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -5518,7 +5433,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Победители спортивного мероприятия в помещении",
+      "vlm_caption_ru": "Спортсменки на церемонии награждения.",
       "vlm_labeled": true
     },
     {
@@ -5529,7 +5444,7 @@
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
       "scene": "event",
-      "event": "sport",
+      "event": "wedding",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5539,8 +5454,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": 0.85,
-      "vlm_caption_ru": "На церемонии награждения участницы спортивного мероприятия получают награды.",
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "На церемонии венчания четырёх женщин в красных костюмах и трофеях.",
       "vlm_labeled": true
     },
     {
@@ -5552,30 +5467,6 @@
       "folder": "2021/2021-04-25",
       "scene": "event",
       "event": "sport",
-      "quality": [
-        "some blur"
-      ],
-      "duplicate": {
-        "group": "single",
-        "copies": 0,
-        "is_original": true,
-        "near_dup_base": null,
-        "near_dup_copies": null
-      },
-      "evil": false,
-      "vlm_confidence": 0.87,
-      "vlm_caption_ru": "Победители спортивного мероприятия на подиуме с наградами и трофеями",
-      "vlm_labeled": true
-    },
-    {
-      "name": "IMG_20210425_190533.jpg",
-      "kind": "photo",
-      "camera": "HUAWEI CLT-L29",
-      "taken_at": "2021-04-25T19:05:35",
-      "taken_at_source": "exif",
-      "folder": "2021/2021-04-25",
-      "scene": "event",
-      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -5586,7 +5477,29 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Победители спортивного мероприятия на церемонии награждения.",
+      "vlm_caption_ru": "Спортсмены на церемонии награждения.",
+      "vlm_labeled": true
+    },
+    {
+      "name": "IMG_20210425_190533.jpg",
+      "kind": "photo",
+      "camera": "HUAWEI CLT-L29",
+      "taken_at": "2021-04-25T19:05:35",
+      "taken_at_source": "exif",
+      "folder": "2021/2021-04-25",
+      "scene": "event",
+      "event": "wedding",
+      "quality": [],
+      "duplicate": {
+        "group": "single",
+        "copies": 0,
+        "is_original": true,
+        "near_dup_base": null,
+        "near_dup_copies": null
+      },
+      "evil": false,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "На церемонии венчания женщины в красной одежде сидят на подиуме, держа в руках трофеи и ленты.",
       "vlm_labeled": true
     },
     {
@@ -5608,7 +5521,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Победительницы спортивного мероприятия на церемонии награждения.",
+      "vlm_caption_ru": "Спортсменки на сцене получают призы на мероприятии.",
       "vlm_labeled": true
     },
     {
@@ -5630,7 +5543,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Победители спортивного мероприятия в красной форме на церемонии награждения.",
+      "vlm_caption_ru": "Четыре женщины в красных и белых спортивных костюмах стоят на спортивной площадке, получившие награды и призы.",
       "vlm_labeled": true
     },
     {
@@ -5642,9 +5555,7 @@
       "folder": "2021/2021-04-25",
       "scene": "event",
       "event": "wedding",
-      "quality": [
-        "небольшой шум"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -5654,7 +5565,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Сцена из церемонии венчания, где женщины в красных и белых костюмах стоят на сцене с трофеями и лентами.",
+      "vlm_caption_ru": "Сцена из невестного торжества, где женщины в красных и белых костюмах стоят на сцене с табличками и трофеями.",
       "vlm_labeled": true
     },
     {
@@ -5666,10 +5577,7 @@
       "folder": "2021/2021-04-25",
       "scene": "sport",
       "event": "sport",
-      "quality": [
-        "нечеткость",
-        "смазка"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -5678,8 +5586,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": 0.85,
-      "vlm_caption_ru": "Девушки в красных костюмах стоят с трофеями и трубы на спортивной площадке.",
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Девушки в спортивной форме стоят на площадке с трофеями и предметами.",
       "vlm_labeled": true
     },
     {
@@ -5691,9 +5599,7 @@
       "folder": "2021/2021-04-25",
       "scene": "interior",
       "event": "other",
-      "quality": [
-        "motion blur"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -5702,8 +5608,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": 0.85,
-      "vlm_caption_ru": "На изображении — женщина в светлой одежде стоит в помещении, держа в руках бумаги. На заднем плане видны другие люди. Сцена происходит в помещении с искусственным освещением.",
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "На изображении показаны люди в помещении, возможно, на мероприятии. В центре внимания — женщина в светлой одежде, держащая документы, и другие люди в фоне.",
       "vlm_labeled": true
     },
     {
@@ -5725,7 +5631,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "На церемонии венчания четырёх девушек в красных и белых костюмах стоят на сцене с трофеями и лентами. Слева стоит женщина в светлой одежде с документами.",
+      "vlm_caption_ru": "Сцена из церемонии свадьбы, где четыре женщины в красных и белых костюмах стоят на сцене с трофеями и лентами.",
       "vlm_labeled": true
     },
     {
@@ -5736,7 +5642,7 @@
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
       "scene": "event",
-      "event": "sport",
+      "event": "wedding",
       "quality": [],
       "duplicate": {
         "group": "exact-a45aee33",
@@ -5747,7 +5653,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "На церемонии венчания четырёх женщин в красных и белых костюмах на сцене с трофеем и лентами.",
+      "vlm_caption_ru": "Сцена из церемонии свадьбы, где четыре женщины в красных и белых костюмах стоят на сцене с трофеями и лентами.",
       "vlm_labeled": true
     },
     {
@@ -5758,10 +5664,8 @@
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
       "scene": "event",
-      "event": "sport",
-      "quality": [
-        "blurry"
-      ],
+      "event": "wedding",
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -5773,8 +5677,8 @@
         ]
       },
       "evil": false,
-      "vlm_confidence": 0.85,
-      "vlm_caption_ru": "На церемонии вручения наград в зале.",
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "На церемонии венчания четырёх девушек в красных и белых костюмах с трофеями и лентами.",
       "vlm_labeled": true
     },
     {
@@ -5786,9 +5690,7 @@
       "folder": "2021/2021-04-25",
       "scene": "event",
       "event": "sport",
-      "quality": [
-        "blurry"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "exact-6666fdae",
         "copies": 1,
@@ -5797,8 +5699,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": 0.85,
-      "vlm_caption_ru": "Четыре женщины в спортивной форме стоят на сцене, держа награды и трофеи. Слева стоит женщина в светлой одежде, держа в руках бумаги.",
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Спортсменки на сцене после завершения соревнования",
       "vlm_labeled": true
     },
     {
@@ -5810,9 +5712,7 @@
       "folder": "2021/2021-04-25",
       "scene": "event",
       "event": "sport",
-      "quality": [
-        "blurry"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "exact-6666fdae",
         "copies": 1,
@@ -5821,8 +5721,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": 0.85,
-      "vlm_caption_ru": "На церемонии награждения спортсмены в красных костюмах стоят на сцене с трофеями и держатся за руки.",
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Спортсмены на сцене, стоят и смотрят в камеру.",
       "vlm_labeled": true
     },
     {
@@ -5833,10 +5733,8 @@
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
       "scene": "event",
-      "event": "wedding",
-      "quality": [
-        "blurry"
-      ],
+      "event": "sport",
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -5848,8 +5746,8 @@
         ]
       },
       "evil": false,
-      "vlm_confidence": 0.85,
-      "vlm_caption_ru": "На церемонии венчания четырёх женщин в красных костюмах и с трофеями на подиуме.",
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "На церемонии награждения спортсмены в красных костюмах стоят на сцене с трофеями и держат в руках ленты.",
       "vlm_labeled": true
     },
     {
@@ -5871,7 +5769,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "На церемонии венчания, участники в красных и белых костюмах стоят на сцене с титулами и трофеями.",
+      "vlm_caption_ru": "На церемонии венчания, женщина с микрофоном и четыре девушки в костюмах на сцене.",
       "vlm_labeled": true
     },
     {
@@ -5879,6 +5777,94 @@
       "kind": "photo",
       "camera": "HUAWEI CLT-L29",
       "taken_at": "2021-04-25T19:06:10",
+      "taken_at_source": "exif",
+      "folder": "2021/2021-04-25",
+      "scene": "event",
+      "event": "wedding",
+      "quality": [],
+      "duplicate": {
+        "group": "single",
+        "copies": 0,
+        "is_original": true,
+        "near_dup_base": null,
+        "near_dup_copies": null
+      },
+      "evil": false,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Семь девушек в красных и белых костюмах стоят на сцене, держа в руках трубы и трофеи. Это кажется, что они участвуют в церемонии.",
+      "vlm_labeled": true
+    },
+    {
+      "name": "IMG_20210425_190610.jpg",
+      "kind": "photo",
+      "camera": "HUAWEI CLT-L29",
+      "taken_at": "2021-04-25T19:06:11",
+      "taken_at_source": "exif",
+      "folder": "2021/2021-04-25",
+      "scene": "sport",
+      "event": "sport",
+      "quality": [],
+      "duplicate": {
+        "group": "single",
+        "copies": 0,
+        "is_original": true,
+        "near_dup_base": null,
+        "near_dup_copies": null
+      },
+      "evil": false,
+      "vlm_confidence": 0.75,
+      "vlm_caption_ru": "Девушки в спортивной форме стоят на спортивной площадке, получая что-то.",
+      "vlm_labeled": true
+    },
+    {
+      "name": "IMG_20210425_190610_1.jpg",
+      "kind": "photo",
+      "camera": "HUAWEI CLT-L29",
+      "taken_at": "2021-04-25T19:06:15",
+      "taken_at_source": "exif",
+      "folder": "2021/2021-04-25",
+      "scene": "sport",
+      "event": "sport",
+      "quality": [],
+      "duplicate": {
+        "group": "single",
+        "copies": 0,
+        "is_original": true,
+        "near_dup_base": null,
+        "near_dup_copies": null
+      },
+      "evil": false,
+      "vlm_confidence": 0.75,
+      "vlm_caption_ru": "Клубные cheerleaders на сцене в вечернее время.",
+      "vlm_labeled": true
+    },
+    {
+      "name": "IMG_20210425_190611.jpg",
+      "kind": "photo",
+      "camera": "HUAWEI CLT-L29",
+      "taken_at": "2021-04-25T19:06:13",
+      "taken_at_source": "exif",
+      "folder": "2021/2021-04-25",
+      "scene": "event",
+      "event": "wedding",
+      "quality": [],
+      "duplicate": {
+        "group": "single",
+        "copies": 0,
+        "is_original": true,
+        "near_dup_base": null,
+        "near_dup_copies": null
+      },
+      "evil": false,
+      "vlm_confidence": 0.75,
+      "vlm_caption_ru": "Сцена из церемонии венчания, где женщины в красных и белых костюмах получают награды.",
+      "vlm_labeled": true
+    },
+    {
+      "name": "IMG_20210425_190611_1.jpg",
+      "kind": "photo",
+      "camera": "HUAWEI CLT-L29",
+      "taken_at": "2021-04-25T19:06:14",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
       "scene": "event",
@@ -5892,107 +5878,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": 0.85,
-      "vlm_caption_ru": "Группа девочек в красных костюмах на сцене, держащих трофей и держащих табличку.",
-      "vlm_labeled": true
-    },
-    {
-      "name": "IMG_20210425_190610.jpg",
-      "kind": "photo",
-      "camera": "HUAWEI CLT-L29",
-      "taken_at": "2021-04-25T19:06:11",
-      "taken_at_source": "exif",
-      "folder": "2021/2021-04-25",
-      "scene": "sport",
-      "event": "sport",
-      "quality": [
-        "смазанный"
-      ],
-      "duplicate": {
-        "group": "single",
-        "copies": 0,
-        "is_original": true,
-        "near_dup_base": null,
-        "near_dup_copies": null
-      },
-      "evil": false,
       "vlm_confidence": 0.75,
-      "vlm_caption_ru": "Девушки в красных и белых костюмах стоят на спортивной площадке, получая награды.",
-      "vlm_labeled": true
-    },
-    {
-      "name": "IMG_20210425_190610_1.jpg",
-      "kind": "photo",
-      "camera": "HUAWEI CLT-L29",
-      "taken_at": "2021-04-25T19:06:15",
-      "taken_at_source": "exif",
-      "folder": "2021/2021-04-25",
-      "scene": "sport",
-      "event": "sport",
-      "quality": [
-        "blurry",
-        "motion blur"
-      ],
-      "duplicate": {
-        "group": "single",
-        "copies": 0,
-        "is_original": true,
-        "near_dup_base": null,
-        "near_dup_copies": null
-      },
-      "evil": false,
-      "vlm_confidence": 0.75,
-      "vlm_caption_ru": "Спортсмены на сцене в вечернее время",
-      "vlm_labeled": true
-    },
-    {
-      "name": "IMG_20210425_190611.jpg",
-      "kind": "photo",
-      "camera": "HUAWEI CLT-L29",
-      "taken_at": "2021-04-25T19:06:13",
-      "taken_at_source": "exif",
-      "folder": "2021/2021-04-25",
-      "scene": "event",
-      "event": "wedding",
-      "quality": [
-        "смазанный",
-        "нечеткий"
-      ],
-      "duplicate": {
-        "group": "single",
-        "copies": 0,
-        "is_original": true,
-        "near_dup_base": null,
-        "near_dup_copies": null
-      },
-      "evil": false,
-      "vlm_confidence": 0.85,
-      "vlm_caption_ru": "На церемонии награждения в зале с танцующими девушками и мужчиной в синем костюме.",
-      "vlm_labeled": true
-    },
-    {
-      "name": "IMG_20210425_190611_1.jpg",
-      "kind": "photo",
-      "camera": "HUAWEI CLT-L29",
-      "taken_at": "2021-04-25T19:06:14",
-      "taken_at_source": "exif",
-      "folder": "2021/2021-04-25",
-      "scene": "event",
-      "event": "sport",
-      "quality": [
-        "смазанный",
-        "нечеткий"
-      ],
-      "duplicate": {
-        "group": "single",
-        "copies": 0,
-        "is_original": true,
-        "near_dup_base": null,
-        "near_dup_copies": null
-      },
-      "evil": false,
-      "vlm_confidence": 0.75,
-      "vlm_caption_ru": "На церемонии венчания на сцене с венком и девочками в красных костюмах.",
+      "vlm_caption_ru": "Спортсмены на сцене, получают награды.",
       "vlm_labeled": true
     },
     {
@@ -6014,7 +5901,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Спортсмены на поле во время игры в волейбол",
+      "vlm_caption_ru": "Спортсмены на поле во время игры в волейбол. На заднем плане — табло с результатами и флаги.",
       "vlm_labeled": true
     },
     {
@@ -6036,7 +5923,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Спортсмены на поле во время игры в волейбол, с табло и судьями.",
+      "vlm_caption_ru": "Спортсмены на поле во время игры в волейбол. На заднем плане — табло с результатами и флаги.",
       "vlm_labeled": true
     },
     {
@@ -6061,7 +5948,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Спортсмены на поле во время игры в волейбол, смотрят на裁判 и другого человека.",
+      "vlm_caption_ru": "Спортсмены на поле во время игры в волейбол",
       "vlm_labeled": true
     },
     {
@@ -6071,8 +5958,8 @@
       "taken_at": "2021-04-25T19:08:17",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -6082,8 +5969,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и тренер на спортивной площадке после игры.",
       "vlm_labeled": true
     },
     {
@@ -6105,7 +5992,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа волейболистов и тренеров на спортивной площадке перед открытием или награждением.",
+      "vlm_caption_ru": "Группа волейболистов и тренеров на спортивной площадке перед началом или после игры.",
       "vlm_labeled": true
     },
     {
@@ -6127,7 +6014,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа игроков в волейбольной форме на спортивной площадке, готовясь к началу игры или после неё.",
+      "vlm_caption_ru": "Группа волейболистов и тренер в спортзале",
       "vlm_labeled": true
     },
     {
@@ -6139,9 +6026,7 @@
       "folder": "2021/2021-04-25",
       "scene": "sport",
       "event": "sport",
-      "quality": [
-        "轻微模糊"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "exact-fa1cd5be",
         "copies": 1,
@@ -6150,8 +6035,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": 0.85,
-      "vlm_caption_ru": "На фотографии изображена группа людей, стоящих на спортивной площадке. Это, вероятно, команды, участвующие в спортивном мероприятии, идентифицируемого как матч или соревнование.",
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Группа волейболистов и тренер в спортзале на мероприятии.",
       "vlm_labeled": true
     },
     {
@@ -6176,7 +6061,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа игроков в волейбольной форме на спортивной площадке, стоящая в ряд для фотографии.",
+      "vlm_caption_ru": "Группа волейболистов и тренер в спортзале на мероприятии.",
       "vlm_labeled": true
     },
     {
@@ -6186,8 +6071,8 @@
       "taken_at": "2021-04-25T19:08:21",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "exact-de871ca8",
@@ -6197,8 +6082,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда на спортивной площадке, готовая к соревнованию.",
       "vlm_labeled": true
     },
     {
@@ -6208,8 +6093,8 @@
       "taken_at": "2021-04-25T19:08:21",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "exact-de871ca8",
@@ -6219,8 +6104,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда на мероприятии в спортивном зале",
       "vlm_labeled": true
     },
     {
@@ -6230,8 +6115,8 @@
       "taken_at": "2021-04-25T19:08:21",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -6244,8 +6129,8 @@
         ]
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Группа игроков в волейбольной форме на спортивной площадке, стоящая в ряд для снимка.",
       "vlm_labeled": true
     },
     {
@@ -6277,8 +6162,8 @@
       "taken_at": "2021-04-25T19:08:22",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -6288,8 +6173,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и тренер с детьми и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -6299,8 +6184,8 @@
       "taken_at": "2021-04-25T19:09:03",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "other",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -6310,8 +6195,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "команда волейбола на мероприятии",
       "vlm_labeled": true
     },
     {
@@ -6321,8 +6206,8 @@
       "taken_at": "2021-04-25T19:08:23",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -6332,8 +6217,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -6343,8 +6228,8 @@
       "taken_at": "2021-04-25T19:08:52",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -6354,8 +6239,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Группа волейболистов и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -6377,7 +6262,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и啦啦队 на мероприятии в спортивном зале.",
+      "vlm_caption_ru": "Группа игроков и cheerleaders на спортивной площадке перед соревнованиями.",
       "vlm_labeled": true
     },
     {
@@ -6387,8 +6272,8 @@
       "taken_at": "2021-04-25T19:08:26",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "exact-a7e11d39",
@@ -6398,8 +6283,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке после игры.",
       "vlm_labeled": true
     },
     {
@@ -6409,8 +6294,8 @@
       "taken_at": "2021-04-25T19:08:26",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "exact-a7e11d39",
@@ -6420,8 +6305,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке после игры.",
       "vlm_labeled": true
     },
     {
@@ -6433,9 +6318,7 @@
       "folder": "2021/2021-04-25",
       "scene": "sport",
       "event": "sport",
-      "quality": [
-        "some blur"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -6448,7 +6331,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа игроков и cheerleaders на спортивной площадке после игры в волейбол.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -6458,8 +6341,8 @@
       "taken_at": "2021-04-25T19:08:27",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -6469,8 +6352,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -6480,8 +6363,8 @@
       "taken_at": "2021-04-25T19:08:30",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -6491,8 +6374,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке перед началом или после игры.",
       "vlm_labeled": true
     },
     {
@@ -6502,8 +6385,8 @@
       "taken_at": "2021-04-25T19:08:28",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -6513,8 +6396,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -6536,7 +6419,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Клубные спортсмены и cheerleaders на спортивной площадке после выступления.",
+      "vlm_caption_ru": "Клубная команда волейбола с болельщиками и медалями на фоне волейбольной сетки.",
       "vlm_labeled": true
     },
     {
@@ -6548,9 +6431,7 @@
       "folder": "2021/2021-04-25",
       "scene": "sport",
       "event": "sport",
-      "quality": [
-        "some blur"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -6560,7 +6441,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -6582,7 +6463,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "команда волейбола и啦啦队 на спортивной площадке",
+      "vlm_caption_ru": "Спортсмены и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -6604,7 +6485,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "команда волейбола и啦啦队 на спортивной площадке",
+      "vlm_caption_ru": "Группа игроков и cheerleaders на спортивной площадке после игры в волейбол.",
       "vlm_labeled": true
     },
     {
@@ -6616,9 +6497,7 @@
       "folder": "2021/2021-04-25",
       "scene": "sport",
       "event": "sport",
-      "quality": [
-        "some blur"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -6631,7 +6510,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа игроков и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Группа игроков и cheerleaders на спортивной площадке перед фото.",
       "vlm_labeled": true
     },
     {
@@ -6641,8 +6520,8 @@
       "taken_at": "2021-04-25T19:08:36",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -6652,8 +6531,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке перед началом или после игры.",
       "vlm_labeled": true
     },
     {
@@ -6663,8 +6542,8 @@
       "taken_at": "2021-04-25T19:08:35",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -6674,8 +6553,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке перед началом или после игры.",
       "vlm_labeled": true
     },
     {
@@ -6697,7 +6576,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке после игры.",
       "vlm_labeled": true
     },
     {
@@ -6719,7 +6598,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -6744,7 +6623,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке после игры.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -6754,8 +6633,8 @@
       "taken_at": "2021-04-25T19:08:39",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -6765,8 +6644,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на мероприятии.",
       "vlm_labeled": true
     },
     {
@@ -6776,8 +6655,8 @@
       "taken_at": "2021-04-25T19:08:40",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -6787,8 +6666,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -6800,9 +6679,7 @@
       "folder": "2021/2021-04-25",
       "scene": "sport",
       "event": "sport",
-      "quality": [
-        "some motion blur"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "exact-3432b49d",
         "copies": 1,
@@ -6812,7 +6689,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа игроков и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -6834,7 +6711,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -6844,8 +6721,8 @@
       "taken_at": "2021-04-25T19:08:41",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -6858,8 +6735,8 @@
         ]
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -6871,9 +6748,7 @@
       "folder": "2021/2021-04-25",
       "scene": "sport",
       "event": "sport",
-      "quality": [
-        "轻微模糊"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "exact-dc18a7b2",
         "copies": 1,
@@ -6883,7 +6758,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и啦啦队 на мероприятии.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -6895,9 +6770,7 @@
       "folder": "2021/2021-04-25",
       "scene": "sport",
       "event": "sport",
-      "quality": [
-        "some motion blur"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "exact-dc18a7b2",
         "copies": 1,
@@ -6907,7 +6780,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа игроков и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Группа волейболистов и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -6917,8 +6790,8 @@
       "taken_at": "2021-04-25T19:08:42",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -6931,8 +6804,8 @@
         ]
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -6944,9 +6817,7 @@
       "folder": "2021/2021-04-25",
       "scene": "sport",
       "event": "sport",
-      "quality": [
-        "some blur"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "exact-4fcdc7ff",
         "copies": 1,
@@ -6956,7 +6827,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке после игры.",
       "vlm_labeled": true
     },
     {
@@ -6978,7 +6849,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке, снимается на фото.",
       "vlm_labeled": true
     },
     {
@@ -7003,7 +6874,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке, снимается с фото.",
       "vlm_labeled": true
     },
     {
@@ -7015,30 +6886,6 @@
       "folder": "2021/2021-04-25",
       "scene": "sport",
       "event": "sport",
-      "quality": [
-        "轻微模糊"
-      ],
-      "duplicate": {
-        "group": "single",
-        "copies": 0,
-        "is_original": true,
-        "near_dup_base": null,
-        "near_dup_copies": null
-      },
-      "evil": false,
-      "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и啦啦队 на спортивной площадке перед соревнованиями.",
-      "vlm_labeled": true
-    },
-    {
-      "name": "IMG_20210425_190844.jpg",
-      "kind": "photo",
-      "camera": "HUAWEI CLT-L29",
-      "taken_at": "2021-04-25T19:08:46",
-      "taken_at_source": "exif",
-      "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -7048,8 +6895,30 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке, готовые к фотографированию.",
+      "vlm_labeled": true
+    },
+    {
+      "name": "IMG_20210425_190844.jpg",
+      "kind": "photo",
+      "camera": "HUAWEI CLT-L29",
+      "taken_at": "2021-04-25T19:08:46",
+      "taken_at_source": "exif",
+      "folder": "2021/2021-04-25",
+      "scene": "sport",
+      "event": "sport",
+      "quality": [],
+      "duplicate": {
+        "group": "single",
+        "copies": 0,
+        "is_original": true,
+        "near_dup_base": null,
+        "near_dup_copies": null
+      },
+      "evil": false,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Группа волейболистов и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7071,7 +6940,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке после игры.",
       "vlm_labeled": true
     },
     {
@@ -7093,7 +6962,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Группа игроков и cheerleaders на спортивной площадке после игры в волейбол.",
       "vlm_labeled": true
     },
     {
@@ -7115,7 +6984,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "команда волейбола и啦啦队 на спортивной площадке",
+      "vlm_caption_ru": "Группа игроков и cheerleaders на спортивной площадке перед волейбольным сетом.",
       "vlm_labeled": true
     },
     {
@@ -7137,7 +7006,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "команда волейбола и啦啦队 на спортивной площадке",
+      "vlm_caption_ru": "Группа игроков и cheerleaders на спортивной площадке перед волейбольным сетом.",
       "vlm_labeled": true
     },
     {
@@ -7162,7 +7031,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7174,10 +7043,7 @@
       "folder": "2021/2021-04-25",
       "scene": "sport",
       "event": "sport",
-      "quality": [
-        "some motion blur",
-        "minor focus issues"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "exact-4f472539",
         "copies": 1,
@@ -7187,7 +7053,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа волейболистов и cheerleaders на спортивной площадке, позирующие для фотографии.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7199,9 +7065,7 @@
       "folder": "2021/2021-04-25",
       "scene": "sport",
       "event": "sport",
-      "quality": [
-        "some motion blur"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "exact-4f472539",
         "copies": 1,
@@ -7211,7 +7075,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и cheerleaders на мероприятии.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7221,8 +7085,8 @@
       "taken_at": "2021-04-25T19:09:02",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -7235,8 +7099,8 @@
         ]
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7246,8 +7110,8 @@
       "taken_at": "2021-04-25T19:08:53",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "exact-7e1b4880",
@@ -7257,8 +7121,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7268,8 +7132,8 @@
       "taken_at": "2021-04-25T19:08:53",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "exact-7e1b4880",
@@ -7279,8 +7143,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7305,7 +7169,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и啦啦队 на мероприятии.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -7327,7 +7191,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Клубная команда волейбола и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7349,7 +7213,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Клубная команда и cheerleaders на спортивной площадке",
+      "vlm_caption_ru": "Команда волейбола и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7361,9 +7225,7 @@
       "folder": "2021/2021-04-25",
       "scene": "sport",
       "event": "sport",
-      "quality": [
-        "some motion blur"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -7376,7 +7238,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке, позирующие для фотографии.",
       "vlm_labeled": true
     },
     {
@@ -7398,7 +7260,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7420,7 +7282,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7432,9 +7294,7 @@
       "folder": "2021/2021-04-25",
       "scene": "sport",
       "event": "sport",
-      "quality": [
-        "some blur"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -7447,7 +7307,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7469,7 +7329,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Клубная команда волейбола и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7491,7 +7351,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7501,8 +7361,8 @@
       "taken_at": "2021-04-25T19:08:57",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -7515,8 +7375,8 @@
         ]
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "команда волейбола и помощники на спортивной площадке",
       "vlm_labeled": true
     },
     {
@@ -7538,7 +7398,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7560,7 +7420,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа игроков и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7572,9 +7432,7 @@
       "folder": "2021/2021-04-25",
       "scene": "sport",
       "event": "sport",
-      "quality": [
-        "轻微模糊"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -7587,7 +7445,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Волейбольная команда и啦啦队 на спортивной площадке.",
+      "vlm_caption_ru": "Группа волейболистов и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7597,8 +7455,8 @@
       "taken_at": "2021-04-25T19:08:59",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "exact-14f2d5f6",
@@ -7608,8 +7466,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7619,8 +7477,8 @@
       "taken_at": "2021-04-25T19:08:59",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "exact-14f2d5f6",
@@ -7630,8 +7488,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7641,8 +7499,8 @@
       "taken_at": "2021-04-25T19:08:59",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -7655,8 +7513,8 @@
         ]
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7678,7 +7536,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке.",
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке перед началом или после игры.",
       "vlm_labeled": true
     },
     {
@@ -7700,7 +7558,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Группа спортсменов и cheerleaders на спортивной площадке перед волейбольным сетом.",
+      "vlm_caption_ru": "Волейбольная команда и болельщики на спортивной площадке перед началом или после игры.",
       "vlm_labeled": true
     },
     {
@@ -7710,8 +7568,8 @@
       "taken_at": "2021-04-25T19:09:00",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "sport",
+      "event": "sport",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -7724,8 +7582,8 @@
         ]
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Волейбольная команда и cheerleaders на спортивной площадке.",
       "vlm_labeled": true
     },
     {
@@ -7747,7 +7605,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Снимок с улицы в вечернее время, на дороге движутся автомобили, а по обочинам идут люди. На заднем плане видны городские здания и деревья.",
+      "vlm_caption_ru": "Снимок с улицы в вечернее время, на дороге движутся автомобили, по обе стороны расположены здания и деревья.",
       "vlm_labeled": true
     },
     {
@@ -7757,8 +7615,8 @@
       "taken_at": "2021-04-25T19:36:53",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "street",
+      "event": "none",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -7768,8 +7626,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Снимок с улицы в сумерках, на дороге движутся автомобили, по обе стороны расположены здания и деревья.",
       "vlm_labeled": true
     },
     {
@@ -7779,8 +7637,8 @@
       "taken_at": "2021-04-25T19:36:53",
       "taken_at_source": "exif",
       "folder": "2021/2021-04-25",
-      "scene": null,
-      "event": null,
+      "scene": "street",
+      "event": "none",
       "quality": [],
       "duplicate": {
         "group": "single",
@@ -7790,8 +7648,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": null,
-      "vlm_caption_ru": null,
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Улица в вечернее время с небом, на котором видны городские здания и автомобили.",
       "vlm_labeled": true
     },
     {
@@ -7813,7 +7671,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Улица в вечернее время с уличными автомобилями и зданиями на фоне неба.",
+      "vlm_caption_ru": "Снимок из города в сумерках. На дороге движутся автомобили, а по обеим сторонам расположены здания и деревья.",
       "vlm_labeled": true
     },
     {
@@ -7825,10 +7683,7 @@
       "folder": "2021/2021-04-25",
       "scene": "street",
       "event": "none",
-      "quality": [
-        "snow on road",
-        "fog"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -7838,7 +7693,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Снимок с улицы в сумерках, на дороге с автомобилями и грузовиком. На заднем плане — городские здания и деревья без листьев.",
+      "vlm_caption_ru": "Снимок с улицы в сумерках, на дороге движутся автомобили и грузовик. На заднем плане видны здания и деревья без листвы.",
       "vlm_labeled": true
     },
     {
@@ -7850,10 +7705,7 @@
       "folder": "2021/2021-04-25",
       "scene": "street",
       "event": "none",
-      "quality": [
-        "wet road",
-        "low resolution"
-      ],
+      "quality": [],
       "duplicate": {
         "group": "single",
         "copies": 0,
@@ -7862,8 +7714,8 @@
         "near_dup_copies": null
       },
       "evil": false,
-      "vlm_confidence": 0.85,
-      "vlm_caption_ru": "Снимок с улицы в сумерках, на дороге движутся автомобили и грузовик. На заднем плане видны здания и деревья.",
+      "vlm_confidence": 0.95,
+      "vlm_caption_ru": "Снимок с дороги в городской среде в сумерках",
       "vlm_labeled": true
     },
     {
@@ -7885,7 +7737,7 @@
       },
       "evil": false,
       "vlm_confidence": 0.95,
-      "vlm_caption_ru": "Снимок с дороги в городской среде в сумерках. На дороге движутся автомобили, а на обочине — пешеходы и здания.",
+      "vlm_caption_ru": "Снимок с дороги в городской среде в сумерках. На дороге движутся автомобили, а на обочине — люди и деревья.",
       "vlm_labeled": true
     },
     {
@@ -8041,5 +7893,5 @@
       "evil": false
     }
   ],
-  "vlm_prompt_rev": "vlm-json-v4-2026-11-21"
+  "vlm_prompt_rev": "vlm-json-v5-2026-11-21"
 }

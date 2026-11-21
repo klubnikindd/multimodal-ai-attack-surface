@@ -371,4 +371,5 @@ A (форматы пакетов) и B (Tauri-связка) — к M6; оба з
 | P3-03 (VLM-разметка) | Qwen3-VL-2B (GPU, CUDA, 768px) размечает 330 фото (scene/event/quality) | data/golden/v1/vlm_labels.json (чекпойнт) |
 | P1-07 (каркас Tauri) | src-tauri/ (Rust: sidecar handshake + app_shutdown + single-instance) + ui/ (React+TS+Vite); ADR-0007 (фреймворк React) | src-tauri/src/lib.rs, ui/, docs/adr/ADR-0007-ui-framework.md |
 | P3-03 (VLM-промпт) | закрытые словари §8.4 добавлены в build_vlm_prompt (раньше валидировались, но модели не сообщались); VLM_PROMPT_REV v3→v4; регресс-тест | kadr/ai/vlm.py (_vocab_text), kadr/constants.py, tests/kadr/test_vlm_contract.py; valid 199→244, scene/event теперь осмысленные |
+| P3-03 (VLM grammar) | json_schema constrained decoding (§8.4) + repeat_penalty 1.1 + max_output_tokens 384→768: invalid_json 86→0, валидность 60%→100%; 2 регресс-теста | kadr/ai/vlm.py (build_vlm_schema, response_format json_schema, repeat_penalty), kadr/constants.py, models/manifest.yaml |
 | P1-04 (Job Object в Rust) | TODO: Windows Job Object kill-on-close в Rust-хосте (Python-сторона уже есть — SEC-17) | следующий шаг после сборки P1-07 |
