@@ -1,4 +1,4 @@
-# M2 / AI-lite — статус дочистки (2026-11-21)
+# M2 / AI-lite — статус дочистки (2026-11-21) — ✅ ВЕХА ЗАКРЫТА
 
 Срез по задачам M2 из плана дочистки. Состояние — фактическое на дату.
 
@@ -35,8 +35,9 @@ SCRFD-500M детектор (apache-2.0) + SigLIP2-энкодер кропов (
 ✅ L0 (эвристика) + **L1 (SigLIP2 image→text zero-shot по сценам)** вшит в
 `classify_asset` (`kadr/ai/cascade.py`, `scene_l1` AI-output, флаг `needs_vlm` для L2).
 L2 (авто-VLM по низкой уверенности) — через ночной планировщик, не автоматически.
-### FR-3.11 (ансамбль+TTA) / FR-3.12 (персонализация)
-Отложено: согласие CLIP↔VLM (TTA) и feedback-реранжинг — отдельный код.
+### FR-3.11 (ансамбль+TTA) / FR-3.12 (персонализация) — ✅ вшито
+`ensemble.py` (TTA + CLIP↔VLM согласие) + `personalize.py` (реранкинг + приор сцен);
+TTA вшит в `classify_asset` (`run_tta`), реранкинг — в `/v1/search` (`_rerank_hits`).
 
 ### Golden: adversarial ≥10% и «трудные» ≥40% — ✅ закрыто
 - adversarial: ✅ **65/633 = 10.3%** (malformed/typographic/exif_spoof/pixel).
